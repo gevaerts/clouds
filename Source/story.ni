@@ -1,46 +1,69 @@
 "Cloud" by "Frank Gevaerts and Nick Sant"
 
-Section 1 -- Introduction
+Chapter 1 -- definitions and general things
 
-Introduction is a scene.
-Introduction begins when the player is in the park.
+Section 1 -- shops
 
-When introduction begins:
-	move Romantic Interest to the rose garden.
-	
-Park is a room. "You are in a park. There are trees here. 
-There's some sort of flowery garden to the east, and a shop to the west."
+a shop is a kind of room.
 
-Rose Garden is a room. "This rose garden is full of roses! Think of the symbolism!
-The park is to the west."
+purchased is a kind of value. a thing has a purchased. The purchased are sold and forsale and nosale. 
+The purchased of a thing is normally nosale.
+Price is a kind of value. 1 gold piece specifies a price. a thing has a price.
 
-Flowershop is a room. "They sell flowers here. The exit is to the east.".
-flower is a kind of thing.
-a bunch of roses is a flower.
-a bunch of lilies is a flower.
-bunch of roses and bunch of lilies are in the flowershop.
+after examining a forsale thing in a shop:
+	say "This [noun] costs [price of noun].";
 
-purchased is a kind of value. a thing has a purchased. The purchased are sold and owned and nosale. The purchased of a thing is normally nosale.
-The purchased of a flower is normally owned.
-
-instead of buying something nosale: say "[The noun] is not for sale."
+instead of buying something not forsale: say "[The noun] is not for sale."
 
 instead of buying something:
-	if the noun is an owned thing:
-		now the noun is carried by the player;
-		say "You pay for the [noun].";
-		now the noun carried by the player is sold;
+	if the noun is a forsale thing:
+		if the player has the wallet:
+			if the price of the wallet >= the price of the noun:
+				decrease the price of the wallet by the price of the noun;
+				now the noun is carried by the player;
+				say "You pay [price of noun] for the [noun].";
+				now the noun carried by the player is sold;
+			otherwise:
+				say "You can't afford [noun]. It costs [price of noun].";
+		otherwise:
+			say "You seem to have lost your wallet.";
 	else if the noun is a sold thing:
 		say "You already bought [the noun]";
 
-before going east from the flowershop: 
-	if the player is holding owned roses begin;
+before going in a shop:
+	if the player is holding forsale things:
 		say "You should buy what you don't own before leaving, or put it back.";
 		stop;
-	end if;
 
-Park is west of the Rose Garden.
-Flowershop is west of Park.
+[the wallet is a bit special. It has a price, but that's really the content. The player can only pay things if he holds it]
+A wallet is a thing. "a wallet with [price of the wallet] in it".
+The description of the wallet is "Your wallet has [price of the wallet] in it".
+The price of the wallet is 20 gold piece.
+
+Chapter 2 -- the world
+
+Section 1 -- Main area
+
+Park is a room. "You are in a park. There are trees here. 
+There's some sort of flowery garden to the east, and a shop to the west."
+
+Rose Garden is a room. "This rose garden is full of roses! Think of the symbolism! The park is to the west.".
+rose garden is east of the park
+
+Flower shop is a shop. "They sell flowers here. The exit is to the east.".
+The flower shop is west of the park.
+
+a bunch of roses is a thing.
+a bunch of lilies is a thing.
+The price of a bunch of roses and a bunch of lilies is 1 gold piece.
+The bunch of roses and the bunch of lilies are forsale.
+The description of the bunch of roses is "A nice bunch of roses.".
+The description of the bunch of lilies is "These lilies look a bit faded.".
+bunch of roses and bunch of lilies are in the flower shop.
+
+
+The wallet is in the park.
+
 
 Romantic Interest is a person.
 The printed name of the romantic interest is "a pretty girl".
@@ -59,6 +82,7 @@ Every turn:
 	
 Instead of kissing in the rose garden: 
 	if the romantic interest has the bunch of roses:
+		award 1 point;
 		say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
 		say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
 		move Romantic Interest to the celestial golf course;
@@ -69,10 +93,7 @@ Instead of kissing in the rose garden:
 
 Section 2 -- Clouds
 
-cloud-golf is a scene.
-cloud-golf begins when the player is in the celestial golf course.
-
-The celestial golf course is a room. "The area around you is white and fluffy. You can see a fluffy white thing in the east, and one in the northwest. Maybe you should look at them more closely."
+The celestial golf course is a room. "The area around you is white and fluffy. You can see a fluffy white thing in the east, and one in the northwest. They seem to have some flags on them. Maybe you should look at them more closely."
 
 The printed name of the celestial golf course is "A fluffy white place.".
 
@@ -106,6 +127,7 @@ instead of examining hole in the celestial golf course:
 	end the game in death.
 	
 Instead of kissing in the celestial golf course:
+	award 1 point;
 	say "Someone taps you in the shoulder. You look round and see a winged man carrying some sort of stick.";
 	say "'Excuse me, sir, but could you get out of the way? I'd like to get on with my putting.'";
 	say "[Romantic Interest] screams and runs away.";
