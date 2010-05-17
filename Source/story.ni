@@ -179,7 +179,7 @@ Instead of drinking beer during Chat Up:
 	increase the alcohol level of the player by 1;
 	move the beer to the storeroom;
 	Say "That was good!";
-	if the alcohol level of the player > 3:
+	if the alcohol level of the player > 2:
 		say "Suddenly the pub starts moving around in strange ways, and you fall over.";
 		say "This beer is strong!".
 			
@@ -188,7 +188,7 @@ Instead of giving beer to Romantic Interest during Chat Up:
 	move the beer to the storeroom;
 	Say "[Romantic Interest] drinks the beer and smiles at you.".
 
-Chat up ends when the alcohol level of the player > 3.
+Chat up ends when the alcohol level of the player > 2 and the romantic interest is named.
 
 Chapter 2 -- the adventures
 
@@ -204,8 +204,9 @@ The Clouds begins when Chat Up ends.
 When The Clouds begins:
 	move the player to the park;
 	move Romantic Interest to the rose garden;
-	move the bunch of roses to the flower shop;
-	now the bunch of roses is forsale;
+	if the player does not have the roses:
+		move the bunch of roses to the flower shop;
+		now the bunch of roses is forsale;
 	say "You wake up, not remembering much except for meeting [romantic interest]. You really want to see her again.";
 
 
@@ -219,7 +220,6 @@ Every turn during The Clouds:
 	
 Instead of kissing in the rose garden during The Clouds: 
 	if the romantic interest has the bunch of roses:
-		award 1 point;
 		say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
 		say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
 		move Romantic Interest to the celestial golf course;
@@ -255,10 +255,9 @@ instead of examining hole in the celestial golf course during The Clouds:
 	say "You hear someone shouting 'Fore!'.";
 	say "Something hits you on the head.";
 	say "You fall through the fluffy white material.";
-	
+	move player to the park.	
 	
 Instead of kissing in the celestial golf course:
-	award 1 point;
 	say "Someone taps you in the shoulder. You look round and see a winged man carrying some sort of stick.";
 	say "'Excuse me, sir, but could you get out of the way? I'd like to get on with my putting.'";
 	say "[Romantic Interest] screams and runs away.";
