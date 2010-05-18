@@ -2,7 +2,7 @@
 
 Chapter 1 -- definitions and general things
 
-Section 0 -- actions
+Section 1 -- actions
 
 Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
@@ -13,7 +13,7 @@ Understand "pay for [any thing]" as buying;
 Understand "buy [any thing]" as buying;
 
 
-Section 1 -- shops
+Section 2 -- shops
 
 a shop is a kind of room.
 
@@ -51,12 +51,12 @@ A wallet is a thing. "a wallet with [price of the wallet] in it".
 The description of the wallet is "Your wallet has [price of the wallet] in it".
 The price of the wallet is 20 gold piece.
 
-Section 2 -- The Player
+Section 3 -- The Player
 
 A person has a number called alcohol level.
 The alcohol level of a person is normally 0.
 
-Section 3 -- The Romantic Interest
+Section 4 -- The Romantic Interest
 
 Romantic Interest is a person.
 The printed name of the romantic interest is "a pretty girl".
@@ -93,15 +93,15 @@ Every turn:
 	repeat with drunkard running through persons:
 		if the alcohol level of the drunkard > 0 and a random chance of 1 in 10 succeeds:
 			decrease the alcohol level of the drunkard by 1;
-	
+
 Chapter 2 -- the central area
 
-Section 0 -- Start of play
+Section 1 -- Start of play
 
 When play begins:
 	say "So here you are in the land of your dreams. It's been a while since you've eaten though.";
 
-Section 1 -- Main area
+Section 2 -- Main area
 
 Park is a room. "You are in a park. There are trees here. 
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub."
@@ -123,7 +123,7 @@ bunch of roses and bunch of lilies are in the flower shop.
 
 The wallet is in the park.
 
-Section 2 -- the pub
+Section 3 -- the pub
 
 The pub is a room. 
 known-state is a kind of value. The pub has a known-state. The known-state are new visitor, regular.
@@ -251,7 +251,7 @@ When Sober end of chat up begins:
 	move Romantic Interest to the secret storeroom;
 	say "You wouldn't mind seeing [romantic interest] again.";
 
-Chapter 2 -- the adventures
+Chapter 3 -- the adventures
 
 Section 1 -- Clouds
 
