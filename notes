@@ -7,3 +7,65 @@ There's a Red Herring dish on the menu, and if you order that then it comes on a
                          bassoon as the evening sun goes down"
 20:38:00 <evilnick|ipad> which no-one will know, but is the kind of sly reference that I like in my games!
 
+
+
+16:41:57  * gevaerts just picked up the flag and the hole
+16:42:17  * evilnick_B considers those to be bugs!
+16:42:33  * gevaerts isn't sure
+16:42:37 <evilnick_B> Also, the plate that delivers the red herring should only be visible AFTER the red herring meal is eaten
+16:43:00 <gevaerts> I can do that. What you're seeing is basically the description of the herring
+16:43:28 <gevaerts> If you take the hole though, it should be possible to put the hole in a door later on if you don't have the key
+16:45:45 <evilnick_B> Oh, and definitely with taking the hole and using it to get through a gap/door later on
+16:46:00 <evilnick_B> That's the kind of non-obvious and annoying solution that we absolutely need
+16:46:20 <gevaerts> I wouldn't use that as the "official" solution, but it should work :)
+16:46:38 <gevaerts> "put hole in wall"
+16:47:03 <evilnick_B> Oooh, now that gives me an idea
+16:47:21 <evilnick_B> A "hole in the wall" is slang for a cashpoint/ATM
+17:11:16 <gevaerts> Oh, we could use the hole in another way too
+17:11:29  * evilnick_B raises an eyebrow
+17:11:35 <gevaerts> If you pick up the hole, you now have a hole in your pocker/holdall/bag :)
+17:11:51 <gevaerts> i.e. you start losing other stuff randomly
+17:11:56 <evilnick_B> loosing*
+17:12:24  * gevaerts lost some grammar there. He only thought about picking up the hole, so it was in his head
+17:12:26  * evilnick_B likes that idea too
+17:12:42 <gevaerts> But you can still put it in walls or doors later on
+17:12:53 <evilnick_B> But can we have a bottomless bag/sack which will hold it without stuff dropping through?
+17:14:08 <gevaerts> Well, I see it as a trade-off. Either take the hole and get through doors without a key but drop things randomly (without it telling you of 
+                    course!), or don't take the hole, you need keys or things, but you get to keep your stuff
+17:14:44 <evilnick_B> Okay, that makes a lot of sense
+17:15:22 <gevaerts> We need to think about how to prevent people just checking every turn
+17:16:16 <evilnick_B> Checking what?
+17:16:19 <evilnick_B> Their inventory?
+17:16:28 <gevaerts> yes
+17:16:42 <evilnick_B> We shouldn't stop them from checking
+17:17:03 <evilnick_B> A random item falls out every n turns without causing the player to be alerted
+17:17:13 <gevaerts> you mean, if they can be bothered to keep typing extra commands all the time, good for them?
+17:17:27 <evilnick_B> But if they "look" then they'll see that item in their present location/not in their inventory
+17:17:54 <gevaerts> Unless you lose things when moving to the next room, and it stays in the other one
+17:18:22 <evilnick_B> Yep, that should happen within my rules above :)
+17:18:46 <evilnick_B> Should the hole itself fall out of the bag?
+17:19:40 <gevaerts> That would cause existential problems
+17:19:47 <gevaerts> possibly :)
+17:20:17 <evilnick_B> It could be argued that the hole is stuck to the outside of the bag, and so could drop off the bag, leaving it intact
+17:20:33 <evilnick_B> Of course, real-world logic doesn't need to apply in this game
+17:20:42 <evilnick_B> Only if we want it to, and only locally
+17:21:14 <gevaerts> If real logic would apply, you couldn't take a hole out of a flag, keep it in your pocket for a while, and then put it in a wall
+17:21:52 <gevaerts> I want that feature in soon though, so we can wait for play testers to complain that you can take the hole
+17:22:18 <gevaerts> the basic feature anyway
+17:22:25  * evilnick_B doesn't want many testers from -community involved
+17:22:31 <gevaerts> indeed not
+17:22:43 <evilnick_B> I want them to have the chance to play it "unsullied" when it's omplete
+17:22:45 <evilnick_B> +c
+17:22:46 <gevaerts> Torne sounds like a good tester, but the others? I don't think so
+17:29:46 <evilnick_B> Torne would be (in my humble opinion) a great tester because he'd be able to break things
+17:29:56  * evilnick_B endorses this choice
+17:31:19  * gevaerts considers not doing anything about taking the flag as well. It might come in useful later
+17:31:52 <gevaerts> Also, if the hole stays in the flag (instead of being in your pocket on its own), you obviously don't drop things
+17:34:25 <gevaerts> Oh, there's a nice go-back-to-the-starting-point thing! If the hole ends up on the floor (i.e. you drop it), you fall through it
+17:35:11 <gevaerts> You can't get the hole back then of course (which you probably can from the other side of a door/wall), unless you find another hole somewhere else
+17:35:31  * gevaerts likes this hole business
+
+
+21:58:27 <evilnick_B> If you know her name: She accepts one drink from you
+21:58:40 <evilnick_B> If you don't know her name: she gets haughty and wanders off
+
