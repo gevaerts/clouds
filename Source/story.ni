@@ -7,9 +7,9 @@ Chapter 1 -- actions
 Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
 
-Understand "order [any thing]" as buying.
-Understand "pay for [any thing]" as buying;
-Understand "buy [any thing]" as buying;
+Understand "order [something]" as buying.
+Understand "pay for [something]" as buying;
+Understand "buy [something]" as buying;
 
 Chapter 2 -- shops
 
@@ -83,7 +83,7 @@ Every turn:
 	if the hole has been in the location of the player for exactly three turns:
 		say "Why don't you pay attention?";
 		say "You just fell through an obvious hole!";
-		move the hole to the secret storeroom;
+		remove the hole from play;
 		lose the girl;
 		move the player to the park;
 		
@@ -169,8 +169,14 @@ The pub is a room.
 The pub is north of the park.
 The description of the pub is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer.".
 
+The landlord is a person.
+The landlord is in the pub.
+
 a table is a supporter in the pub.
 a menu is a thing on the table.
+the suggestion board is a thing. 
+The description of the suggestion board is "The board says 'Daily special', followed by some unreadable chalk writing.".
+the suggestion board is in the pub.
 foodstuff is a kind of thing.
 Foodstuff is normally edible.
 an empty plate is a thing.
@@ -181,28 +187,36 @@ The description of the empty plate is "THis is just an ordinary plate.".
 old-fashioned red herring is a foodstuff. 
 The description of the red herring is "The red herring looks delicious.".
 some unmentionable meat is a foodstuff. "This meat doesn't look very good.".
+the daily special is a foodstuff.
+The description of the daily special is "This box seems to have something moving inside it. Wait, did the lid just move up a bit, and did a pair of beady eyes really look out?".
 
 the secret storeroom is a room.
 herring is in the secret storeroom.
 empty plate is in the storeroom.
 interesting plate is in the storeroom.
+daily special is in the secret storeroom.
 a beer is in the storeroom.
 a beer is edible.
+
+Rule for deciding the scope of the player while buying in the pub:
+        place the secret storeroom in scope.
+Rule for reaching inside the secret storeroom while buying in the pub:
+	allow access.
 
 Section 2 -- Food
 
 The description of a menu is "There seems to be a wide choice of dishes available. You'll need to read the menu carefully.".
 Instead of examining the menu:
-	say "'The Bannister and Shamrock' - dinner menu.";
-	say "Old-fashioned Red Herring.";
-	say "Some Unmentionable Meat.";
+	say "'The Bannister and Shamrock' - dinner menu[line break]";
+	say "Old-fashioned Red Herring[line break]";
+	say "Some Unmentionable Meat[line break]";
 
-before buying a foodstuff in the pub:
-	move noun to pub;
-	
 instead of buying a foodstuff in the pub:
 	move noun to table;
-	say "The landlord places a steaming plate of [noun] on the table in front of you.";
+	if noun is the daily special:
+		say "The landlord puts some sort of box on the table in front of you.";
+	otherwise:
+		say "The landlord places a steaming plate of [noun] on the table in front of you.";
 
 After eating a foodstuff in the pub:
 	say "That wasn't bad.";
@@ -213,11 +227,13 @@ After eating a foodstuff in the pub:
 		move empty plate to the table;
 	move noun to the secret storeroom;
 
+Understand "complain to [the landlord] about [text]" as asking it about.
+Understand "box" as the daily special.
+After asking the landlord about "[the daily special]":
+	say "The landlord points at the suggestions board and says 'It[']s clearly written there. The daily special is Peking Duck!'".
+
 Section 3 -- Drinks
 
-before buying beer in the pub:
-	move noun to pub;
-	
 instead of buying beer in the pub:
 	if the noun is not a beer:
 		say "Sorry, we only have beer.";
@@ -227,7 +243,7 @@ instead of buying beer in the pub:
 
 Instead of drinking beer in the pub:
 	increase the alcohol level of the player by 1;
-	move the beer to the storeroom;
+	move the noun to the storeroom;
 	Say "That was good!";
 	if the alcohol level of the player > 2:
 		say "Suddenly the pub starts moving around in strange ways, and you fall over.";
@@ -260,7 +276,7 @@ instead of talking to romantic interest during chat up:
 
 Instead of giving beer to Romantic Interest during Chat Up:
 	increase the alcohol level of the Romantic Interest by 1;
-	move the beer to the storeroom;
+	move the noun to the storeroom;
 	Say "[Romantic Interest] drinks the beer and smiles at you.".
 
 Chat up ends drunkenly when the alcohol level of the player > 2 and the romantic interest is named.
@@ -270,6 +286,7 @@ Drunken end of chat up is a recurring scene.
 Drunken end of chat up begins when Chat Up ends drunkenly.
 Drunken end of chat up ends when the player is in a room.
 When Drunken end of chat up begins:
+	remove Romantic Interest from play;
 	move the player to the park;
 	say "You wake up, not remembering much except for meeting [romantic interest]. You really want to see her again.";
 
@@ -277,7 +294,7 @@ Sober end of chat up is a recurring scene.
 Sober end of chat up begins when Chat Up ends soberly.
 Sober end of chat up ends when the player is in a room.
 When Sober end of chat up begins:
-	move Romantic Interest to the secret storeroom;
+	remove Romantic Interest from play;
 	say "You wouldn't mind seeing [romantic interest] again.";
 
 Part 3 -- the adventures
