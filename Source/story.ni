@@ -68,14 +68,14 @@ Understand "pretty woman" as romantic interest.
 Understand "woman" as romantic interest.
 name assigned is a kind of value. romantic interest has a name assigned. the name assigned are named and unnamed.
 The romantic interest is unnamed.
- 
-Chapter 5 -- general rules
 
 To lose the girl:
 	now the romantic interest is unnamed;
 	now the printed name of the romantic interest is "a very pretty woman";
 	change the height of the romantic interest to a random height;
 	change the hair colour of the romantic interest to a random hair colour;
+
+Chapter 5 -- general rules
 
 Every turn:
 	if the hole has been in the location of the player for exactly one turn:
@@ -97,6 +97,8 @@ Every turn:
 	repeat with drunkard running through persons:
 		if the alcohol level of the drunkard > 0 and a random chance of 1 in 10 succeeds:
 			decrease the alcohol level of the drunkard by 1;
+
+A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining something: now the noun is examined. 
 
 Chapter 5 -- global mechanics
 
@@ -165,51 +167,60 @@ Chapter 3 -- the pub
 
 Section 1 -- The Setting
 
-The pub is a room. 
-The pub is north of the park.
-The description of the pub is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer.".
+the secret storeroom is a room. "You've never seen the secret storeroom and you never will. It's used by the pub to store things where you can't see them.".
 
-The landlord is a person.
-The landlord is in the pub.
-
-a table is a supporter in the pub.
-a menu is a thing on the table.
-the suggestion board is a thing. 
-The description of the suggestion board is "The board says 'Daily special', followed by some unreadable chalk writing.".
-the suggestion board is in the pub.
-foodstuff is a kind of thing.
+Foodstuff is a kind of thing.
 Foodstuff is normally edible.
-an empty plate is a thing.
-an intresting plate is a thing.
-a beer is a thing.
-The description of the interesting plate is "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
-The description of the empty plate is "THis is just an ordinary plate.".
-old-fashioned red herring is a foodstuff. 
-The description of the red herring is "The red herring looks delicious.".
-some unmentionable meat is a foodstuff. "This meat doesn't look very good.".
-the daily special is a foodstuff.
-The description of the daily special is "This box seems to have something moving inside it. Wait, did the lid just move up a bit, and did a pair of beady eyes really look out?".
-
-the secret storeroom is a room.
-herring is in the secret storeroom.
-empty plate is in the storeroom.
-interesting plate is in the storeroom.
-daily special is in the secret storeroom.
-a beer is in the storeroom.
-a beer is edible.
+A foodstuff can be on_the_menu and special. A foodstuff is normally on_the_menu.
 
 Rule for deciding the scope of the player while buying in the pub:
         place the secret storeroom in scope.
 Rule for reaching inside the secret storeroom while buying in the pub:
 	allow access.
 
+The pub is a room. 
+The pub is north of the park.
+The description of the pub is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall.".
+
+The landlord is a person who is in the pub.
+
+a table is a supporter in the pub.
+a menu is a thing on the table.
+the suggestion board is scenery in the pub.
+The description of the suggestion board is "The board says 'Daily special', followed by some unreadable chalk writing.".
+
+an empty plate is a thing.
+The description of the empty plate is "This is just an ordinary plate.".
+empty plate is in the storeroom.
+
+an interesting plate is a thing.
+The description of the interesting plate is "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
+interesting plate is in the storeroom.
+
+
+
+		
 Section 2 -- Food
+
+old-fashioned red herring is a foodstuff. 
+The description of the red herring is "The red herring looks delicious.".
+The printed name of old-fashioned red herring is "Old-fashioned Red Herring";
+old-fashioned red herring is in the secret storeroom.
+
+some unmentionable meat is a foodstuff. "This meat doesn't look very good.".
+The printed name of some unmentionable meat is "Some Unmentionable Meat".
+
+the daily special is a foodstuff which is special.
+The description of the daily special is "This box seems to have something moving inside it. Wait, did the lid just move up a bit, and did a pair of beady eyes really look out? What's this noise?".
+instead of listening to the daily special:
+	say "You hear a faint quacking noise.".
+daily special is in the secret storeroom.
 
 The description of a menu is "There seems to be a wide choice of dishes available. You'll need to read the menu carefully.".
 Instead of examining the menu:
 	say "'The Bannister and Shamrock' - dinner menu[line break]";
-	say "Old-fashioned Red Herring[line break]";
-	say "Some Unmentionable Meat[line break]";
+	repeat with item running through every on_the_menu foodstuff:
+		say "[item][line break]";
 
 instead of buying a foodstuff in the pub:
 	move noun to table;
@@ -229,10 +240,26 @@ After eating a foodstuff in the pub:
 
 Understand "complain to [the landlord] about [text]" as asking it about.
 Understand "box" as the daily special.
-After asking the landlord about "[the daily special]":
-	say "The landlord points at the suggestions board and says 'It[']s clearly written there. The daily special is Peking Duck!'".
+
+Understand "ask [someone] about [any foodstuff]" as asking it about the foodstuff.
+Asking it about the foodstuff is an action applying to one thing and one visible thing. 
+
+
+
+Carry out an actor asking about the foodstuff in the pub(this is the ask about the special rule):
+	if the second noun is:
+		-- the daily special:
+			if the daily special is not in the secret storeroom and the daily special is examined:
+				say "The landlord points at the suggestions board and says 'It[']s clearly written there. The daily special is Peking Duck!'";
+			otherwise:
+				say "The landlord mumbles something unintelligible, and then says 'It[']s really excellent.'";	
+		-- otherwise:
+			say "The landlord looks proud and says 'I can really recommend [the second noun]!'".
 
 Section 3 -- Drinks
+
+a beer is a thing.
+a beer is in the secret storeroom.
 
 instead of buying beer in the pub:
 	if the noun is not a beer:
