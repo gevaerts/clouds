@@ -381,7 +381,8 @@ When The Clouds ends:
 
 When The Clouds ends well:
 	now The Clouds is non-recurring;
-	
+	now Cloud Selector is non-recurring;
+		
 When The Clouds begins:
 	say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
 	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
