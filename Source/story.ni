@@ -395,8 +395,8 @@ number '10' written on it in yellow."
 
 The flagpole is a supporter in the celestial golf course. "There seems to be some sort of pole nearby.".
 description of flagpole is "This could well be a flagpole. There seems to be a flag at the top.".
-a flag is a container. "There's something on top of the pole.".
-description of flag is "This is weird. The flag has a hole in it. Could this be worth examining?".
+a flag is a thing. "There's something on top of the pole.".
+description of flag is "[if the flag is handled]The flag has the number '9' written on it in yellow.[otherwise]There seems to be something written on the flag in yellow, but you can't see it from this angle.[end if]".
 a hole is a thing.
 
 instead of examining flagpole in the celestial golf course during The Clouds:
@@ -405,9 +405,9 @@ instead of examining flagpole in the celestial golf course during The Clouds:
 	move flag to flagpole.
 	
 instead of examining flag in the celestial golf course during The Clouds:
-	say "The flag seems to have had a yellow number on it, but what mainly strikes you is the hole in the flag.";
+	say "The flag seems to have yellow writing on it, but you can't read it from this angle. You can see a hole at the lower end of the flagpole though.";
 	say "[Romantic Interest] tugs at your sleeve.";
-	move hole to flag.
+	move hole to the celestial golf course.
 	
 instead of examining hole in the celestial golf course during The Clouds:
 	say "[Romantic Interest] just got up and left.";
