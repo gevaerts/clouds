@@ -105,7 +105,7 @@ Chapter 5 -- global mechanics
 A scene can be adventurous or nonadventurous.
 A scene can be selective.
 Gamestate is a kind of value. A Gamestate is adventuring, selecting, or wandering about.
-The player has a gamestate.
+The player has a gamestate. The player is wandering about.
 
 To interrupt selection:
 	now the player is wandering about.
