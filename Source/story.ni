@@ -100,6 +100,7 @@ Every turn:
 
 A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining something: now the noun is examined. 
 
+
 Chapter 5 -- global mechanics
 
 A scene can be adventurous or nonadventurous.
@@ -211,10 +212,13 @@ some unmentionable meat is a foodstuff. "This meat doesn't look very good.".
 The printed name of some unmentionable meat is "Some Unmentionable Meat".
 
 the daily special is a foodstuff which is special.
+The daily special can be listened or unlistened. The daily special is  unlistened. 
 The description of the daily special is "This box seems to have something moving inside it. Wait, did the lid just move up a bit, and did a pair of beady eyes really look out? What's this noise?".
 instead of listening to the daily special:
+	now the daily special is listened;
 	say "You hear a faint quacking noise.".
 daily special is in the secret storeroom.
+
 
 The description of a menu is "There seems to be a wide choice of dishes available. You'll need to read the menu carefully.".
 Instead of examining the menu:
@@ -228,6 +232,11 @@ instead of buying a foodstuff in the pub:
 		say "The landlord puts some sort of box on the table in front of you.";
 	otherwise:
 		say "The landlord places a steaming plate of [noun] on the table in front of you.";
+
+Before eating a foodstuff in the pub:
+	if the noun is the daily special:
+		say "You can't eat that, surely?";
+		stop the action.
 
 After eating a foodstuff in the pub:
 	say "That wasn't bad.";
@@ -249,7 +258,7 @@ Asking it about the foodstuff is an action applying to one thing and one visible
 Carry out an actor asking about the foodstuff in the pub(this is the ask about the special rule):
 	if the second noun is:
 		-- the daily special:
-			if the daily special is not in the secret storeroom and the daily special is examined:
+			if the daily special is not in the secret storeroom and the daily special is examined and the daily special is listened:
 				say "The landlord points at the suggestions board and says 'It[']s clearly written there. The daily special is Peking Duck!'";
 			otherwise:
 				say "The landlord mumbles something unintelligible, and then says 'It[']s really excellent.'";	
@@ -362,10 +371,8 @@ Cloud Selector ends normally when the player is wandering about.
 
 Section 3 -- The actual adventure
 
-The Clouds is a scene.
+The Clouds is an adventurous recurring scene.
 The Clouds begins when Cloud Selector ends well.
-The Clouds is a recurring scene.
-The Clouds is adventurous.
 The Clouds ends well when the player is not in the celestial golf course and the romantic interest is in the celestial golf course and the romantic interest is named.
 The Clouds ends badly when the player is not in the celestial golf course and the romantic interest is in the celestial golf course and the romantic interest is unnamed.
 
@@ -404,10 +411,12 @@ instead of examining flagpole in the celestial golf course during The Clouds:
 	say "[Romantic Interest] seems to be getting a bit impatient.";
 	move flag to flagpole.
 	
-instead of examining flag in the celestial golf course during The Clouds:
-	say "The flag seems to have yellow writing on it, but you can't read it from this angle. You can see a hole at the lower end of the flagpole though.";
-	say "[Romantic Interest] tugs at your sleeve.";
-	move hole to the celestial golf course.
+Carry out of examining flag in the celestial golf course during The Clouds:
+	if the flag is not handled:
+		say "The flag seems to have yellow writing on it, but you can't read it from this angle. You can see a hole at the lower end of the flagpole though.";
+		say "[Romantic Interest] tugs at your sleeve.";
+	if the hole is not handled:
+		move hole to the celestial golf course;
 	
 instead of examining hole in the celestial golf course during The Clouds:
 	say "[Romantic Interest] just got up and left.";
