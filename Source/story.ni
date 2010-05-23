@@ -1,8 +1,8 @@
 "Cloud" by "Frank Gevaerts and Nick Sant"
 
-Part 1 -- definitions and general things
+Volume 1 -- definitions and general things
 
-Chapter 1 -- actions
+Book 1 -- actions
 
 The block giving rule is not listed in the check giving it to rules.
 The block kissing rule is not listed in the check kissing rules.
@@ -10,15 +10,16 @@ The block kissing rule is not listed in the check kissing rules.
 Report kissing: 
 	say "Are you out of your mind?";
 	rule succeeds. [no other report or after rules!]
-	
+
+Understand "make love to [someone]" as kissing.	
 Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
+
+Book 2 -- shops
 
 Understand "order [something]" as buying.
 Understand "pay for [something]" as buying;
 Understand "buy [something]" as buying;
-
-Chapter 2 -- shops
 
 a shop is a kind of room.
 
@@ -56,12 +57,12 @@ A wallet is a thing. "a wallet with [price of the wallet] in it".
 The description of the wallet is "Your wallet has [price of the wallet] in it".
 The price of the wallet is 20 gold piece.
 
-Chapter 3 -- The Player
+Book 3 -- The Player
 
 A person has a number called alcohol level.
 The alcohol level of a person is normally 0.
 
-Chapter 4 -- The Romantic Interest
+Book 4 -- The Romantic Interest
 
 Romantic Interest is a person.
 The printed name of the romantic interest is "a pretty girl".
@@ -87,7 +88,7 @@ Report kissing the Romantic Interest:
 	say "[romantic interest] turns away.";
 	rule succeeds. [no other report or after rules!]
 	
-Chapter 5 -- general rules
+Book 5 -- general rules
 
 Every turn:
 	if the round hole has been in the location of the player for exactly one turn:
@@ -131,7 +132,6 @@ A scene can be selective.
 Gamestate is a kind of value. A Gamestate is adventuring, selecting, or wandering about.
 The player has a gamestate. The player is wandering about.
 
-
 To interrupt selection:
 	now the player is wandering about.
 To complete selection:
@@ -139,15 +139,15 @@ To complete selection:
 To end the adventure:
 	now the player is wandering about.
 
-Part 2 -- the central area
+Volume 2 -- the central area
 
-Chapter 1 -- Start of play
+Book 1 -- Start of play
 
 When play begins:
 	say "So here you are in the land of your dreams. It's been a while since you've eaten though.";
 	lose the girl; [make sure initial values are correct]
 
-Chapter 2 -- Main area
+Book 2 -- Main area
 
 Park is a room. "You are in a park. There are trees here. 
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
@@ -188,9 +188,9 @@ bunch of roses and bunch of lilies are in the flower shop.
 
 The wallet is in the park.
 
-Chapter 3 -- the pub
+Book 3 -- the pub
 
-Section 1 -- The Setting
+Part 1 -- The Setting
 
 the secret storeroom is a room. "You've never seen the secret storeroom and you never will. It's used by the pub to store things where you can't see them.".
 
@@ -225,7 +225,9 @@ interesting plate is in the storeroom.
 
 
 		
-Section 2 -- Food
+Part 2 -- Food
+
+Chapter 1 -- Regular food
 
 old-fashioned red herring is a foodstuff. 
 The description of the red herring is "The red herring looks delicious.".
@@ -236,6 +238,8 @@ some unmentionable meat is a foodstuff. "This meat doesn't look very good.".
 The printed name of some unmentionable meat is "Some Unmentionable Meat".
 some unmentionable meat is in the secret storeroom.
 
+Chapter 2 -- The Daily Special
+
 the daily special is a foodstuff which is special.
 The daily special can be listened or unlistened. The daily special is  unlistened. 
 The description of the daily special is "This box seems to have something moving inside it. Wait, did the lid just move up a bit, and did a pair of beady eyes really look out? What's this noise?".
@@ -244,8 +248,16 @@ instead of listening to the daily special:
 	say "You hear a faint quacking noise.".
 daily special is in the secret storeroom.
 
+instead of buying the daily special in the pub:
+	move noun to table;
+	say "The landlord puts some sort of box on the table in front of you.";
+		
+Understand "box" as the daily special.
+
+Chapter 3 -- food handling
 
 The description of a menu is "There seems to be a wide choice of dishes available. You'll need to read the menu carefully.".
+
 Instead of examining the menu:
 	say "'The Bannister and Shamrock' - dinner menu[line break]";
 	repeat with item running through every on_the_menu foodstuff:
@@ -253,10 +265,8 @@ Instead of examining the menu:
 
 instead of buying a foodstuff in the pub:
 	move noun to table;
-	if noun is the daily special:
-		say "The landlord puts some sort of box on the table in front of you.";
-	otherwise:
-		say "The landlord places a steaming plate of [noun] on the table in front of you.";
+	say "The landlord places a steaming plate of [noun] on the table in front of you.";
+	
 
 Before eating a foodstuff in the pub:
 	if the noun is the daily special:
@@ -273,12 +283,11 @@ After eating a foodstuff in the pub:
 	move noun to the secret storeroom;
 
 Understand "complain to [the landlord] about [text]" as asking it about.
-Understand "box" as the daily special.
-
 Understand "ask [someone] about [any foodstuff]" as asking it about the foodstuff.
 Asking it about the foodstuff is an action applying to one thing and one visible thing. 
 
-Carry out an actor asking about the foodstuff in the pub(this is the ask about the special rule):
+Carry out an actor asking about the foodstuff in the pub (this is the ask about the special rule):
+	[rewrite using custom rulebook to allow isolating the daily special?]
 	if the second noun is:
 		-- the daily special:
 			if the daily special is not in the secret storeroom and the daily special is examined and the daily special is listened:
@@ -288,7 +297,7 @@ Carry out an actor asking about the foodstuff in the pub(this is the ask about t
 		-- otherwise:
 			say "The landlord looks proud and says 'I can really recommend [the second noun]!'".
 
-Section 3 -- Drinks
+Part 3 -- Drinks
 
 a beer is a thing.
 a beer is in the secret storeroom.
@@ -308,7 +317,7 @@ Instead of drinking beer in the pub:
 		say "Suddenly the pub starts moving around in strange ways, and you fall over.";
 		say "This beer is strong!".
 
-Section 4 -- Social life
+Part 4 -- Social life
 
 People Walking In is a recurring scene.
 People Walking In begins when the player is in the pub and the romantic interest is unnamed and chat up is not happening and a random chance of 1 in 3 succeeds.
@@ -356,24 +365,17 @@ When Sober end of chat up begins:
 	remove Romantic Interest from play;
 	say "You wouldn't mind seeing [romantic interest] again.";
 
-Part 3 -- the adventures
+Volume 3 -- the adventures
 
-Chapter 1 -- Clouds
+Book 1 -- Clouds
 
-Section 1 -- Setting
+Part 1 -- Setting
 
 The Celestial Golf Course is a region.
-Cloud nine is a room in The Celestial Golf Course. "The area around you is white and fluffy. You can see a fluffy white thing in the east, and one in the northwest. They seem to have some flags on them. Maybe you should look at them more closely.".
 
 a round hole is a thing. The printed name of a round hole is "a hole".
 
-Tee one is a room in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
-Green eighteen is a room in The Celestial Golf Course. "You've managed to complete the game. Well done!".
-Green eighteen is east of Tee one.
-
-The printed name of cloud nine is "A fluffy white place.".
-
-Section 2 -- Selection
+Part 2 -- Selection
 
 Cloud Selector is a selective recurring scene.
 Cloud Selector begins when no adventurous scene is happening and the romantic interest is named and the player is in the rose garden and the player is wandering about.
@@ -418,7 +420,12 @@ Every turn during Cloud Selector:
 Cloud Selector ends well when the player is adventuring.
 Cloud Selector ends normally when the player is wandering about.
 
-Section 3 -- The actual adventure
+Part 3 -- The actual adventure
+
+Chapter 1 -- Intro
+
+Cloud nine is a room in The Celestial Golf Course. "The area around you is white and fluffy. You can see a fluffy white thing in the east, and one in the northwest. They seem to have some flags on them. Maybe you should look at them more closely.".
+The printed name of cloud nine is "A fluffy white place.".
 
 The Clouds is an adventurous recurring scene.
 The Clouds begins when Cloud Selector ends well.
@@ -437,7 +444,9 @@ When The Clouds begins:
 	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
 	move the player to cloud nine;
 	move the romantic interest to cloud nine; [ RI will NOT follow "magic" moves automatically!]
-	
+
+Chapter 2 -- Cloud Nine
+
 Every turn while in cloud nine during The Clouds:
 	say "[Romantic Interest] is looking at you expectantly.".
 
@@ -497,5 +506,13 @@ After asking the romantic interest about "[a game of golf]" during The Clouds:
 	say "[Romantic Interest] nods enthousiastically and says 'How did you know that I like golf?'";
 	move the player to Tee One;
 	move the romantic interest to Tee One; [ RI will NOT follow "magic" moves automatically!]
+
+Chapter 3 -- A game of golf
+
+Tee one is a room in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
+Green eighteen is a room in The Celestial Golf Course. "You've managed to complete the game. Well done!".
+Green eighteen is east of Tee one.
+
+Tee One and Green Eighteen are in The Celestial Golf Course.
 
 understand "pole" as flagpole.
