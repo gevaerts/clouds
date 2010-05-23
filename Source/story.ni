@@ -64,30 +64,40 @@ The alcohol level of a person is normally 0.
 
 Book 4 -- The Romantic Interest
 
-Romantic Interest is a person.
-The printed name of the romantic interest is "a pretty girl".
-hair colour is a kind of value. The romantic interest has hair colour. the hair colour are blond, red, brown, black, interestingly purple-greenish.
-Height is a kind of value. The romantic interest has height. The heights are tall, of medium lenght, rather short.
-First name is a kind of value. The romantic interest has a first name. The first names are Mary, Susan, Josephine.
-The description of the romantic interest is "This is [Romantic Interest]. She has [hair colour of romantic interest] hair and is [height of romantic interest]".
-Understand "pretty girl" as romantic interest.
-Understand "girl" as romantic interest.
-Understand "pretty woman" as romantic interest.
-Understand "woman" as romantic interest.
-romantic interest can be named and unnamed.
-The romantic interest is unnamed.
+Potential Girlfriend is a kind of woman.
+a Potential Girlfriend can be unmet,friendly and angry.
+a Potential Girlfriend is normally unmet.
+
+Susan is a Potential Girlfriend with printed name "[if Susan is unmet]a pretty woman[otherwise]Susan[end if]" and description "This is [Susan]. She has [hair colour of Susan] hair and is [height of Susan].".
+Mary is a Potential Girlfriend with printed name "[if Mary is unmet]a somewhat pretty woman[otherwise]Mary[end if]" and description "This is [Mary]. She has [hair colour of Mary] hair and is [height of Mary].".
+Josephine is a Potential Girlfriend with printed name "[if Josephine is unmet]a very pretty woman[otherwise]Josephine[end if]" and description "This is [Josephine]. She has [hair colour of Josephine] hair and is [height of Josephine].".
+
+Romantic Interest is a Potential Girlfriend that varies.
+hair colour is a kind of value. A potential girlfriend has hair colour. the hair colour are blond, red, brown, black, interestingly purple-greenish.
+Height is a kind of value. A potential girlfriend has height. The heights are tall, of medium lenght, rather short.
+The description of the girl is "She has [hair colour of girl] hair and is [height of girl].".
+
+When play begins:
+	repeat with girl running through potential girlfriends:
+		Now the hair colour of the girl is a random hair colour;
+		Now the height of the girl is a random height;
+	
+
+Understand "pretty girl" as a potential girlfriend.
+Understand "girl" as a potential girlfriend.
+Understand "pretty woman" as a potential girlfriend.
+Understand "woman" as a potential girlfriend.
 
 To lose the girl:
-	now the romantic interest is unnamed;
+	now the romantic interest is angry;
 	now The romantic interest is nonfollowing;
-	now the printed name of the romantic interest is "a very pretty woman";
-	change the height of the romantic interest to a random height;
-	change the hair colour of the romantic interest to a random hair colour;
+	change the romantic interest to a random unmet potential girlfriend;
+	say "You have now met and lost [list of angry potential girlfriends].";
 
 Report kissing the Romantic Interest: 
 	say "[romantic interest] turns away.";
 	rule succeeds. [no other report or after rules!]
-	
+
 Book 5 -- general rules
 
 Every turn:
@@ -125,7 +135,7 @@ Report going (this is the follow the player report rule):
 		say "[follower] follows you here".
 		
 The follow the player carry out rule is listed last in the carry out going rules.
-The follow the player report rule is listed last in the carry out going rules.
+The follow the player report rule is listed first in the report going rules.
 
 A scene can be adventurous or nonadventurous.
 A scene can be selective.
@@ -145,7 +155,6 @@ Book 1 -- Start of play
 
 When play begins:
 	say "So here you are in the land of your dreams. It's been a while since you've eaten though.";
-	lose the girl; [make sure initial values are correct]
 
 Book 2 -- Main area
 
@@ -222,9 +231,6 @@ an interesting plate is a thing.
 The description of the interesting plate is "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
 interesting plate is in the storeroom.
 
-
-
-		
 Part 2 -- Food
 
 Chapter 1 -- Regular food
@@ -282,7 +288,7 @@ After eating a foodstuff in the pub:
 		move empty plate to the table;
 	move noun to the secret storeroom;
 
-Understand "complain to [the landlord] about [text]" as asking it about.
+Understand "complain to [someone] about [any foodstuff]" as asking it about the foodstuff.
 Understand "ask [someone] about [any foodstuff]" as asking it about the foodstuff.
 Asking it about the foodstuff is an action applying to one thing and one visible thing. 
 
@@ -320,24 +326,22 @@ Instead of drinking beer in the pub:
 Part 4 -- Social life
 
 People Walking In is a recurring scene.
-People Walking In begins when the player is in the pub and the romantic interest is unnamed and chat up is not happening and a random chance of 1 in 3 succeeds.
+People Walking In begins when the player is in the pub and the romantic interest is unmet and chat up is not happening and a random chance of 1 in 3 succeeds.
 
 When People Walking In begins:
 	say "Some people have just walked in.";
 	say "You look at them, and notice that one of them is a rather pretty woman.";
+	change the romantic interest to a random unmet potential girlfriend;
 	move romantic interest to the pub;
 		
 People Walking In ends when romantic interest is in the pub.
 
 Chat up is a recurring scene.
 Chat up begins when People Walking In ends.
-	
-instead of talking to romantic interest during chat up:
-	if the romantic interest is unnamed:
-		now the alcohol level of the romantic interest is 0; [ new people are not drunk ]
-		change the first name of the romantic interest to a random first name;
-		now the printed name of the romantic interest is "[first name of the romantic interest]";
-		now the romantic interest is named;
+
+Instead of talking to romantic interest during chat up:
+	if the romantic interest is unmet:
+		now the romantic interest is friendly;
 		say "She says, 'Hello, my name is [the printed name of the romantic interest].'";
 	otherwise:
 		say "She says, 'I could use a drink.'".
@@ -347,8 +351,8 @@ Instead of giving beer to Romantic Interest during Chat Up:
 	move the noun to the storeroom;
 	Say "[Romantic Interest] drinks the beer and smiles at you.".
 
-Chat up ends drunkenly when the alcohol level of the player > 2 and the romantic interest is named.
-Chat up ends soberly when the romantic interest is named and the player is not in the pub.
+Chat up ends drunkenly when the alcohol level of the player > 2 and the romantic interest is not unmet.
+Chat up ends soberly when the romantic interest is not unmet and the player is not in the pub.
 
 Drunken end of chat up is a recurring scene.
 Drunken end of chat up begins when Chat Up ends drunkenly.
@@ -378,7 +382,7 @@ a round hole is a thing. The printed name of a round hole is "a hole".
 Part 2 -- Selection
 
 Cloud Selector is a selective recurring scene.
-Cloud Selector begins when no adventurous scene is happening and the romantic interest is named and the player is in the rose garden and the player is wandering about.
+Cloud Selector begins when no adventurous scene is happening and the romantic interest is friendly  and the player is in the rose garden and the player is wandering about.
 
 When Cloud Selector begins:
 	now the player is selecting;
@@ -430,7 +434,7 @@ The printed name of cloud nine is "A fluffy white place.".
 The Clouds is an adventurous recurring scene.
 The Clouds begins when Cloud Selector ends well.
 The Clouds ends well when the player is wandering about.
-The Clouds ends badly when the romantic interest is unnamed.
+The Clouds ends badly when the romantic interest is not friendly.
 
 When The Clouds ends:
 	end the adventure;
@@ -442,8 +446,8 @@ When The Clouds ends well:
 When The Clouds begins:
 	say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
 	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
-	move the player to cloud nine;
 	move the romantic interest to cloud nine; [ RI will NOT follow "magic" moves automatically!]
+	move the player to cloud nine;
 
 Chapter 2 -- Cloud Nine
 
@@ -472,21 +476,21 @@ Instead of examining flag in cloud nine during The Clouds:
 	if the flag is not handled:
 		say "The flag seems to have yellow writing on it, but you can't read it from this angle. You can see a hole at the lower end of the flagpole though.";
 		say "[Romantic Interest] tugs at your sleeve.";
+	rule succeeds;
 		
-Carry out examining the round hole in cloud nine during The Clouds:
-	lose the girl;
-	move the player to the park;
-	
-Report examining the round hole in cloud nine during The Clouds:
+Instead of examining the round hole in cloud nine during The Clouds:
 	say "[Romantic Interest] just got up and left.";
 	say "You hear someone shouting 'Fore!'.";
 	say "Something hits you on the head.";
 	say "You fall through the fluffy white material.";
+	lose the girl;
+	move the player to the park;
+	rule succeeds;
 
 Check an actor kissing the romantic interest in cloud nine during The Clouds:
 	continue the action;
 
-Carry out kissing the romantic interest in cloud nine during The Clouds:
+Instead of kissing the romantic interest in cloud nine during The Clouds:
 	say "Someone taps you in the shoulder. You look round and see a winged man carrying some sort of stick.";
 	say "'Excuse me, sir, but could you get out of the way? I'd like to get on with my putting.'";
 	say "[Romantic Interest] screams and runs away.";
@@ -495,17 +499,16 @@ Carry out kissing the romantic interest in cloud nine during The Clouds:
 	end the adventure;
 	now the romantic interest is nonfollowing;
 	move the player to the park;
-
-Report kissing the romantic interest during The Clouds:
-	rule succeeds. [No other reports!]
 	
 Understand "golf" as "[a game of golf]".
 Understand "a round of golf" as "[a game of golf]".
 Understand "a game of golf" as "[a game of golf]".
+Understand "propose [text] to  [someone]" as asking it about (with nouns reversed).
+
 After asking the romantic interest about "[a game of golf]" during The Clouds:
 	say "[Romantic Interest] nods enthousiastically and says 'How did you know that I like golf?'";
-	move the player to Tee One;
 	move the romantic interest to Tee One; [ RI will NOT follow "magic" moves automatically!]
+	move the player to Tee One;
 
 Chapter 3 -- A game of golf
 
