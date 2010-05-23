@@ -81,7 +81,7 @@ When play begins:
 	repeat with girl running through potential girlfriends:
 		Now the hair colour of the girl is a random hair colour;
 		Now the height of the girl is a random height;
-	
+
 
 Understand "pretty girl" as a potential girlfriend.
 Understand "girl" as a potential girlfriend.
@@ -109,7 +109,7 @@ Every turn:
 		remove the hole from play;
 		lose the girl;
 		move the player to the park;
-		
+
 Every turn:
 	if the hole is carried by the player and a random chance of 1 in 4 succeeds:
 		let the lost object be a random thing that is carried by the player;
@@ -133,7 +133,7 @@ Carry out going (this is the follow the player carry out rule):
 Report going (this is the follow the player report rule):
 	repeat with follower running through every following person:
 		say "[follower] follows you here".
-		
+
 The follow the player carry out rule is listed last in the carry out going rules.
 The follow the player report rule is listed first in the report going rules.
 
@@ -257,7 +257,7 @@ daily special is in the secret storeroom.
 instead of buying the daily special in the pub:
 	move noun to table;
 	say "The landlord puts some sort of box on the table in front of you.";
-		
+
 Understand "box" as the daily special.
 
 Chapter 3 -- food handling
@@ -272,7 +272,7 @@ Instead of examining the menu:
 instead of buying a foodstuff in the pub:
 	move noun to table;
 	say "The landlord places a steaming plate of [noun] on the table in front of you.";
-	
+
 
 Before eating a foodstuff in the pub:
 	if the noun is the daily special:
@@ -333,7 +333,7 @@ When People Walking In begins:
 	say "You look at them, and notice that one of them is a rather pretty woman.";
 	change the romantic interest to a random unmet potential girlfriend;
 	move romantic interest to the pub;
-		
+
 People Walking In ends when romantic interest is in the pub.
 
 Chat up is a recurring scene.
@@ -469,7 +469,7 @@ Instead of examining flagpole in cloud nine during The Clouds:
 	say "[Romantic Interest] seems to be getting a bit impatient.";
 	move flag to flagpole;
 	rule succeeds.
-		
+
 Instead of examining flag in cloud nine during The Clouds:
 	if the round hole is not handled:
 		move round hole to cloud nine;
@@ -477,7 +477,7 @@ Instead of examining flag in cloud nine during The Clouds:
 		say "The flag seems to have yellow writing on it, but you can't read it from this angle. You can see a hole at the lower end of the flagpole though.";
 		say "[Romantic Interest] tugs at your sleeve.";
 	rule succeeds;
-		
+
 Instead of examining the round hole in cloud nine during The Clouds:
 	say "[Romantic Interest] just got up and left.";
 	say "You hear someone shouting 'Fore!'.";
@@ -499,7 +499,7 @@ Instead of kissing the romantic interest in cloud nine during The Clouds:
 	end the adventure;
 	now the romantic interest is nonfollowing;
 	move the player to the park;
-	
+
 Understand "golf" as "[a game of golf]".
 Understand "a round of golf" as "[a game of golf]".
 Understand "a game of golf" as "[a game of golf]".
