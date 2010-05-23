@@ -15,6 +15,15 @@ Understand "make love to [someone]" as kissing.
 Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
 
+Printing the description of something is an activity.
+The fancy examining rule is listed instead of the standard examining rule in the carry out examining rules.
+This is the fancy examining rule:
+	carry out the printing the description activity with the noun.
+Rule for printing the description of something (called item):
+	say "[description of item] [run paragraph on]". 
+Last after printing the description of something:
+	say paragraph break.
+			
 Book 2 -- shops
 
 Understand "order [something]" as buying.
@@ -68,14 +77,27 @@ Potential Girlfriend is a kind of woman.
 a Potential Girlfriend can be unmet,friendly and angry.
 a Potential Girlfriend is normally unmet.
 
-Susan is a Potential Girlfriend with printed name "[if Susan is unmet]a pretty woman[otherwise]Susan[end if]" and description "This is [Susan]. She has [hair colour of Susan] hair and is [height of Susan].".
-Mary is a Potential Girlfriend with printed name "[if Mary is unmet]a somewhat pretty woman[otherwise]Mary[end if]" and description "This is [Mary]. She has [hair colour of Mary] hair and is [height of Mary].".
-Josephine is a Potential Girlfriend with printed name "[if Josephine is unmet]a very pretty woman[otherwise]Josephine[end if]" and description "This is [Josephine]. She has [hair colour of Josephine] hair and is [height of Josephine].".
+Susan is a Potential Girlfriend.
+Mary is a Potential Girlfriend.
+Josephine is a Potential Girlfriend.
+
+Rule for printing the name of an unmet potential girlfriend:
+	say "a pretty woman".
+
+
+Rule for printing the description of a potential girlfriend (called the girl):
+	say "This is [girl]. She has [hair colour of girl] hair and is [height of girl]. [run paragraph on]". 
+
+After printing the description of an angry potential girlfriend:
+	say "She seems  to dislike you." instead.
+
+After printing the description of a friendly potential girlfriend:
+	say "She smiles at you." instead.
 
 Romantic Interest is a Potential Girlfriend that varies.
 hair colour is a kind of value. A potential girlfriend has hair colour. the hair colour are blond, red, brown, black, interestingly purple-greenish.
 Height is a kind of value. A potential girlfriend has height. The heights are tall, of medium lenght, rather short.
-The description of the girl is "She has [hair colour of girl] hair and is [height of girl].".
+The description of a potential girlfriend is usually "A girl.". [should never be actually printed]
 
 When play begins:
 	repeat with girl running through potential girlfriends:
@@ -282,7 +304,7 @@ Before eating a foodstuff in the pub:
 After eating a foodstuff in the pub:
 	say "That wasn't bad.";
 	if the noun is the red herring:
-		say "The plate looks interesting.";
+		say "The plate looks interesting."; [special casing avoidable?]
 		move interesting plate to the table;
 	otherwise:
 		move empty plate to the table;
