@@ -4,6 +4,13 @@ Part 1 -- definitions and general things
 
 Chapter 1 -- actions
 
+The block giving rule is not listed in the check giving it to rules.
+The block kissing rule is not listed in the check kissing rules.
+
+Report kissing: 
+	say "Are you out of your mind?";
+	rule succeeds. [no other report or after rules!]
+	
 Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
 
@@ -66,21 +73,26 @@ Understand "pretty girl" as romantic interest.
 Understand "girl" as romantic interest.
 Understand "pretty woman" as romantic interest.
 Understand "woman" as romantic interest.
-name assigned is a kind of value. romantic interest has a name assigned. the name assigned are named and unnamed.
+romantic interest can be named and unnamed.
 The romantic interest is unnamed.
 
 To lose the girl:
 	now the romantic interest is unnamed;
+	now The romantic interest is nonfollowing;
 	now the printed name of the romantic interest is "a very pretty woman";
 	change the height of the romantic interest to a random height;
 	change the hair colour of the romantic interest to a random hair colour;
 
+Report kissing the Romantic Interest: 
+	say "[romantic interest] turns away.";
+	rule succeeds. [no other report or after rules!]
+	
 Chapter 5 -- general rules
 
 Every turn:
-	if the hole has been in the location of the player for exactly one turn:
+	if the round hole has been in the location of the player for exactly one turn:
 		say "Careful! There's a hole here.";
-	if the hole has been in the location of the player for exactly three turns:
+	if the round hole has been in the location of the player for exactly three turns:
 		say "Why don't you pay attention?";
 		say "You just fell through an obvious hole!";
 		remove the hole from play;
@@ -100,13 +112,25 @@ Every turn:
 
 A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining something: now the noun is examined. 
 
+A person can be following and nonfollowing.
+A person is normally nonfollowing.
 
-Chapter 5 -- global mechanics
+Carry out going (this is the follow the player carry out rule):
+	repeat with follower running through every following person:
+		move the follower to the location of the player;
+
+Report going (this is the follow the player report rule):
+	repeat with follower running through every following person:
+		say "[follower] follows you here".
+		
+The follow the player carry out rule is listed last in the carry out going rules.
+The follow the player report rule is listed last in the carry out going rules.
 
 A scene can be adventurous or nonadventurous.
 A scene can be selective.
 Gamestate is a kind of value. A Gamestate is adventuring, selecting, or wandering about.
 The player has a gamestate. The player is wandering about.
+
 
 To interrupt selection:
 	now the player is wandering about.
@@ -210,6 +234,7 @@ old-fashioned red herring is in the secret storeroom.
 
 some unmentionable meat is a foodstuff. "This meat doesn't look very good.".
 The printed name of some unmentionable meat is "Some Unmentionable Meat".
+some unmentionable meat is in the secret storeroom.
 
 the daily special is a foodstuff which is special.
 The daily special can be listened or unlistened. The daily special is  unlistened. 
@@ -252,8 +277,6 @@ Understand "box" as the daily special.
 
 Understand "ask [someone] about [any foodstuff]" as asking it about the foodstuff.
 Asking it about the foodstuff is an action applying to one thing and one visible thing. 
-
-
 
 Carry out an actor asking about the foodstuff in the pub(this is the ask about the special rule):
 	if the second noun is:
@@ -339,9 +362,16 @@ Chapter 1 -- Clouds
 
 Section 1 -- Setting
 
-The celestial golf course is a room. "The area around you is white and fluffy. You can see a fluffy white thing in the east, and one in the northwest. They seem to have some flags on them. Maybe you should look at them more closely."
+The Celestial Golf Course is a region.
+Cloud nine is a room in The Celestial Golf Course. "The area around you is white and fluffy. You can see a fluffy white thing in the east, and one in the northwest. They seem to have some flags on them. Maybe you should look at them more closely.".
 
-The printed name of the celestial golf course is "A fluffy white place.".
+a round hole is a thing. The printed name of a round hole is "a hole".
+
+Tee one is a room in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
+Green eighteen is a room in The Celestial Golf Course. "You've managed to complete the game. Well done!".
+Green eighteen is east of Tee one.
+
+The printed name of cloud nine is "A fluffy white place.".
 
 Section 2 -- Selection
 
@@ -356,16 +386,35 @@ When Cloud Selector begins:
 		move the bunch of roses to the flower shop;
 		now the bunch of roses is forsale;
 
-Instead of giving roses to Romantic Interest during Cloud Selector:
-	Now Romantic Interest is carrying the roses;
-	Say "[Romantic Interest] smiles at you and steps closer".
+Check an actor giving something to:
+	if the second noun is the romantic interest and the noun is the bunch of roses:
+		continue the action;
+	otherwise:
+		stop the action with library message giving it to action number 3 for the second noun.
 
-Instead of kissing in the rose garden during Cloud Selector: 
+Report giving roses to Romantic Interest during Cloud Selector:
+	Say "[Romantic Interest] smiles at you and steps closer";
+	rule succeeds. [no other report or after rules!]
+
+Check an actor kissing the Romantic Interest in the rose garden during Cloud Selector:
 	if the romantic interest has the bunch of roses:
-		complete selection;
+		continue the action;
 	otherwise:
 		say "[Romantic Interest] turns away.";
-		
+		stop the action.
+
+Carry out kissing the Romantic Interest in the rose garden during Cloud Selector: 
+	complete selection;
+	now the romantic interest is following;
+
+Report kissing the Romantic Interest in the rose garden during Cloud Selector: 
+	say "You kiss [romantic interest] enthousiastically.";
+	rule succeeds. [no other report or after rules!]
+
+Every turn during Cloud Selector:
+	if the player has been in the rose garden for exactly 2 turns, say "You suddenly hear a booming voice coming from above. It says 'Get on with it!'.";
+	if the player has been in the rose garden for exactly 3 turns, say "Don't you know what to do when you meet [Romantic Interest] in a rose garden?".		
+
 Cloud Selector ends well when the player is adventuring.
 Cloud Selector ends normally when the player is wandering about.
 
@@ -373,8 +422,8 @@ Section 3 -- The actual adventure
 
 The Clouds is an adventurous recurring scene.
 The Clouds begins when Cloud Selector ends well.
-The Clouds ends well when the player is not in the celestial golf course and the romantic interest is in the celestial golf course and the romantic interest is named.
-The Clouds ends badly when the player is not in the celestial golf course and the romantic interest is in the celestial golf course and the romantic interest is unnamed.
+The Clouds ends well when the player is wandering about.
+The Clouds ends badly when the romantic interest is unnamed.
 
 When The Clouds ends:
 	end the adventure;
@@ -382,58 +431,71 @@ When The Clouds ends:
 When The Clouds ends well:
 	now The Clouds is non-recurring;
 	now Cloud Selector is non-recurring;
-		
+
 When The Clouds begins:
 	say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
 	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
-	move Romantic Interest to the celestial golf course;
-	move the player to the celestial golf course;
-
-Every turn during The Clouds:
-	if the player has been in the rose garden for exactly 2 turns, say "You suddenly hear a booming voice coming from above. It says 'Get on with it!'.";
-	if the player has been in the rose garden for exactly 3 turns, say "Don't you know what to do if you meet [Romantic Interest] in a rose garden?".
+	move the player to cloud nine;
+	move the romantic interest to cloud nine; [ RI will NOT follow "magic" moves automatically!]
 	
-
-Every turn while in the celestial golf course during The Clouds:
+Every turn while in cloud nine during The Clouds:
 	say "[Romantic Interest] is looking at you expectantly.".
 
-fluffy white thing in the east is scenery in The celestial golf course. "In the distance to the east you can see a fluffy white object. There's a small flag on it. The flag has the number '8' written on it in yellow.".
-fluffy white thing in the northwest is scenery in The celestial golf course. "In the distance to the northwest you can see a fluffy white object. There's a small flag on it. The flag has the 
+fluffy white thing in the east is scenery in cloud nine. "In the distance to the east you can see a fluffy white object. There's a small flag on it. The flag has the number '8' written on it in yellow.".
+fluffy white thing in the northwest is scenery in cloud nine. "In the distance to the northwest you can see a fluffy white object. There's a small flag on it. The flag has the 
 number '10' written on it in yellow."
 
-The flagpole is a supporter in the celestial golf course. "There seems to be some sort of pole nearby.".
-description of flagpole is "This could well be a flagpole. There seems to be a flag at the top.".
+The flagpole is a supporter in cloud nine. 
+description of flagpole is "[if the flagpole is examined]This could well be a flagpole. There seems to be a flag at the top.[otherwise]There seems to be some sort of pole nearby.[end if]".
+printed name of flagpole is "pole".
 a flag is a thing. "There's something on top of the pole.".
 description of flag is "[if the flag is handled]The flag has the number '9' written on it in yellow.[otherwise]There seems to be something written on the flag in yellow, but you can't see it from this angle.[end if]".
-a hole is a thing.
 
-instead of examining flagpole in the celestial golf course during The Clouds:
+Instead of examining flagpole in cloud nine during The Clouds:
 	say "This could well be a flagpole. There seems to be a flag at the top.";
 	say "[Romantic Interest] seems to be getting a bit impatient.";
-	move flag to flagpole.
-	
-Carry out of examining flag in the celestial golf course during The Clouds:
+	move flag to flagpole;
+	rule succeeds.
+		
+Instead of examining flag in cloud nine during The Clouds:
+	if the round hole is not handled:
+		move round hole to cloud nine;
 	if the flag is not handled:
 		say "The flag seems to have yellow writing on it, but you can't read it from this angle. You can see a hole at the lower end of the flagpole though.";
 		say "[Romantic Interest] tugs at your sleeve.";
-	if the hole is not handled:
-		move hole to the celestial golf course;
+		
+Carry out examining the round hole in cloud nine during The Clouds:
+	lose the girl;
+	move the player to the park;
 	
-instead of examining hole in the celestial golf course during The Clouds:
+Report examining the round hole in cloud nine during The Clouds:
 	say "[Romantic Interest] just got up and left.";
 	say "You hear someone shouting 'Fore!'.";
 	say "Something hits you on the head.";
 	say "You fall through the fluffy white material.";
-	lose the girl;
-	move player to the park.
-	
-Instead of kissing in the celestial golf course:
+
+Check an actor kissing the romantic interest in cloud nine during The Clouds:
+	continue the action;
+
+Carry out kissing the romantic interest in cloud nine during The Clouds:
 	say "Someone taps you in the shoulder. You look round and see a winged man carrying some sort of stick.";
 	say "'Excuse me, sir, but could you get out of the way? I'd like to get on with my putting.'";
 	say "[Romantic Interest] screams and runs away.";
 	say "You're so shocked that you fall through the fluffy white material.";
 	say "Maybe you should try looking for [Romantic Interest].";
-	move player to the park.
+	end the adventure;
+	now the romantic interest is nonfollowing;
+	move the player to the park;
 
-[propose a game of golf. That's the winning move]
+Report kissing the romantic interest during The Clouds:
+	rule succeeds. [No other reports!]
+	
+Understand "golf" as "[a game of golf]".
+Understand "a round of golf" as "[a game of golf]".
+Understand "a game of golf" as "[a game of golf]".
+After asking the romantic interest about "[a game of golf]" during The Clouds:
+	say "[Romantic Interest] nods enthousiastically and says 'How did you know that I like golf?'";
+	move the player to Tee One;
+	move the romantic interest to Tee One; [ RI will NOT follow "magic" moves automatically!]
+
 understand "pole" as flagpole.
