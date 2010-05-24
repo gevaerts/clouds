@@ -145,14 +145,14 @@ Every turn:
 
 Every turn:
 	repeat with ex running through former potential girlfriends:
-		if the friendlyness of the ex > 0 and a random chance of 1 in 10 succeeds:
+		if the friendlyness of the ex > 0 and a random chance of 1 in 20 succeeds:
 			decrease the friendlyness of the ex by 1;
-		if the friendlyness of the ex < 0 and a random chance of 1 in 10 succeeds:
+		if the friendlyness of the ex < 0 and a random chance of 1 in 20 succeeds:
 			increase the friendlyness of the ex by 1;
 	repeat with RI running through current potential girlfriends:
-		if the friendlyness of the RI > 5 and a random chance of 1 in 10 succeeds:
+		if the friendlyness of the RI > 5 and a random chance of 1 in 20 succeeds:
 			decrease the friendlyness of the RI by 1;
-		if the friendlyness of the RI < 5 and a random chance of 1 in 10 succeeds:
+		if the friendlyness of the RI < 5 and a random chance of 1 in 20 succeeds:
 			increase the friendlyness of the RI by 1;
 		if the friendlyness of the RI < 0:
 			say "You seem to have annoyed [RI] once too often. She's decided to leave you.";
