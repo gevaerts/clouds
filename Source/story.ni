@@ -83,8 +83,8 @@ a Potential Girlfriend is normally unmet.
 hair colour is a kind of value. A potential girlfriend has hair colour. the hair colour are blond, red, brown, black, interestingly purple-greenish.
 Height is a kind of value. A potential girlfriend has height. The heights are tall, of medium lenght, rather short.
 
-A potential girlfriend has a number called friendlyness.
-The friendlyness of a potential girlfriend is normally 0.
+A potential girlfriend has a number called friendliness.
+The friendliness of a potential girlfriend is normally 0.
 
 When play begins:
 	repeat with girl running through potential girlfriends:
@@ -98,17 +98,17 @@ Rule for printing the name of an unmet potential girlfriend:
 
 Rule for printing the description of a potential girlfriend (called the girl):
 	say "This is [girl]. She has [hair colour of girl] hair and is [height of girl]. [run paragraph on]";
-	if the friendlyness of the girl < -8:
+	if the friendliness of the girl < -8:
 		say "[girl] looks as if she could kill you.";
-	otherwise if the friendlyness of the girl < -5: 
+	otherwise if the friendliness of the girl < -5: 
 		say "[girl] looks as if she is really annoyed with you.";
-	otherwise if the friendlyness of the girl < -2:
+	otherwise if the friendliness of the girl < -2:
 		say "[girl] seems to be a bit annoyed.";
-	otherwise if the friendlyness of the girl < 2:
+	otherwise if the friendliness of the girl < 2:
 		say "[girl] seems to be indifferent about you.";
-	otherwise if the friendlyness of the girl < 5:
+	otherwise if the friendliness of the girl < 5:
 		say "[girl] seems to be happy to see you.";
-	otherwise if the friendlyness of the girl < 8:
+	otherwise if the friendliness of the girl < 8:
 		say "[girl] smiles when she sees you looking at her.";
 	otherwise:
 		say "[girl] looks at you adoringly. You can do nothing wrong.";
@@ -145,29 +145,29 @@ Every turn:
 
 Every turn:
 	repeat with ex running through former potential girlfriends:
-		if the friendlyness of the ex > 0 and a random chance of 1 in 20 succeeds:
-			decrease the friendlyness of the ex by 1;
-		if the friendlyness of the ex < 0 and a random chance of 1 in 20 succeeds:
-			increase the friendlyness of the ex by 1;
+		if the friendliness of the ex > 0 and a random chance of 1 in 20 succeeds:
+			decrease the friendliness of the ex by 1;
+		if the friendliness of the ex < 0 and a random chance of 1 in 20 succeeds:
+			increase the friendliness of the ex by 1;
 	repeat with RI running through current potential girlfriends:
-		if the friendlyness of the RI > 5 and a random chance of 1 in 20 succeeds:
-			decrease the friendlyness of the RI by 1;
-		if the friendlyness of the RI < 5 and a random chance of 1 in 20 succeeds:
-			increase the friendlyness of the RI by 1;
-		if the friendlyness of the RI < 0:
+		if the friendliness of the RI > 5 and a random chance of 1 in 20 succeeds:
+			decrease the friendliness of the RI by 1;
+		if the friendliness of the RI < 5 and a random chance of 1 in 20 succeeds:
+			increase the friendliness of the RI by 1;
+		if the friendliness of the RI < 0:
 			say "You seem to have annoyed [RI] once too often. She's decided to leave you.";
 			lose the girl;
 						
 			
 To impress (girl - a potential girlfriend) by (amount - a number):
-	increase the friendlyness of the girl by the amount;
-	if the friendlyness of the girl > 10:
-		now the friendlyness of the girl is 10;
+	increase the friendliness of the girl by the amount;
+	if the friendliness of the girl > 10:
+		now the friendliness of the girl is 10;
 	
 To annoy (girl - a potential girlfriend) by (amount - a number):
-	decrease the friendlyness of the girl by the amount;
-	if the friendlyness of the girl < -10:
-		now the friendlyness of the girl is -10;
+	decrease the friendliness of the girl by the amount;
+	if the friendliness of the girl < -10:
+		now the friendliness of the girl is -10;
 
 Part 3 -- Actions
 
@@ -184,9 +184,9 @@ Report giving flowers (called the bouquet) to a potential girlfriend (called the
 	rule succeeds. [no other report or after rules!]
 
 Check an actor kissing a potential girlfriend (called the girl):
-	if the friendlyness of the girl > 2:
+	if the friendliness of the girl > 2:
 		continue the action;
-	otherwise if the friendlyness of the girl >= -2:
+	otherwise if the friendliness of the girl >= -2:
 		say "[Romantic Interest] turns away.";
 		stop the action;
 	otherwise:
@@ -248,6 +248,7 @@ The follow the player report rule is listed first in the report going rules.
 
 A scene can be adventurous or nonadventurous.
 A scene can be selective.
+A scene can be incomplete or completed. A scene normally is incomplete.
 Gamestate is a kind of value. A Gamestate is adventuring, selecting, or wandering about.
 The player has a gamestate. The player is wandering about.
 
@@ -273,6 +274,8 @@ The park, the rose garden, the flower shop, the narrow street, round square, pen
 Park is a room. "You are in a park. There are trees here. 
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
 
+The wallet is in the park.
+
 Rose Garden is a room. "This rose garden is full of roses. The park is to the west.".
 rose garden is east of the park.
 
@@ -283,7 +286,7 @@ A narrow street is a room. "This isn't a very interesting street. To the southea
 a narrow street is northwest of the park.
 
 Round Square is a room. "This square isn't. A narrow street leads to the south.
-Desing note: Round Square has room for buildings.".
+Design note: Round Square has room for buildings.".
 Round Square is north of a narrow street.
 
 Penny Lane is a room. "The lane is lined with trees. Some of the trees don't look too well, their leaves seem to be half-eaten and they look a bit silvery. Penny Lane continues to the south.
@@ -291,14 +294,11 @@ To the west is the library, the park is to the north.".
 Penny Lane is south of the park.
 
 South end of Penny Lane is a room. "The lane is lined with trees. Some of the trees don't look too well, their leaves seem to be half-eaten and they look a bit silvery. Penny Lane continues to the north.
-Designe note: more room for expansion here.".
+Design note: more room for expansion here.".
 South end of Penny Lane is south of Penny Lane.
 
+Book 3 -- The flower shop
 
-The library is a room. "This is the library. The walls are lined with books.
-The exit is to the east".
-The library is west of Penny lane.
-	
 flowers is a kind of thing.
 A flowers has a number called niceness.
 The niceness of a flowers is normally 1.
@@ -312,9 +312,7 @@ The description of the bunch of roses is "A nice bunch of roses.".
 The description of the bunch of lilies is "These lilies look a bit faded.".
 bunch of roses and bunch of lilies are in the flower shop.
 
-The wallet is in the park.
-
-Book 3 -- the pub
+Book 4 -- the pub
 
 Part 1 -- The Setting
 
@@ -352,8 +350,14 @@ Instead of examining the menu:
 	say "*** drinks menu ***[line break]";
 	repeat with item running through every drink:
 		say "[item] -- [price of item][line break]";
-	rule succeeds;.
-	
+	say "*** incomplete scenes menu ***[line break]";
+	repeat with item running through every incomplete adventurous scene:
+		say "[item][line break]";
+	say "*** completed scenes menu ***[line break]";
+	repeat with item running through every completed adventurous scene:
+		say "[item][line break]";
+	rule succeeds;
+
 Part 2 -- Food and Drink
 
 Chapter 1 -- General things
@@ -473,7 +477,7 @@ Instead of talking to a potential girlfriend (called the girl) during chat up:
 	rule succeeds;
 
 Instead of giving beer to a potential girlfriend (called the girl) in the pub:
-	if the friendlyness of the girl < 0 and a random chance of 0 - the friendlyness of the girl in 10 succeeds:
+	if the friendliness of the girl < 0 and a random chance of 0 - the friendliness of the girl in 10 succeeds:
 		say "[girl] pours the beer over your head.";
 		annoy girl by 1;
 	otherwise:
@@ -501,7 +505,26 @@ When Sober end of chat up begins:
 	remove Romantic Interest from play;
 	say "You wouldn't mind seeing [romantic interest] again.";
 
-Volume 3 -- the adventures
+Book 5 -- The Library
+
+The library is a room. "This is the library. The walls are lined with books. There is a nice plaque on the wall.
+The exit is to the east".
+The library is west of Penny lane.
+
+the achievements plaque is scenery in the library.
+The description of the achievements plaque is "This plaque tells the world about your adventues.".
+Instead of examining the achievements plaque:
+	if there is at least one completed adventurous scene:
+		say "Great deeds[line break]";
+		repeat with item running through every completed adventurous scene:
+			say "* [item][line break]";
+	if there is at least one incomplete adventurous scene:
+		say "Possible future great deeds[line break]";
+		repeat with item running through every incomplete adventurous scene:
+			say "* [item][line break]";
+	rule succeeds;
+	
+Volume 3 -- The Adventures
 
 Book 1 -- Clouds
 
@@ -520,7 +543,7 @@ When Cloud Selector begins:
 	now the player is selecting;
 	move Romantic Interest to the rose garden;
 	say "[Romantic Interest] is here. She looks absolutely wonderful. [run paragraph on]";
-	if the friendlyness of the romantic interest > 2:
+	if the friendliness of the romantic interest > 2:
 		say "She smiles and steps closer.";
 	otherwise:
 		say "She does look a bit indifferent though.";
@@ -566,6 +589,7 @@ When The Clouds ends:
 
 When The Clouds ends well:
 	now The Clouds is non-recurring;
+	now The Clouds is completed;
 	now Cloud Selector is non-recurring;
 
 When The Clouds begins:
