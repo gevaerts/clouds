@@ -481,6 +481,10 @@ When The Clouds ends well:
 When The Clouds begins:
 	say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
 	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
+	if the round hole is not handled:
+		remove the round hole from play;
+	if the flag is not handled:
+		remove the flag from play;
 	move the romantic interest to cloud nine; [ RI will NOT follow "magic" moves automatically!]
 	move the player to cloud nine;
 
