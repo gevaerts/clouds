@@ -113,12 +113,22 @@ Understand "woman" as a potential girlfriend.
 To lose the girl:
 	now the romantic interest is angry;
 	now The romantic interest is nonfollowing;
+	move the romantic interest to a random room in the town;
 	change the romantic interest to a random unmet potential girlfriend;
 	say "You have now met and lost [list of angry potential girlfriends].";
 
 Report kissing the Romantic Interest: 
 	say "[romantic interest] turns away.";
 	rule succeeds. [no other report or after rules!]
+
+Every turn:
+	repeat with ex running through every angry potential girlfriend:
+		if a random chance of 1 in 4 succeeds:
+			if ex is in a room (called the current space):
+				let next space be a random room which is adjacent to the current space;
+				if ex is visible, say "[ex] heads to [the next space].";
+				move ex to next space;
+				if ex is visible, say "[ex] arrives from [the current space]. She doesn't seem to like you very much.".
 
 Book 5 -- general rules
 
@@ -179,6 +189,9 @@ When play begins:
 	say "So here you are in the land of your dreams. It's been a while since you've eaten though.";
 
 Book 2 -- Main area
+
+The Town is a region.
+The park, the rose garden, the flower shop, the narrow street, round square, penny lane, south end of peny lane, the library and the pub are in the town.
 
 Park is a room. "You are in a park. There are trees here. 
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
