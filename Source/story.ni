@@ -268,7 +268,7 @@ When play begins:
 Book 2 -- Main area
 
 The Town is a region.
-The park, the rose garden, the flower shop, the narrow street, round square, penny lane, south end of peny lane, the library and the pub are in the town.
+The park, the rose garden, the flower shop, the narrow street, round square, penny lane, south end of penny lane, the library and the pub are in the town.
 
 Park is a room. "You are in a park. There are trees here. 
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
