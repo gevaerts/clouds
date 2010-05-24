@@ -318,52 +318,85 @@ Book 3 -- the pub
 
 Part 1 -- The Setting
 
-the secret storeroom is a room. "You've never seen the secret storeroom and you never will. It's used by the pub to store things where you can't see them.".
+The pub is a room. 
+The pub is north of the park.
+The description of the pub is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall.".
 
-Foodstuff is a kind of thing.
-Foodstuff is normally edible.
-A foodstuff can be on_the_menu and special. A foodstuff is normally on_the_menu.
+the secret storeroom is a room. "You've never seen the secret storeroom and you never will. It's used by the pub to store things where you can't see them.".
 
 Rule for deciding the scope of the player while buying in the pub:
         place the secret storeroom in scope.
 Rule for reaching inside the secret storeroom while buying in the pub:
 	allow access.
 
-The pub is a room. 
-The pub is north of the park.
-The description of the pub is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall.".
-
 The landlord is a person who is in the pub.
 
 a table is a supporter in the pub.
-a menu is a thing on the table.
 the suggestion board is scenery in the pub.
 The description of the suggestion board is "The board says 'Daily special', followed by some unreadable chalk writing.".
 
-an empty plate is a thing.
+an empty plate is a thing in the secret storeroom.
 The description of the empty plate is "This is just an ordinary plate.".
 empty plate is in the storeroom.
 
-an interesting plate is a thing.
+an interesting plate is a thing in the secret storeroom.
 The description of the interesting plate is "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
-interesting plate is in the storeroom.
 
-Part 2 -- Food
+a menu is a thing on the table.
+The description of a menu is "There seems to be a wide choice of food and drink available. You'll need to read the menu carefully.".
+Instead of examining the menu:
+	say "'The Bannister and Shamrock'[line break]";
+	say "*** food menu ***[line break]";
+	repeat with item running through every on_the_menu foodstuff:
+		say "[item] -- [price of item][line break]";
+	say "*** drinks menu ***[line break]";
+	repeat with item running through every drink:
+		say "[item] -- [price of item][line break]";
+	rule succeeds;.
+	
+Part 2 -- Food and Drink
 
-Chapter 1 -- Regular food
+Chapter 1 -- General things
 
-old-fashioned red herring is a foodstuff. 
-The description of the red herring is "The red herring looks delicious.".
-The printed name of old-fashioned red herring is "Old-fashioned Red Herring";
-old-fashioned red herring is in the secret storeroom.
+a comestible is a kind of thing.
+A comestible has a text called qualifier.
+A comestible can be on_the_menu and special. A comestible is normally on_the_menu.
 
-some unmentionable meat is a foodstuff. "This meat doesn't look very good.".
-The printed name of some unmentionable meat is "Some Unmentionable Meat".
-some unmentionable meat is in the secret storeroom.
+Foodstuff is a kind of comestible.
+Foodstuff is normally edible.
+The qualifier of a foodstuff is normally "a steaming plate of".
+The price of a foodstuff is normally 1 gold piece.
 
-Chapter 2 -- The Daily Special
+a drink is a kind of comestible.
+The qualifier of a drink is normally "a nice".
+The price of a drink is normally 1 gold piece.
+
+instead of buying a comestible in the pub:
+	if the player has the wallet:
+		if the price of the wallet >= the price of the noun:
+			decrease the price of the wallet by the price of the noun;
+			move the noun to the table;
+			say "The landlord places [qualifier of noun] [noun] on the table in front of you.";
+			say "You pay [price of noun] for the [noun].";
+		otherwise:
+			say "You can't afford [noun]. It costs [price of noun].";
+	otherwise:
+		say "You seem to have lost your wallet.";
+	rule succeeds;
+	
+Chapter 2 -- The available wares
+
+Old-fashioned Red Herring is a foodstuff in the secret storeroom. "The red herring looks delicious.".
+some unmentionable meat is a foodstuff in the secret storeroom. "This meat doesn't look very good.".
+
+beer is a drink  in the secret storeroom with qualifier "a nice cool frothy".
+glass of wine is a drink in the secret storeroom with qualifier "a nice".
+
+Chapter 3 -- The Daily Special
 
 the daily special is a foodstuff which is special.
+The printed name of the daily special is "box".
+The qualifier of the daily special is "some sort of".
 The daily special can be listened or unlistened. The daily special is  unlistened. 
 The description of the daily special is "This box seems to have something moving inside it. Wait, did the lid just move up a bit, and did a pair of beady eyes really look out? What's this noise?".
 instead of listening to the daily special:
@@ -373,32 +406,14 @@ instead of listening to the daily special:
 
 daily special is in the secret storeroom.
 
-instead of buying the daily special in the pub:
-	move noun to table;
-	say "The landlord puts some sort of box on the table in front of you.";
-	rule succeeds;
-
-Understand "box" as the daily special.
-
-Chapter 3 -- food handling
-
-The description of a menu is "There seems to be a wide choice of dishes available. You'll need to read the menu carefully.".
-
-Instead of examining the menu:
-	say "'The Bannister and Shamrock' - dinner menu[line break]";
-	repeat with item running through every on_the_menu foodstuff:
-		say "[item][line break]";
-	rule succeeds;
-
-instead of buying a foodstuff in the pub:
-	move noun to table;
-	say "The landlord places a steaming plate of [noun] on the table in front of you.";
-	rule succeeds;
-
 Before eating a foodstuff in the pub:
 	if the noun is the daily special:
 		say "You can't eat that, surely?";
 		stop the action.
+		
+Understand "box" as the daily special.
+
+Chapter 3 -- Eating and Drinking
 
 After eating a foodstuff in the pub:
 	say "That wasn't bad.";
@@ -424,26 +439,13 @@ Carry out an actor asking about the foodstuff in the pub (this is the ask about 
 		-- otherwise:
 			say "The landlord looks proud and says 'I can really recommend [the second noun]!'".
 
-Part 3 -- Drinks
-
-a beer is a thing.
-a beer is in the secret storeroom.
-
-instead of buying beer in the pub:
-	if the noun is not a beer:
-		say "Sorry, we only have beer.";
-		stop;
-	move the noun to the table;
-	say "The landlord places a nice frothy [noun] on the table in front of you.";
-	rule succeeds;
-
-Instead of drinking beer in the pub:
+Instead of drinking a drink in the pub:
 	increase the alcohol level of the player by 1;
 	move the noun to the storeroom;
 	Say "That was good!";
 	if the alcohol level of the player > 2:
 		say "Suddenly the pub starts moving around in strange ways, and you fall over.";
-		say "This beer is strong!";
+		say "This [noun] is strong!";
 	rule succeeds;
 
 Part 4 -- Social life
@@ -462,9 +464,9 @@ People Walking In ends when romantic interest is in the pub.
 Chat up is a recurring scene.
 Chat up begins when People Walking In ends.
 
-Instead of talking to romantic interest during chat up:
-	if the romantic interest is unmet:
-		now the romantic interest is current;
+Instead of talking to a potential girlfriend (called the girl) during chat up:
+	if the girl is unmet:
+		now the girl is current;
 		say "She says, 'Hello, my name is [the printed name of the romantic interest].'";
 	otherwise:
 		say "She says, 'I could use a drink.'";
