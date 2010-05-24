@@ -55,6 +55,7 @@ instead of buying something in a shop:
 			say "You seem to have lost your wallet.";
 	else if the noun is a sold thing:
 		say "You already bought [the noun]";
+	rule succeeds;
 
 before going in a shop:
 	if the player is holding forsale things:
@@ -73,62 +74,138 @@ The alcohol level of a person is normally 0.
 
 Book 4 -- The Romantic Interest
 
+Part 1 -- Definitions
+
 Potential Girlfriend is a kind of woman.
-a Potential Girlfriend can be unmet,friendly and angry.
+a Potential Girlfriend can be unmet,current and former.
 a Potential Girlfriend is normally unmet.
 
-Susan is a Potential Girlfriend.
-Mary is a Potential Girlfriend.
-Josephine is a Potential Girlfriend.
-
-Rule for printing the name of an unmet potential girlfriend:
-	say "a pretty woman".
-
-
-Rule for printing the description of a potential girlfriend (called the girl):
-	say "This is [girl]. She has [hair colour of girl] hair and is [height of girl]. [run paragraph on]". 
-
-After printing the description of an angry potential girlfriend:
-	say "She seems  to dislike you." instead.
-
-After printing the description of a friendly potential girlfriend:
-	say "She smiles at you." instead.
-
-Romantic Interest is a Potential Girlfriend that varies.
 hair colour is a kind of value. A potential girlfriend has hair colour. the hair colour are blond, red, brown, black, interestingly purple-greenish.
 Height is a kind of value. A potential girlfriend has height. The heights are tall, of medium lenght, rather short.
-The description of a potential girlfriend is usually "A girl.". [should never be actually printed]
+
+A potential girlfriend has a number called friendlyness.
+The friendlyness of a potential girlfriend is normally 0.
 
 When play begins:
 	repeat with girl running through potential girlfriends:
 		Now the hair colour of the girl is a random hair colour;
 		Now the height of the girl is a random height;
 
+Part 2 -- Descriptions
+
+Rule for printing the name of an unmet potential girlfriend:
+	say "a pretty woman".
+
+Rule for printing the description of a potential girlfriend (called the girl):
+	say "This is [girl]. She has [hair colour of girl] hair and is [height of girl]. [run paragraph on]";
+	if the friendlyness of the girl < -8:
+		say "[girl] looks as if she could kill you.";
+	otherwise if the friendlyness of the girl < -5: 
+		say "[girl] looks as if she is really annoyed with you.";
+	otherwise if the friendlyness of the girl < -2:
+		say "[girl] seems to be a bit annoyed.";
+	otherwise if the friendlyness of the girl < 2:
+		say "[girl] seems to be indifferent about you.";
+	otherwise if the friendlyness of the girl < 5:
+		say "[girl] seems to be happy to see you.";
+	otherwise if the friendlyness of the girl < 8:
+		say "[girl] smiles when she sees you looking at her.";
+	otherwise:
+		say "[girl] looks at you adoringly. You can do nothing wrong.";
+	say " [run paragraph on]".
+				
+After printing the description of a current potential girlfriend:
+	say "You really like her." instead.
+
+Romantic Interest is a Potential Girlfriend that varies.
+The description of a potential girlfriend is usually "A girl.". [should never be actually printed]
 
 Understand "pretty girl" as a potential girlfriend.
 Understand "girl" as a potential girlfriend.
 Understand "pretty woman" as a potential girlfriend.
 Understand "woman" as a potential girlfriend.
 
+Part 3 -- Mechanics
+
 To lose the girl:
-	now the romantic interest is angry;
+	now the romantic interest is former;
 	now The romantic interest is nonfollowing;
 	move the romantic interest to a random room in the town;
 	change the romantic interest to a random unmet potential girlfriend;
-	say "You have now met and lost [list of angry potential girlfriends].";
-
-Report kissing the Romantic Interest: 
-	say "[romantic interest] turns away.";
-	rule succeeds. [no other report or after rules!]
+	say "You have now met and lost [list of former potential girlfriends].";
 
 Every turn:
-	repeat with ex running through every angry potential girlfriend:
+	repeat with ex running through every former potential girlfriend:
 		if a random chance of 1 in 4 succeeds:
 			if ex is in a room (called the current space):
 				let next space be a random room which is adjacent to the current space;
 				if ex is visible, say "[ex] heads to [the next space].";
 				move ex to next space;
-				if ex is visible, say "[ex] arrives from [the current space]. She doesn't seem to like you very much.".
+				if ex is visible, say "[ex] arrives from [the current space].".
+
+Every turn:
+	repeat with ex running through former potential girlfriends:
+		if the friendlyness of the ex > 0 and a random chance of 1 in 10 succeeds:
+			decrease the friendlyness of the ex by 1;
+		if the friendlyness of the ex < 0 and a random chance of 1 in 10 succeeds:
+			increase the friendlyness of the ex by 1;
+	repeat with RI running through current potential girlfriends:
+		if the friendlyness of the RI > 5 and a random chance of 1 in 10 succeeds:
+			decrease the friendlyness of the RI by 1;
+		if the friendlyness of the RI < 5 and a random chance of 1 in 10 succeeds:
+			increase the friendlyness of the RI by 1;
+		if the friendlyness of the RI < 0:
+			say "You seem to have annoyed [RI] once too often. She's decided to leave you.";
+			lose the girl;
+						
+			
+To impress (girl - a potential girlfriend) by (amount - a number):
+	increase the friendlyness of the girl by the amount;
+	if the friendlyness of the girl > 10:
+		now the friendlyness of the girl is 10;
+	
+To annoy (girl - a potential girlfriend) by (amount - a number):
+	decrease the friendlyness of the girl by the amount;
+	if the friendlyness of the girl < -10:
+		now the friendlyness of the girl is -10;
+
+Part 3 -- Actions
+
+Report kissing a potential girlfriend: 
+	say "That was nice!";
+	rule succeeds. [no other report or after rules!]
+
+
+Carry out giving flowers (called the bouquet) to a potential girlfriend (called the girl):
+	impress the girl by the niceness of the bouquet;
+
+Report giving flowers (called the bouquet) to a potential girlfriend (called the girl):
+	Say "[girl] gladly accepts the [bouquet].";
+	rule succeeds. [no other report or after rules!]
+
+Check an actor kissing a potential girlfriend (called the girl):
+	if the friendlyness of the girl > 2:
+		continue the action;
+	otherwise if the friendlyness of the girl >= -2:
+		say "[Romantic Interest] turns away.";
+		stop the action;
+	otherwise:
+		say "[romantic interest] slapped you.";
+		annoy the girl by 1;
+
+Carry out kissing a potential girlfriend (called the kissed girl):
+	repeat with other girl running through potential girlfriends in the location of the player:
+		if the other girl is not the kissed girl:
+			annoy the other girl by 1;
+			if the other girl is current:
+				annoy the other girl by 2; [so 3 in total]
+
+Part 4 -- The Cast
+
+Susan is a Potential Girlfriend.
+Mary is a Potential Girlfriend.
+Josephine is a Potential Girlfriend.
+
 
 Book 5 -- general rules
 
@@ -221,9 +298,14 @@ South end of Penny Lane is south of Penny Lane.
 The library is a room. "This is the library. The walls are lined with books.
 The exit is to the east".
 The library is west of Penny lane.
+	
+flowers is a kind of thing.
+A flowers has a number called niceness.
+The niceness of a flowers is normally 1.
 
-a bunch of roses is a thing.
-a bunch of lilies is a thing.
+a bunch of roses is a flowers with niceness 3.
+a bunch of lilies is a flowers.
+
 The price of a bunch of roses and a bunch of lilies is 1 gold piece.
 The bunch of roses and the bunch of lilies are forsale.
 The description of the bunch of roses is "A nice bunch of roses.".
@@ -286,12 +368,15 @@ The daily special can be listened or unlistened. The daily special is  unlistene
 The description of the daily special is "This box seems to have something moving inside it. Wait, did the lid just move up a bit, and did a pair of beady eyes really look out? What's this noise?".
 instead of listening to the daily special:
 	now the daily special is listened;
-	say "You hear a faint quacking noise.".
+	say "You hear a faint quacking noise.";
+	rule succeeds;
+
 daily special is in the secret storeroom.
 
 instead of buying the daily special in the pub:
 	move noun to table;
 	say "The landlord puts some sort of box on the table in front of you.";
+	rule succeeds;
 
 Understand "box" as the daily special.
 
@@ -303,11 +388,12 @@ Instead of examining the menu:
 	say "'The Bannister and Shamrock' - dinner menu[line break]";
 	repeat with item running through every on_the_menu foodstuff:
 		say "[item][line break]";
+	rule succeeds;
 
 instead of buying a foodstuff in the pub:
 	move noun to table;
 	say "The landlord places a steaming plate of [noun] on the table in front of you.";
-
+	rule succeeds;
 
 Before eating a foodstuff in the pub:
 	if the noun is the daily special:
@@ -348,7 +434,8 @@ instead of buying beer in the pub:
 		say "Sorry, we only have beer.";
 		stop;
 	move the noun to the table;
-	say "The landlord places a nice frothy [noun] on the table in front of you.".
+	say "The landlord places a nice frothy [noun] on the table in front of you.";
+	rule succeeds;
 
 Instead of drinking beer in the pub:
 	increase the alcohol level of the player by 1;
@@ -356,7 +443,8 @@ Instead of drinking beer in the pub:
 	Say "That was good!";
 	if the alcohol level of the player > 2:
 		say "Suddenly the pub starts moving around in strange ways, and you fall over.";
-		say "This beer is strong!".
+		say "This beer is strong!";
+	rule succeeds;
 
 Part 4 -- Social life
 
@@ -376,15 +464,22 @@ Chat up begins when People Walking In ends.
 
 Instead of talking to romantic interest during chat up:
 	if the romantic interest is unmet:
-		now the romantic interest is friendly;
+		now the romantic interest is current;
 		say "She says, 'Hello, my name is [the printed name of the romantic interest].'";
 	otherwise:
-		say "She says, 'I could use a drink.'".
+		say "She says, 'I could use a drink.'";
+	rule succeeds;
 
-Instead of giving beer to Romantic Interest during Chat Up:
-	increase the alcohol level of the Romantic Interest by 1;
+Instead of giving beer to a potential girlfriend (called the girl) in the pub:
+	if the friendlyness of the girl < 0 and a random chance of 0 - the friendlyness of the girl in 10 succeeds:
+		say "[girl] pours the beer over your head.";
+		annoy girl by 1;
+	otherwise:
+		Say "[girl] drinks the beer and smiles at you.";
+		increase the alcohol level of the girl by 1;
+		impress girl by 1;
 	move the noun to the storeroom;
-	Say "[Romantic Interest] drinks the beer and smiles at you.".
+	rule succeeds;
 
 Chat up ends drunkenly when the alcohol level of the player > 2 and the romantic interest is not unmet.
 Chat up ends soberly when the romantic interest is not unmet and the player is not in the pub.
@@ -417,32 +512,24 @@ a round hole is a thing. The printed name of a round hole is "a hole".
 Part 2 -- Selection
 
 Cloud Selector is a selective recurring scene.
-Cloud Selector begins when no adventurous scene is happening and the romantic interest is friendly  and the player is in the rose garden and the player is wandering about.
+Cloud Selector begins when no adventurous scene is happening and the romantic interest is current  and the player is in the rose garden and the player is wandering about. [the romantic interest is current? That might need some rework]
 
 When Cloud Selector begins:
 	now the player is selecting;
 	move Romantic Interest to the rose garden;
-	say "[Romantic Interest] is here. She looks absolutely wonderful.";
-	if the player does not have the roses:
-		move the bunch of roses to the flower shop;
-		now the bunch of roses is forsale;
+	say "[Romantic Interest] is here. She looks absolutely wonderful. [run paragraph on]";
+	if the friendlyness of the romantic interest > 2:
+		say "She smiles and steps closer.";
+	otherwise:
+		say "She does look a bit indifferent though.";
+		
 
 Check an actor giving something to:
-	if the second noun is the romantic interest and the noun is the bunch of roses:
+	if the second noun is a potential girlfriend and the noun is a flowers:
 		continue the action;
 	otherwise:
 		stop the action with library message giving it to action number 3 for the second noun.
 
-Report giving roses to Romantic Interest during Cloud Selector:
-	Say "[Romantic Interest] smiles at you and steps closer";
-	rule succeeds. [no other report or after rules!]
-
-Check an actor kissing the Romantic Interest in the rose garden during Cloud Selector:
-	if the romantic interest has the bunch of roses:
-		continue the action;
-	otherwise:
-		say "[Romantic Interest] turns away.";
-		stop the action.
 
 Carry out kissing the Romantic Interest in the rose garden during Cloud Selector: 
 	complete selection;
@@ -469,10 +556,11 @@ The printed name of cloud nine is "A fluffy white place.".
 The Clouds is an adventurous recurring scene.
 The Clouds begins when Cloud Selector ends well.
 The Clouds ends well when the player is wandering about.
-The Clouds ends badly when the romantic interest is not friendly.
+The Clouds ends badly when the romantic interest is not current. [ i.e. there isn't a current potential girlfriend]
 
 When The Clouds ends:
 	end the adventure;
+	move the player to the park;
 
 When The Clouds ends well:
 	now The Clouds is non-recurring;
@@ -506,6 +594,7 @@ description of flag is "[if the flag is handled]The flag has the number '9' writ
 Instead of examining flagpole in cloud nine during The Clouds:
 	say "This could well be a flagpole. There seems to be a flag at the top.";
 	say "[Romantic Interest] seems to be getting a bit impatient.";
+	annoy romantic interest by 1;
 	move flag to flagpole;
 	rule succeeds.
 
@@ -515,6 +604,7 @@ Instead of examining flag in cloud nine during The Clouds:
 	if the flag is not handled:
 		say "The flag seems to have yellow writing on it, but you can't read it from this angle. You can see a hole at the lower end of the flagpole though.";
 		say "[Romantic Interest] tugs at your sleeve.";
+		annoy romantic interest by 1;
 	rule succeeds;
 
 Instead of examining the round hole in cloud nine during The Clouds:
@@ -522,8 +612,8 @@ Instead of examining the round hole in cloud nine during The Clouds:
 	say "You hear someone shouting 'Fore!'.";
 	say "Something hits you on the head.";
 	say "You fall through the fluffy white material.";
+	annoy romantic interest by 2;
 	lose the girl;
-	move the player to the park;
 	rule succeeds;
 
 Check an actor kissing the romantic interest in cloud nine during The Clouds:
@@ -537,7 +627,7 @@ Instead of kissing the romantic interest in cloud nine during The Clouds:
 	say "Maybe you should try looking for [Romantic Interest].";
 	end the adventure;
 	now the romantic interest is nonfollowing;
-	move the player to the park;
+	rule succeeds;
 
 Understand "golf" as "[a game of golf]".
 Understand "a round of golf" as "[a game of golf]".
