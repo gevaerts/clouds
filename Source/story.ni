@@ -6,7 +6,15 @@ Book 1 -- actions
 
 The block giving rule is not listed in the check giving it to rules.
 The block kissing rule is not listed in the check kissing rules.
+The block burning rule is not listed in the check burning rules.
 
+A thing can be inflammable or fireproof. A thing normally is fireproof.
+Check an actor burning:
+	if the noun is fireproof:
+		stop the action with library message burning action number 1.
+
+
+	
 Report kissing: 
 	say "Are you out of your mind?";
 	rule succeeds. [no other report or after rules!]
@@ -14,6 +22,7 @@ Report kissing:
 Understand "make love to [someone]" as kissing.	
 Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
+Understand "light [something]" as burning.
 
 Printing the description of something is an activity.
 The fancy examining rule is listed instead of the standard examining rule in the carry out examining rules.
@@ -129,19 +138,19 @@ Part 3 -- Mechanics
 
 To lose the girl:
 	now the romantic interest is former;
-	now The romantic interest is nonfollowing;
+	now The romantic interest is wandering;
 	move the romantic interest to a random room in the town;
 	change the romantic interest to a random unmet potential girlfriend;
 	say "You have now met and lost [list of former potential girlfriends].";
 
 Every turn:
-	repeat with ex running through every former potential girlfriend:
+	repeat with chap running through every wandering person:
 		if a random chance of 1 in 4 succeeds:
-			if ex is in a room (called the current space):
+			if chap is in a room (called the current space):
 				let next space be a random room which is adjacent to the current space;
-				if ex is visible, say "[ex] heads to [the next space].";
-				move ex to next space;
-				if ex is visible, say "[ex] arrives from [the current space].".
+				if chap is visible, say "[chap] heads to [the next space].";
+				move chap to next space;
+				if chap is visible, say "[chap] arrives from [the current space].".
 
 Every turn:
 	repeat with ex running through former potential girlfriends:
@@ -232,8 +241,8 @@ Every turn:
 
 A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining something: now the noun is examined. 
 
-A person can be following and nonfollowing.
-A person is normally nonfollowing.
+A person can be following, wandering and stationary.
+A person is normally stationary.
 
 Carry out going (this is the follow the player carry out rule):
 	repeat with follower running through every following person:
@@ -329,7 +338,7 @@ Rule for reaching inside the secret storeroom while buying in the pub:
 
 The landlord is a person who is in the pub.
 
-a table is a supporter in the pub.
+a table is a supporter which is fixed in place in the pub.
 the suggestion board is scenery in the pub.
 The description of the suggestion board is "The board says 'Daily special', followed by some unreadable chalk writing.".
 
@@ -580,8 +589,8 @@ The printed name of cloud nine is "A fluffy white place.".
 
 The Clouds is an adventurous recurring scene.
 The Clouds begins when Cloud Selector ends well.
-The Clouds ends well when the player is wandering about.
-The Clouds ends badly when the romantic interest is not current. [ i.e. there isn't a current potential girlfriend]
+The Clouds ends well when Ballooning begins.
+[The Clouds ends badly when Ballooning begins.]
 
 When The Clouds ends:
 	end the adventure;
@@ -635,24 +644,25 @@ Instead of examining flag in cloud nine during The Clouds:
 
 Instead of examining the round hole in cloud nine during The Clouds:
 	say "[Romantic Interest] just got up and left.";
-	say "You hear someone shouting 'Fore!'.";
-	say "Something hits you on the head.";
-	say "You fall through the fluffy white material.";
 	annoy romantic interest by 2;
 	lose the girl;
+	say "You hear someone shouting 'Fore!'.";
+	say "Something hits you on the head.";
+	say "The world turns black.";
+	say "You wake up to see a stranger looking at you.";
+	move Joseph to Cloud Nine;
 	rule succeeds;
 
 Check an actor kissing the romantic interest in cloud nine during The Clouds:
 	continue the action;
 
 Instead of kissing the romantic interest in cloud nine during The Clouds:
-	say "Someone taps you in the shoulder. You look round and see a winged man carrying some sort of stick.";
+	say "Someone taps you in the shoulder. You look round and see a man wearing mountaineering gear and crampons, carrying a golf club.";
 	say "'Excuse me, sir, but could you get out of the way? I'd like to get on with my putting.'";
 	say "[Romantic Interest] screams and runs away.";
-	say "You're so shocked that you fall through the fluffy white material.";
-	say "Maybe you should try looking for [Romantic Interest].";
-	end the adventure;
-	now the romantic interest is nonfollowing;
+	Move Jacques to Cloud Nine;
+	now the romantic interest is wandering;
+	move the romantic interest to a random room that is not cloud nine in the celestial golf course;
 	rule succeeds;
 
 Understand "golf" as "[a game of golf]".
@@ -662,15 +672,67 @@ Understand "propose [text] to  [someone]" as asking it about (with nouns reverse
 
 After asking the romantic interest about "[a game of golf]" during The Clouds:
 	say "[Romantic Interest] nods enthousiastically and says 'How did you know that I like golf?'";
-	move the romantic interest to Tee One; [ RI will NOT follow "magic" moves automatically!]
-	move the player to Tee One;
+	move the romantic interest to Tee ten; [ RI will NOT follow "magic" moves automatically!]
+	move the player to Tee ten;
 
 Chapter 3 -- A game of golf
 
-Tee one is a room in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
-Green eighteen is a room in The Celestial Golf Course. "You've managed to complete the game. Well done!".
-Green eighteen is east of Tee one.
+mountain golf is a recurring scene.
+mountain golf begins when the player is in Tee ten.
+mountain golf ends when ballooning begins.
+When mountain golf begins:
+	Now Jacques is following;
+	Now Joseph is following;
+
+Jacques is a man with description  "Jacques looks like a real golfing mountaineer. It's a good thing the links are cloudy, or the people in charge would surely have objected to the crampons he insists on wearing while putting.".
+Joseph is a man with description "Joseph is a fanatical mountaineer and golfer. When he was the first man to reach these summits, he immediately laid out this golf course. He named the place 'Mount Golf', and his feet haven't touched the ground since".
+
+Jacques and Joseph are in Tee ten.
+After asking Jacques about "[a game of golf]":
+	say "Jacques talks incoherently about spherical things that fly.";
+After asking Joseph about "[a game of golf]":
+	say "Joseph quickly looks around and whispers to you 'We[']ve built a machine that can lift us into the air, so we don[']t have to walk here any more.'";
+After asking Jacques about "crampons":
+	say "Jacques says 'Oh, well, I don't really need them these days, but I[']m used to them now.'";
+After asking Joseph about "Mount Golf":
+	say "'Yes, we have spent so much time up here that people think of us as the original Mount Golfers,' is all Joseph has to say.".
+		
+Tee ten is a room in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
+Green eighteen is a room in The Celestial Golf Course.
+Green eighteen is east of Tee ten.
+
+Persuasion rule for asking the romantic interest to try entering in green eighteen:
+	if the noun is the balloon:
+		persuasion succeeds;
+	otherwise:
+		persuasion fails;
+
+a balloon is a vehicle in Green Eighteen.
+firewood is an inflammable thing which is fixed in place in the balloon.
+
+Check an actor taking the balloon:
+	say "The balloon is much too big to take.";
+	stop the action.
+
+Carry out burning the firewood:
+	now the firewood is lit.
 
 Tee One and Green Eighteen are in The Celestial Golf Course.
 
 understand "pole" as flagpole.
+
+Chapter 4 -- Ballooning
+
+Ballooning is a scene.
+Ballooning begins when the firewood is lit and the firewood is in the balloon and the player is in the balloon.
+sky is a room.
+When Ballooning begins:
+	say "The balloon lifts up in the air.";
+	move the balloon to the sky;
+	
+Ballooning ends when the balloon is in the sky.
+When Ballooning ends:
+	move the balloon to the park;
+	repeat with chap running through people in the balloon:
+		move chap to park;
+	say "You seem to have landed in the park.";
