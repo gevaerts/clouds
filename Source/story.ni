@@ -604,6 +604,7 @@ When The Clouds ends well:
 When The Clouds begins:
 	say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
 	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
+	say "You really can't figure out how you got here. The plot is apparently missing some bits.";
 	if the round hole is not handled:
 		remove the round hole from play;
 	if the flag is not handled:
