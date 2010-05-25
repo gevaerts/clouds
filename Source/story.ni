@@ -218,6 +218,7 @@ Josephine is a Potential Girlfriend.
 
 Book 5 -- general rules
 
+[
 Every turn:
 	if the round hole has been in the location of the player for exactly one turn:
 		say "Careful! There's a hole here.";
@@ -229,10 +230,11 @@ Every turn:
 		move the player to the park;
 
 Every turn:
-	if the hole is carried by the player and a random chance of 1 in 4 succeeds:
+	if the round hole is carried by the player and a random chance of 1 in 4 succeeds:
 		let the lost object be a random thing that is carried by the player;
 		if the lost object is not nothing and the lost object is not the hole:
 			move lost object to the location of the player;
+]
 
 Every turn:
 	repeat with drunkard running through persons:
@@ -541,8 +543,6 @@ Part 1 -- Setting
 
 The Celestial Golf Course is a region.
 
-a round hole is a thing. The printed name of a round hole is "a hole".
-
 Part 2 -- Selection
 
 Cloud Selector is a selective recurring scene.
@@ -625,6 +625,8 @@ description of flagpole is "[if the flagpole is examined]This could well be a fl
 printed name of flagpole is "pole".
 a flag is a thing. "There's something on top of the pole.".
 description of flag is "[if the flag is handled]The flag has the number '9' written on it in yellow.[otherwise]There seems to be something written on the flag in yellow, but you can't see it from this angle.[end if]".
+
+a round hole is a fixed in place thing. The printed name of a round hole is "a hole".
 
 Instead of examining flagpole in cloud nine during The Clouds:
 	say "This could well be a flagpole. There seems to be a flag at the top.";
