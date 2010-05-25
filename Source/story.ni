@@ -717,7 +717,7 @@ Check an actor taking the balloon:
 Carry out burning the firewood:
 	now the firewood is lit.
 
-Tee One and Green Eighteen are in The Celestial Golf Course.
+Tee Ten and Green Eighteen are in The Celestial Golf Course.
 
 understand "pole" as flagpole.
 
