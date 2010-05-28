@@ -615,7 +615,8 @@ When The Clouds begins:
 Chapter 2 -- Cloud Nine
 
 Every turn while in cloud nine during The Clouds:
-	say "[Romantic Interest] is looking at you expectantly.".
+	if the clouds has been happening for exactly one turn and the romantic interest is current and the romantic interest is in cloud nine:
+		say "[Romantic Interest] is looking at you expectantly.".
 
 fluffy white thing in the east is scenery in cloud nine. "In the distance to the east you can see a fluffy white object. There's a small flag on it. The flag has the number '8' written on it in yellow.".
 fluffy white thing in the northwest is scenery in cloud nine. "In the distance to the northwest you can see a fluffy white object. There's a small flag on it. The flag has the 
@@ -678,17 +679,32 @@ After asking the romantic interest about "[a game of golf]" during The Clouds:
 	move the romantic interest to Tee ten; [ RI will NOT follow "magic" moves automatically!]
 	move the player to Tee ten;
 
+Check  an actor going (this is the don't leave cloud nine yet rule):
+	if the actor is the player and the player is in cloud nine and mountain golf is not happening:
+		stop the action with library message going action number 2 for the room gone from.
+
 Chapter 3 -- A game of golf
 
+After printing the description of cloud nine during mountain golf:
+	say "You can see a path leading to the northwest."
+
+
 mountain golf is a recurring scene.
-mountain golf begins when the player is in Tee ten.
+mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or the player is in Tee ten.
+
 mountain golf ends when ballooning begins.
 When mountain golf begins:
+	say "The weather clears a bit, and you can now see that the white fluffy things were all actually grass-covered mountain tops.";
 	Now Jacques is following;
 	Now Joseph is following;
+	Now the description of cloud nine is "The area around you is covered in neatly trimmed grass. You can see a path leading to a hilltop in the east, and a similar one the northwest. The hilltops seem to have flags on them. Maybe you should look at them more closely.";
+	Now the printed name of cloud nine is "A  neatly trimmed lawn".
+	
+
+
 
 Jacques is a man with description  "Jacques looks like a real golfing mountaineer. It's a good thing the links are cloudy, or the people in charge would surely have objected to the crampons he insists on wearing while putting.".
-Joseph is a man with description "Joseph is a fanatical mountaineer and golfer. When he was the first man to reach these summits, he immediately laid out this golf course. He named the place 'Mount Golf', and his feet haven't touched the ground since".
+Joseph is a man with description "Joseph is a fanatical mountaineer and golfer. When he was the first man to reach these summits, he immediately laid out this golf course. He named the place 'Mount Golf', and his feet haven't touched the ground since.".
 
 Jacques and Joseph are in Tee ten.
 After asking Jacques about "[a game of golf]":
@@ -701,14 +717,21 @@ After asking Joseph about "Mount Golf":
 	say "'Yes, we have spent so much time up here that people think of us as the original Mount Golfers,' is all Joseph has to say.".
 		
 Tee ten is a room in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
+Tee ten is northwest of cloud nine.
+
+
 Green eighteen is a room in The Celestial Golf Course.
 Green eighteen is east of Tee ten.
+Hole Nineteen is north of Green Eighteen.
 
 Persuasion rule for asking the romantic interest to try entering in green eighteen:
 	if the noun is the balloon:
 		persuasion succeeds;
 	otherwise:
 		persuasion fails;
+		
+Carry out the romantic interest entering the balloon:
+	now the romantic interest is stationary.
 
 a balloon is a vehicle in Green Eighteen.
 firewood is an inflammable thing which is fixed in place in the balloon.
