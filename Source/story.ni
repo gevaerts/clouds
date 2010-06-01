@@ -687,46 +687,49 @@ Chapter 3 -- A game of golf
 
 a golf_course is a kind of room. A golf_course can be fairway, green, rough, bunker and teeing.
 
-The amount is a number variable.
-The amount is 0.
-				
-to enumerate (name - a text) with (neighbours - a list of golf_courses):
-	Change the amount to the number of entries in neighbours;
+To start listing exits for (amount - a number) of (type of exit - a text):
 	if the amount > 0:
-		Say "There [if the amount is 1]is a [name][otherwise]are [name]s[end if] to the ";
-		repeat with nearby bit running through neighbours:
-			say "[best route from the location to the nearby bit]";
-			decrease the amount by 1;
-			if the amount > 1:
-				say ", ";
-			else if the amount is 1:
-				say " and ";
-			otherwise:
-				say ".";
-					
-	
+		Say "There [if the amount is 1]is a [type of exit][otherwise]are [type of exit]s[end if] to the ";
+
+To pick a separator for (amount - a number):
+	if the amount > 1:
+		say ", ";
+	else if the amount is 1:
+		say " and ";
+	else if the amount is 0:
+		say ".";
+
 After looking in a golf_course during mountain golf:
-	Let the neighbours be a list of golf_courses;
+	Let the amount be the number of adjacent fairway golf_courses;
+	start listing exits for amount of "fairway";
 	repeat with nearby bit running through adjacent fairway golf_courses:
-		add the nearby bit to the neighbours;
-	enumerate "fairway" with the neighbours;
-	truncate the neighbours to 0 entries;
+		say "[best route from the location to the nearby bit]";
+		decrease the amount by 1;
+		pick a separator for the amount;
+	Let the amount be the number of adjacent green golf_courses;
+	start listing exits for amount of "green";
 	repeat with nearby bit running through adjacent green golf_courses:
-		add the nearby bit to the neighbours;
-	enumerate "green" with the neighbours;
-	truncate the neighbours to 0 entries;
+		say "[best route from the location to the nearby bit]";
+		decrease the amount by 1;
+		pick a separator for the amount;
+	Let the amount be the number of adjacent rough golf_courses;
+	start listing exits for amount of "rough bit";
 	repeat with nearby bit running through adjacent rough golf_courses:
-		add the nearby bit to the neighbours;
-	enumerate "rough bit" with the neighbours;
-	truncate the neighbours to 0 entries;
+		say "[best route from the location to the nearby bit]";
+		decrease the amount by 1;
+		pick a separator for the amount;
+	Let the amount be the number of adjacent bunker golf_courses;
+	start listing exits for amount of "bunker";
 	repeat with nearby bit running through adjacent bunker golf_courses:
-		add the nearby bit to the neighbours;
-	enumerate "bunker" with the neighbours;
-	truncate the neighbours to 0 entries;
+		say "[best route from the location to the nearby bit]";
+		decrease the amount by 1;
+		pick a separator for the amount;
+	Let the amount be the number of adjacent teeing golf_courses;
+	start listing exits for amount of "teeing area";
 	repeat with nearby bit running through adjacent teeing golf_courses:
-		add the nearby bit to the neighbours;
-	enumerate "teeing area" with the neighbours;
-	truncate the neighbours to 0 entries;
+		say "[best route from the location to the nearby bit]";
+		decrease the amount by 1;
+		pick a separator for the amount;
 
 After printing the description of cloud nine during mountain golf:
 	say "You can see a path leading to the northwest."
@@ -745,9 +748,6 @@ When mountain golf begins:
 	Now Joseph is following;
 	Now the description of cloud nine is "The area around you is covered in neatly trimmed grass. You can see a path leading to a hilltop in the east, and a similar one the northwest. The hilltops seem to have flags on them. Maybe you should look at them more closely.";
 	Now the printed name of cloud nine is "A  neatly trimmed lawn".
-	
-
-
 
 Jacques is a man with description  "Jacques looks like a real golfing mountaineer. It's a good thing the links are cloudy, or the people in charge would surely have objected to the crampons he insists on wearing while putting.".
 Joseph is a man with description "Joseph is a fanatical mountaineer and golfer. When he was the first man to reach these summits, he immediately laid out this golf course. He named the place 'Mount Golf', and his feet haven't touched the ground since.".
