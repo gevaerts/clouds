@@ -14,12 +14,12 @@ Check an actor burning:
 		stop the action with library message burning action number 1.
 
 
-	
-Report kissing: 
+
+Report kissing:
 	say "Are you out of your mind?";
 	rule succeeds. [no other report or after rules!]
 
-Understand "make love to [someone]" as kissing.	
+Understand "make love to [someone]" as kissing.
 Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
 Understand "light [something]" as burning.
@@ -29,10 +29,10 @@ The fancy examining rule is listed instead of the standard examining rule in the
 This is the fancy examining rule:
 	carry out the printing the description activity with the noun.
 Rule for printing the description of something (called item):
-	say "[description of item] [run paragraph on]". 
+	say "[description of item] [run paragraph on]".
 Last after printing the description of something:
 	say paragraph break.
-			
+
 Book 2 -- shops
 
 Understand "order [something]" as buying.
@@ -41,7 +41,7 @@ Understand "buy [something]" as buying;
 
 a shop is a kind of room.
 
-purchased is a kind of value. a thing has a purchased. The purchased are sold and forsale and nosale. 
+purchased is a kind of value. a thing has a purchased. The purchased are sold and forsale and nosale.
 The purchased of a thing is normally nosale.
 Price is a kind of value. 1 gold piece specifies a price. a thing has a price.
 
@@ -109,7 +109,7 @@ Rule for printing the description of a potential girlfriend (called the girl):
 	say "This is [girl]. She has [hair colour of girl] hair and is [height of girl]. [run paragraph on]";
 	if the friendliness of the girl < -8:
 		say "[girl] looks as if she could kill you.";
-	otherwise if the friendliness of the girl < -5: 
+	otherwise if the friendliness of the girl < -5:
 		say "[girl] looks as if she is really annoyed with you.";
 	otherwise if the friendliness of the girl < -2:
 		say "[girl] seems to be a bit annoyed.";
@@ -122,7 +122,7 @@ Rule for printing the description of a potential girlfriend (called the girl):
 	otherwise:
 		say "[girl] looks at you adoringly. You can do nothing wrong.";
 	say " [run paragraph on]".
-				
+
 After printing the description of a current potential girlfriend:
 	say "You really like her." instead.
 
@@ -166,13 +166,13 @@ Every turn:
 		if the friendliness of the RI < 0:
 			say "You seem to have annoyed [RI] once too often. She's decided to leave you.";
 			lose the girl;
-						
-			
+
+
 To impress (girl - a potential girlfriend) by (amount - a number):
 	increase the friendliness of the girl by the amount;
 	if the friendliness of the girl > 10:
 		now the friendliness of the girl is 10;
-	
+
 To annoy (girl - a potential girlfriend) by (amount - a number):
 	decrease the friendliness of the girl by the amount;
 	if the friendliness of the girl < -10:
@@ -180,7 +180,7 @@ To annoy (girl - a potential girlfriend) by (amount - a number):
 
 Part 3 -- Actions
 
-Report kissing a potential girlfriend: 
+Report kissing a potential girlfriend:
 	say "That was nice!";
 	rule succeeds. [no other report or after rules!]
 
@@ -241,7 +241,7 @@ Every turn:
 		if the alcohol level of the drunkard > 0 and a random chance of 1 in 10 succeeds:
 			decrease the alcohol level of the drunkard by 1;
 
-A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining something: now the noun is examined. 
+A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining something: now the noun is examined.
 
 A person can be following, wandering and stationary.
 A person is normally stationary.
@@ -282,7 +282,7 @@ Book 2 -- Main area
 The Town is a region.
 The park, the rose garden, the flower shop, the narrow street, round square, penny lane, south end of penny lane, the library and the pub are in the town.
 
-Park is a room. "You are in a park. There are trees here. 
+Park is a room. "You are in a park. There are trees here.
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
 
 The wallet is in the park.
@@ -291,7 +291,7 @@ Rose Garden is a room. "This rose garden is full of roses. The park is to the we
 rose garden is east of the park.
 
 Flower shop is a shop. "They sell flowers here. The exit is to the east.".
-The flower shop is west of the park. 
+The flower shop is west of the park.
 
 A narrow street is a room. "This isn't a very interesting street. To the southeast is the park, Round Square is to the north.".
 a narrow street is northwest of the park.
@@ -327,7 +327,7 @@ Book 4 -- the pub
 
 Part 1 -- The Setting
 
-The pub is a room. 
+The pub is a room.
 The pub is north of the park.
 The description of the pub is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall.".
 
@@ -398,7 +398,7 @@ instead of buying a comestible in the pub:
 	otherwise:
 		say "You seem to have lost your wallet.";
 	rule succeeds;
-	
+
 Chapter 2 -- The available wares
 
 Old-fashioned Red Herring is a foodstuff in the secret storeroom. "The red herring looks delicious.".
@@ -412,7 +412,7 @@ Chapter 3 -- The Daily Special
 the daily special is a foodstuff which is special.
 The printed name of the daily special is "box".
 The qualifier of the daily special is "some sort of".
-The daily special can be listened or unlistened. The daily special is  unlistened. 
+The daily special can be listened or unlistened. The daily special is  unlistened.
 The description of the daily special is "This box seems to have something moving inside it. Wait, did the lid just move up a bit, and did a pair of beady eyes really look out? What's this noise?".
 instead of listening to the daily special:
 	now the daily special is listened;
@@ -425,7 +425,7 @@ Before eating a foodstuff in the pub:
 	if the noun is the daily special:
 		say "You can't eat that, surely?";
 		stop the action.
-		
+
 Understand "box" as the daily special.
 
 Chapter 3 -- Eating and Drinking
@@ -441,7 +441,7 @@ After eating a foodstuff in the pub:
 
 Understand "complain to [someone] about [any foodstuff]" as asking it about the foodstuff.
 Understand "ask [someone] about [any foodstuff]" as asking it about the foodstuff.
-Asking it about the foodstuff is an action applying to one thing and one visible thing. 
+Asking it about the foodstuff is an action applying to one thing and one visible thing.
 
 Carry out an actor asking about the foodstuff in the pub (this is the ask about the special rule):
 	[rewrite using custom rulebook to allow isolating the daily special?]
@@ -450,7 +450,7 @@ Carry out an actor asking about the foodstuff in the pub (this is the ask about 
 			if the daily special is not in the secret storeroom and the daily special is examined and the daily special is listened:
 				say "The landlord points at the suggestions board and says 'It[']s clearly written there. The daily special is Peking Duck!'";
 			otherwise:
-				say "The landlord mumbles something unintelligible, and then says 'It[']s really excellent.'";	
+				say "The landlord mumbles something unintelligible, and then says 'It[']s really excellent.'";
 		-- otherwise:
 			say "The landlord looks proud and says 'I can really recommend [the second noun]!'".
 
@@ -534,7 +534,7 @@ Instead of examining the achievements plaque:
 		repeat with item running through every incomplete adventurous scene:
 			say "* [item][line break]";
 	rule succeeds;
-	
+
 Volume 3 -- The Adventures
 
 Book 1 -- Clouds
@@ -556,7 +556,7 @@ When Cloud Selector begins:
 		say "She smiles and steps closer.";
 	otherwise:
 		say "She does look a bit indifferent though.";
-		
+
 
 Check an actor giving something to:
 	if the second noun is a potential girlfriend and the noun is a flowers:
@@ -565,17 +565,17 @@ Check an actor giving something to:
 		stop the action with library message giving it to action number 3 for the second noun.
 
 
-Carry out kissing the Romantic Interest in the rose garden during Cloud Selector: 
+Carry out kissing the Romantic Interest in the rose garden during Cloud Selector:
 	complete selection;
 	now the romantic interest is following;
 
-Report kissing the Romantic Interest in the rose garden during Cloud Selector: 
+Report kissing the Romantic Interest in the rose garden during Cloud Selector:
 	say "You kiss [romantic interest] enthousiastically.";
 	rule succeeds. [no other report or after rules!]
 
 Every turn during Cloud Selector:
 	if the player has been in the rose garden for exactly 2 turns, say "You suddenly hear a booming voice coming from above. It says 'Get on with it!'.";
-	if the player has been in the rose garden for exactly 3 turns, say "Don't you know what to do when you meet [Romantic Interest] in a rose garden?".		
+	if the player has been in the rose garden for exactly 3 turns, say "Don't you know what to do when you meet [Romantic Interest] in a rose garden?".
 
 Cloud Selector ends well when the player is adventuring.
 Cloud Selector ends normally when the player is wandering about.
@@ -619,10 +619,10 @@ Every turn while in cloud nine during The Clouds:
 		say "[Romantic Interest] is looking at you expectantly.".
 
 fluffy white thing in the east is scenery in cloud nine. "In the distance to the east you can see a fluffy white object. There's a small flag on it. The flag has the number '8' written on it in yellow.".
-fluffy white thing in the northwest is scenery in cloud nine. "In the distance to the northwest you can see a fluffy white object. There's a small flag on it. The flag has the 
+fluffy white thing in the northwest is scenery in cloud nine. "In the distance to the northwest you can see a fluffy white object. There's a small flag on it. The flag has the
 number '10' written on it in yellow."
 
-The flagpole is a supporter in cloud nine. 
+The flagpole is a supporter in cloud nine.
 description of flagpole is "[if the flagpole is examined]This could well be a flagpole. There seems to be a flag at the top.[otherwise]There seems to be some sort of pole nearby.[end if]".
 printed name of flagpole is "pole".
 a flag is a thing. "There's something on top of the pole.".
@@ -672,7 +672,7 @@ Instead of kissing the romantic interest in cloud nine during The Clouds:
 Understand "golf" as "[a game of golf]".
 Understand "a round of golf" as "[a game of golf]".
 Understand "a game of golf" as "[a game of golf]".
-Understand "propose [text] to  [someone]" as asking it about (with nouns reversed).
+Understand "propose [text] to [someone]" as asking it about (with nouns reversed).
 
 After asking the romantic interest about "[a game of golf]" during The Clouds:
 	say "[Romantic Interest] nods enthousiastically and says 'How did you know that I like golf?'";
@@ -684,6 +684,8 @@ Check  an actor going (this is the don't leave cloud nine yet rule):
 		stop the action with library message going action number 2 for the room gone from.
 
 Chapter 3 -- A game of golf
+
+Section 1 -- The golf course
 
 a golf_course is a kind of room. A golf_course can be fairway, green, rough, bunker and teeing.
 
@@ -731,6 +733,40 @@ After looking in a golf_course during mountain golf:
 		decrease the amount by 1;
 		pick a separator for the amount;
 
+Tee ten is a teeing golf_course in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
+Tee ten is northwest of cloud nine.
+
+
+First Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. First Stretch of Fairway ten is west of Tee ten.
+Middle Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Middle Stretch of Fairway Ten is southwest of First Stretch of Fairway ten.
+Last Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Last Stretch of Fairway Ten is northwest of Middle Stretch of Fairway Ten.
+Green ten is a green golf_course in The Celestial Golf Course. Green Ten is northwest of Last Stretch of Fairway ten.
+
+First bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. First bit of rough on the left of ten is south of First Stretch of Fairway ten and east of Middle Stretch of Fairway ten and southwest of Tee Ten.
+
+Second bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Second bit of rough on the left of ten is south of Middle Stretch of Fairway ten and southwest of First bit of rough on the left of ten.
+
+Third bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Third bit of rough on the left of ten is west of Middle Stretch of Fairway ten and northwest of Second bit of rough on the left of ten and south of Last Stretch of Fairway ten.
+
+Fourth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the left of ten is west of Last Stretch of Fairway ten and northwest of Third bit of rough on the left of ten and south of Green ten.
+
+Fifth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fifth bit of rough on the left of ten is west of Green ten and northwest of Fourth bit of rough on the left of ten.
+
+First bit of rough on the right is a rough golf_course in The Celestial Golf Course. First bit of rough on the right is northwest of Tee Ten and north of First Stretch of Fairway ten.
+
+The Bunker Near Ten is a bunker golf_course in The Celestial Golf Course. The Bunker Near Ten is west of First Stretch of Fairway ten and north of Middle Stretch of Fairway ten and east of Last Stretch of Fairway ten and northwest of First bit of rough on the left of ten and northeast of Third bit of rough on the left of ten and southwest of First bit of rough on the right.
+
+Second bit of rough on the right is a rough golf_course in The Celestial Golf Course. Second bit of rough on the right is west of First bit of rough on the right and northwest of First Stretch of Fairway ten and north of The Bunker Near Ten and northeast of Last Stretch of Fairway ten.
+
+Third bit of rough on the right is a rough golf_course in The Celestial Golf Course. Third bit of rough on the right is west of Second bit of rough on the right and north of Last Stretch of Fairway ten and northwest of The Bunker Near Ten and northeast of Fourth bit of rough on the left and east of Green Ten.
+
+Fourth bit of rough on the right is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the right is northwest of Third bit of rough on the right and north of Green Ten and northeast of Fifth bit of rough on the left of ten.
+
+Hole Nineteen is a room.
+Hole Nineteen is northwest of Green Ten.
+
+Section 2 -- Game things
+
 After printing the description of cloud nine during mountain golf:
 	say "You can see a path leading to the northwest."
 
@@ -761,38 +797,9 @@ After asking Jacques about "crampons":
 	say "Jacques says 'Oh, well, I don't really need them these days, but I[']m used to them now.'";
 After asking Joseph about "Mount Golf":
 	say "'Yes, we have spent so much time up here that people think of us as the original Mount Golfers,' is all Joseph has to say.".
-		
-Tee ten is a teeing golf_course in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
-Tee ten is northwest of cloud nine.
 
+Section 3 -- Prepare for ballooning
 
-First Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. First Stretch of Fairway ten is west of Tee ten. 
-Middle Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Middle Stretch of Fairway Ten is southwest of First Stretch of Fairway ten.
-Last Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Last Stretch of Fairway Ten is northwest of Middle Stretch of Fairway Ten.
-Green ten is a green golf_course in The Celestial Golf Course. Green Ten is northwest of Last Stretch of Fairway ten.
-
-First bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. First bit of rough on the left of ten is south of First Stretch of Fairway ten and east of Middle Stretch of Fairway ten and southwest of Tee Ten.
-
-Second bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Second bit of rough on the left of ten is south of Middle Stretch of Fairway ten and southwest of First bit of rough on the left of ten.
-
-Third bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Third bit of rough on the left of ten is west of Middle Stretch of Fairway ten and northwest of Second bit of rough on the left of ten and south of Last Stretch of Fairway ten.
-
-Fourth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the left of ten is west of Last Stretch of Fairway ten and northwest of Third bit of rough on the left of ten and south of Green ten.
-
-Fifth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fifth bit of rough on the left of ten is west of Green ten and northwest of Fourth bit of rough on the left of ten.
-
-First bit of rough on the right is a rough golf_course in The Celestial Golf Course. First bit of rough on the right is northwest of Tee Ten and north of First Stretch of Fairway ten.
-
-The Bunker Near Ten is a bunker golf_course in The Celestial Golf Course. The Bunker Near Ten is west of First Stretch of Fairway ten and north of Middle Stretch of Fairway ten and east of Last Stretch of Fairway ten and northwest of First bit of rough on the left of ten and northeast of Third bit of rough on the left of ten and southwest of First bit of rough on the right.
-
-Second bit of rough on the right is a rough golf_course in The Celestial Golf Course. Second bit of rough on the right is west of First bit of rough on the right and northwest of First Stretch of Fairway ten and north of The Bunker Near Ten and northeast of Last Stretch of Fairway ten.
-
-Third bit of rough on the right is a rough golf_course in The Celestial Golf Course. Third bit of rough on the right is west of Second bit of rough on the right and north of Last Stretch of Fairway ten and northwest of The Bunker Near Ten and northeast of Fourth bit of rough on the left and east of Green Ten.
-
-Fourth bit of rough on the right is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the right is northwest of Third bit of rough on the right and north of Green Ten and northeast of Fifth bit of rough on the left of ten.
-
-Hole Nineteen is a room.
-Hole Nineteen is northwest of Green Ten.
 BalloonGrounds is a room.
 BalloonGrounds is north of Hole Nineteen.
 
@@ -801,7 +808,7 @@ Persuasion rule for asking the romantic interest to try entering in BalloonGroun
 		persuasion succeeds;
 	otherwise:
 		persuasion fails;
-		
+
 Carry out the romantic interest entering the balloon:
 	now the romantic interest is stationary.
 
@@ -825,10 +832,11 @@ sky is a room.
 When Ballooning begins:
 	say "The balloon lifts up in the air.";
 	move the balloon to the sky;
-	
+
 Ballooning ends when the balloon is in the sky.
 When Ballooning ends:
 	move the balloon to the park;
 	repeat with chap running through people in the balloon:
 		move chap to park;
 	say "You seem to have landed in the park.";
+	
