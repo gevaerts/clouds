@@ -252,7 +252,7 @@ Carry out going (this is the follow the player carry out rule):
 
 Report going (this is the follow the player report rule):
 	repeat with follower running through every following person:
-		say "[follower] follows you here".
+		say "[follower] follows you here.".
 
 The follow the player carry out rule is listed last in the carry out going rules.
 The follow the player report rule is listed first in the report going rules.
@@ -685,9 +685,55 @@ Check  an actor going (this is the don't leave cloud nine yet rule):
 
 Chapter 3 -- A game of golf
 
+a golf_course is a kind of room. A golf_course can be fairway, green, rough, bunker and teeing.
+
+The amount is a number variable.
+The amount is 0.
+				
+to enumerate (name - a text) with (neighbours - a list of golf_courses):
+	Change the amount to the number of entries in neighbours;
+	if the amount > 0:
+		Say "There [if the amount is 1]is a [name][otherwise]are [name]s[end if] to the ";
+		repeat with nearby bit running through neighbours:
+			say "[best route from the location to the nearby bit]";
+			decrease the amount by 1;
+			if the amount > 1:
+				say ", ";
+			else if the amount is 1:
+				say " and ";
+			otherwise:
+				say ".";
+					
+	
+After looking in a golf_course during mountain golf:
+	Let the neighbours be a list of golf_courses;
+	repeat with nearby bit running through adjacent fairway golf_courses:
+		add the nearby bit to the neighbours;
+	enumerate "fairway" with the neighbours;
+	truncate the neighbours to 0 entries;
+	repeat with nearby bit running through adjacent green golf_courses:
+		add the nearby bit to the neighbours;
+	enumerate "green" with the neighbours;
+	truncate the neighbours to 0 entries;
+	repeat with nearby bit running through adjacent rough golf_courses:
+		add the nearby bit to the neighbours;
+	enumerate "rough bit" with the neighbours;
+	truncate the neighbours to 0 entries;
+	repeat with nearby bit running through adjacent bunker golf_courses:
+		add the nearby bit to the neighbours;
+	enumerate "bunker" with the neighbours;
+	truncate the neighbours to 0 entries;
+	repeat with nearby bit running through adjacent teeing golf_courses:
+		add the nearby bit to the neighbours;
+	enumerate "teeing area" with the neighbours;
+	truncate the neighbours to 0 entries;
+
 After printing the description of cloud nine during mountain golf:
 	say "You can see a path leading to the northwest."
 
+A golf ball is a kind of thing.
+Jacques holds one golf ball.
+Joseph holds one golf ball.
 
 mountain golf is a recurring scene.
 mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or the player is in Tee ten.
@@ -716,15 +762,41 @@ After asking Jacques about "crampons":
 After asking Joseph about "Mount Golf":
 	say "'Yes, we have spent so much time up here that people think of us as the original Mount Golfers,' is all Joseph has to say.".
 		
-Tee ten is a room in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
+Tee ten is a teeing golf_course in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
 Tee ten is northwest of cloud nine.
 
 
-Green eighteen is a room in The Celestial Golf Course.
-Green eighteen is east of Tee ten.
-Hole Nineteen is north of Green Eighteen.
+First Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. First Stretch of Fairway ten is west of Tee ten. 
+Middle Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Middle Stretch of Fairway Ten is southwest of First Stretch of Fairway ten.
+Last Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Last Stretch of Fairway Ten is northwest of Middle Stretch of Fairway Ten.
+Green ten is a green golf_course in The Celestial Golf Course. Green Ten is northwest of Last Stretch of Fairway ten.
 
-Persuasion rule for asking the romantic interest to try entering in green eighteen:
+First bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. First bit of rough on the left of ten is south of First Stretch of Fairway ten and east of Middle Stretch of Fairway ten and southwest of Tee Ten.
+
+Second bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Second bit of rough on the left of ten is south of Middle Stretch of Fairway ten and southwest of First bit of rough on the left of ten.
+
+Third bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Third bit of rough on the left of ten is west of Middle Stretch of Fairway ten and northwest of Second bit of rough on the left of ten and south of Last Stretch of Fairway ten.
+
+Fourth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the left of ten is west of Last Stretch of Fairway ten and northwest of Third bit of rough on the left of ten and south of Green ten.
+
+Fifth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fifth bit of rough on the left of ten is west of Green ten and northwest of Fourth bit of rough on the left of ten.
+
+First bit of rough on the right is a rough golf_course in The Celestial Golf Course. First bit of rough on the right is northwest of Tee Ten and north of First Stretch of Fairway ten.
+
+The Bunker Near Ten is a bunker golf_course in The Celestial Golf Course. The Bunker Near Ten is west of First Stretch of Fairway ten and north of Middle Stretch of Fairway ten and east of Last Stretch of Fairway ten and northwest of First bit of rough on the left of ten and northeast of Third bit of rough on the left of ten and southwest of First bit of rough on the right.
+
+Second bit of rough on the right is a rough golf_course in The Celestial Golf Course. Second bit of rough on the right is west of First bit of rough on the right and northwest of First Stretch of Fairway ten and north of The Bunker Near Ten and northeast of Last Stretch of Fairway ten.
+
+Third bit of rough on the right is a rough golf_course in The Celestial Golf Course. Third bit of rough on the right is west of Second bit of rough on the right and north of Last Stretch of Fairway ten and northwest of The Bunker Near Ten and northeast of Fourth bit of rough on the left and east of Green Ten.
+
+Fourth bit of rough on the right is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the right is northwest of Third bit of rough on the right and north of Green Ten and northeast of Fifth bit of rough on the left of ten.
+
+Hole Nineteen is a room.
+Hole Nineteen is northwest of Green Ten.
+BalloonGrounds is a room.
+BalloonGrounds is north of Hole Nineteen.
+
+Persuasion rule for asking the romantic interest to try entering in BalloonGrounds:
 	if the noun is the balloon:
 		persuasion succeeds;
 	otherwise:
@@ -733,7 +805,7 @@ Persuasion rule for asking the romantic interest to try entering in green eighte
 Carry out the romantic interest entering the balloon:
 	now the romantic interest is stationary.
 
-a balloon is a vehicle in Green Eighteen.
+a balloon is a vehicle in BalloonGrounds.
 firewood is an inflammable thing which is fixed in place in the balloon.
 
 Check an actor taking the balloon:
@@ -742,8 +814,6 @@ Check an actor taking the balloon:
 
 Carry out burning the firewood:
 	now the firewood is lit.
-
-Tee Ten and Green Eighteen are in The Celestial Golf Course.
 
 understand "pole" as flagpole.
 
