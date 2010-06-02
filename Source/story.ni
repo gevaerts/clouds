@@ -25,10 +25,12 @@ Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
 Understand "light [something]" as burning.
 
-Hitting is an action applying to one visible thing.
-Understand "hit [something]" as hitting.
-Understand "strike [something]" as hitting.
-Understand "play [something]" as hitting.
+Striking is an action applying to one visible thing.
+Understand "hit [something]" as striking.
+Understand "strike [something]" as striking.
+Understand "play [something]" as striking.
+Understand "putt [something]" as striking.
+Understand "drive [something]" as striking.
 
 Printing the description of something is an activity.
 The fancy examining rule is listed instead of the standard examining rule in the carry out examining rules.
@@ -81,6 +83,7 @@ before going in a shop:
 A wallet is a thing. "a wallet with [price of the wallet] in it".
 The description of the wallet is "Your wallet has [price of the wallet] in it".
 The price of the wallet is 20 gold piece.
+Does the player mean giving the wallet to someone: it is very unlikely.
 
 Book 3 -- The Player
 
@@ -252,16 +255,13 @@ A thing can be examined or unexamined. A thing is usually unexamined. Carry out 
 A person can be following, wandering and stationary.
 A person is normally stationary.
 
-Carry out going (this is the follow the player carry out rule):
-	repeat with follower running through every following person:
-		move the follower to the location of the player;
-
-Report going (this is the follow the player report rule):
-	repeat with follower running through every following person:
-		say "[follower] follows you here.".
+Carry out an actor going (this is the follow the player carry out rule):
+	if the actor is the player:
+		repeat with follower running through every following person:
+			let the road be the best route from the location of the follower to the location of the player;
+			try the follower going road;
 
 The follow the player carry out rule is listed last in the carry out going rules.
-The follow the player report rule is listed first in the report going rules.
 
 A scene can be adventurous or nonadventurous.
 A scene can be selective.
@@ -484,6 +484,7 @@ People Walking In ends when romantic interest is in the pub.
 
 Chat up is a recurring scene.
 Chat up begins when People Walking In ends.
+Does the player mean talking to the romantic interest during chat up: it is very likely.
 
 Instead of talking to a potential girlfriend (called the girl) during chat up:
 	if the girl is unmet:
@@ -562,7 +563,6 @@ When Cloud Selector begins:
 		say "She smiles and steps closer.";
 	otherwise:
 		say "She does look a bit indifferent though.";
-
 
 Check an actor giving something to:
 	if the second noun is a potential girlfriend and the noun is a flowers:
@@ -777,10 +777,31 @@ Hole Nineteen is northwest of Green Ten.
 
 Section 2 -- Game things
 
+mountain golf is a recurring scene.
+mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or the player is in Tee ten.
+
+mountain golf ends when all golf balls are not in play and the golf ball owned by the player has been in play.
+
+When mountain golf begins:
+	say "The weather clears a bit, and you can now see that the white fluffy things were all actually grass-covered mountain tops.";
+	if the romantic interest is following:
+		Now the romantic interest owns the fourth golf ball;
+		Now the romantic interest is stationary;
+	repeat with the distributed ball running through all golf balls:
+		now the owner of the distributed ball holds the distributed ball;
+	Now the description of cloud nine is "The area around you is covered in neatly trimmed grass. You can see a path leading to a hilltop in the east, and a similar one the northwest. The hilltops seem to have flags on them. Maybe you should look at them more closely.";
+	Now the printed name of cloud nine is "A  neatly trimmed lawn".
+
 After printing the description of cloud nine during mountain golf:
 	say "You can see a path leading to the northwest."
+
+Check an actor going during mountain golf:
+	if the actor is the player and the room gone to is hole nineteen:
+		say "The people there won't let you in if you're not a real golf player.";
+		stop the action.
+
 A golf ball is a kind of thing. A golf ball can be in play. A golf ball is normally not in play.
-the first golf ball is a golf ball with indefinite article "Jacques'" and printed name "ball".
+the first golf ball is a golf ball with indefinite article "Jacques[']" and printed name "ball".
 the second golf ball is a golf ball with indefinite article "Joseph's" and printed name "ball".
 the third golf ball is a golf ball with indefinite article "your" and printed name "ball".
 the fourth golf ball is a golf ball with indefinite article "[romantic interest]'s" and printed name "ball".
@@ -788,18 +809,22 @@ Jacques owns the first golf ball.
 Joseph owns the second golf ball.
 The player owns the third golf ball.
 
-Check an actor hitting a golf ball (called the ball to play):
+Does the player mean taking the third golf ball: it is very likely.
+Does the player mean striking the third golf ball during mountain golf: it is very likely.
+Rule for clarifying the parser's choice of the third golf ball: say "".
+
+Check an actor striking a golf ball (called the ball to play):
 	if the ball to play is not owned by the actor:
 		say "[the owner of the ball to play] shouts at you. Maybe you should play your own ball?";
 		stop the action;
 	if the ball to play is not in play:
-		say "This ball isn't your current playing ball!";
+		say "[the actor], this ball isn't your current playing ball!";
 		stop the action.
 		
-Carry out an actor hitting a golf ball (called the current ball) in a golf_course:
+Carry out an actor striking a golf ball (called the current ball) in a golf_course:
 	let the current space be the location of the actor;
-	let the play direction be the best route from the location to green ten;
 	let the best move be the number of moves from the current space to green ten;
+	let the ideal space be the current space;
 	repeat with the candidate running through all golf_courses which are adjacent to the current space:
 		let the candidate move be the number of moves from the candidate to green ten;
 		if the candidate move < the best move:
@@ -817,38 +842,53 @@ Carry out an actor hitting a golf ball (called the current ball) in a golf_cours
 		let the probability be 2;
 	else if the current space is teeing:
 		let the probability be 7;
+	else if the current space is green:
+		let the probability be 4;
+		let the ideal space be the current space;
 	if a random chance of probability in 10 succeeds:
-		say "Well played!";
+		if the actor is visible:
+			say "Well played[if the actor is not the player], [the actor][end if]! [run paragraph on]";
+			if the current space is green:
+				say "You've completed the hole.[run paragraph on]";
+				now the current ball is not in play;
+				if the actor is not the player, now the actor is following;
+			say "[paragraph break]";
 		let the next space be the ideal space;
 	else:
-		say "Tough luck! Now where did that ball go?";
+		if the actor is visible:
+			say "Tough luck[if the actor is not the player], [the actor][end if]! Now where did that ball go?";
 		let the next space be a random golf_course which is adjacent to the current space;
 	move the current ball to the next space;
-	if the next space is green ten:
-		say "Well done! You've completed the hole.";
-		now the current ball is not in play;
+	if the current ball is visible:
+		say "A golf ball just landed near you.";
 		
+Every turn during mountain golf:
+	repeat with the golfer running through all people in a golf_course:
+		if the golfer is not the player:
+			if the golfer is in tee ten and the golfer is holding a golf ball (called the actual ball):
+				try the golfer dropping the actual ball;
+			else if a golf ball (called the actual ball) owned by the golfer is in the location of the golfer:
+				if the actual ball is in play:
+					try the golfer striking the actual ball;
+				else:
+					try the golfer taking the actual ball;
+			else if a golf ball (called the actual ball) owned by the golfer is in play:
+				if the location of the golfer is not the location of the actual ball:
+					let next space be best route from the location of the golfer to the location of the actual ball;
+					try the golfer going next space;
+	if all golf balls are not in play:
+		if the golf ball owned by the player has not been in play:
+			say "People are waiting for you to finish this hole!";
+
 Check an actor taking a golf ball that is in play:
 	say "Don't cheat!";
 	stop the action.
  
-After dropping a golf ball (called the ball to play) in a teeing golf_course:
+After an actor dropping a golf ball (called the ball to play) in a teeing golf_course:
+	if the actor is visible and actor is not the player:
+		say "[the actor] drops a ball.";
 	now the ball to play is in play.
 
-mountain golf is a recurring scene.
-mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or the player is in Tee ten.
-
-mountain golf ends when ballooning begins.
-When mountain golf begins:
-	say "The weather clears a bit, and you can now see that the white fluffy things were all actually grass-covered mountain tops.";
-	if the romantic interest is following:
-		Now the romantic interest owns the fourth golf ball;
-	repeat with the distributed ball running through all golf balls:
-		now the owner of the distributed ball holds the distributed ball;
-	Now Jacques is following;
-	Now Joseph is following;
-	Now the description of cloud nine is "The area around you is covered in neatly trimmed grass. You can see a path leading to a hilltop in the east, and a similar one the northwest. The hilltops seem to have flags on them. Maybe you should look at them more closely.";
-	Now the printed name of cloud nine is "A  neatly trimmed lawn".
 
 Jacques is a man with description  "Jacques looks like a real golfing mountaineer. It's a good thing the links are cloudy, or the people in charge would surely have objected to the crampons he insists on wearing while putting.".
 Joseph is a man with description "Joseph is a fanatical mountaineer and golfer. When he was the first man to reach these summits, he immediately laid out this golf course. He named the place 'Mount Golf', and his feet haven't touched the ground since.".
