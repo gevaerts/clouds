@@ -2,6 +2,8 @@
 
 Volume 1 -- definitions and general things
 
+When play begins, seed the random-number generator with 33.
+
 Book 1 -- actions
 
 Owning relates one person (called the owner) to various things.
@@ -85,12 +87,78 @@ The description of the wallet is "Your wallet has [price of the wallet] in it".
 The price of the wallet is 20 gold piece.
 Does the player mean giving the wallet to someone: it is very unlikely.
 
-Book 3 -- The Player
+Book 3 -- Pubs
+
+a pub is a kind of room.
+a table is a kind of supporter. A table is usually fixed in place. The printed name of a table is usually "table". 
+
+A chair is a kind of supporter with carrying capacity 1. A chair is enterable. Understand "chair" as a chair. 
+
+Instead of an actor entering a chair which is enclosing something (called the original):
+	Let R be the location of the original;
+	Repeat with C running through the chairs in R:
+		if C is not enclosing something:
+			try the actor entering C;
+			break;
+
+Report an actor entering a chair:
+	if the actor is the player:
+		say "This is a nice chair!";
+	else:
+		say "[the actor] sits down.";
+	stop the action;
+
+Repositing relates one pub to one room.
+The verb to reposit (he reposits, they reposit, he reposited, he is reposited) implies the repositing relation.
+
+Rule for deciding the scope of the player while buying in a pub (called the joint):
+	Let the storeroom be a random room which reposits the joint;
+        place the storeroom in scope.
+
+Rule for reaching inside a room (called the storeroom) while buying in a pub (called the joint):
+	if the storeroom reposits the joint, allow access.
+
+a comestible is a kind of thing.
+A comestible has a text called qualifier.
+A comestible can be on_the_menu and special. A comestible is normally on_the_menu.
+
+Foodstuff is a kind of comestible.
+Foodstuff is normally edible.
+The qualifier of a foodstuff is normally "a steaming plate of".
+The price of a foodstuff is normally 1 gold piece.
+
+a drink is a kind of comestible.
+The qualifier of a drink is normally "a nice".
+The price of a drink is normally 1 gold piece.
+
+instead of buying a comestible in a pub (called the joint):
+	if the player has the wallet:
+		if the price of the wallet >= the price of the noun:
+			decrease the price of the wallet by the price of the noun;
+			move the noun to a random table in the pub;
+			say "The landlord places [qualifier of noun] [noun] on the table in front of you.";
+			say "You pay [price of noun] for the [noun].";
+		otherwise:
+			say "You can't afford [noun]. It costs [price of noun].";
+	otherwise:
+		say "You seem to have lost your wallet.";
+	rule succeeds;
+
+Instead of drinking a drink in a pub:
+	increase the alcohol level of the player by 1;
+	move the noun to the storeroom;
+	Say "That was good!";
+	if the alcohol level of the player > 2:
+		say "Suddenly the place starts moving around in strange ways, and you fall over.";
+		say "This [noun] is strong!";
+	rule succeeds;	
+
+Book 4 -- The Player
 
 A person has a number called alcohol level.
 The alcohol level of a person is normally 0.
 
-Book 4 -- The Romantic Interest
+Book 5 -- The Romantic Interest
 
 Part 1 -- Definitions
 
@@ -187,7 +255,7 @@ To annoy (girl - a potential girlfriend) by (amount - a number):
 	if the friendliness of the girl < -10:
 		now the friendliness of the girl is -10;
 
-Part 3 -- Actions
+Part 4 -- Actions
 
 Report kissing a potential girlfriend:
 	say "That was nice!";
@@ -218,14 +286,14 @@ Carry out kissing a potential girlfriend (called the kissed girl):
 			if the other girl is current:
 				annoy the other girl by 2; [so 3 in total]
 
-Part 4 -- The Cast
+Part 5 -- The Cast
 
 Susan is a Potential Girlfriend.
 Mary is a Potential Girlfriend.
 Josephine is a Potential Girlfriend.
 
 
-Book 5 -- general rules
+Book 6 -- general rules
 
 [
 Every turn:
@@ -286,7 +354,7 @@ When play begins:
 Book 2 -- Main area
 
 The Town is a region.
-The park, the rose garden, the flower shop, the narrow street, round square, penny lane, south end of penny lane, the library and the pub are in the town.
+The park, the rose garden, the flower shop, the narrow street, round square, penny lane, south end of penny lane, the library and the The Bannister and Shamrock are in the town.
 
 Park is a room. "You are in a park. There are trees here.
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
@@ -329,35 +397,41 @@ The description of the bunch of roses is "A nice bunch of roses.".
 The description of the bunch of lilies is "These lilies look a bit faded.".
 bunch of roses and bunch of lilies are in the flower shop.
 
-Book 4 -- the pub
+Book 4 -- The Bannister and Shamrock
 
 Part 1 -- The Setting
 
-The pub is a room.
-The pub is north of the park.
-The description of the pub is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall.".
+The Bannister is a pub with printed name "The Bannister and Shamrock".
+The Bannister's Storeroom is a room which reposits The Bannister.
 
-the secret storeroom is a room. "You've never seen the secret storeroom and you never will. It's used by the pub to store things where you can't see them.".
+The Bannister is north of the park.
+The description of The Bannister is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall.".
 
-Rule for deciding the scope of the player while buying in the pub:
-        place the secret storeroom in scope.
-Rule for reaching inside the secret storeroom while buying in the pub:
-	allow access.
+The landlord is a person who is in The Bannister.
 
-The landlord is a person who is in the pub.
+the bannister's table is a table in The Bannister.
+There are four chairs in The Banister.
 
-a table is a supporter which is fixed in place in the pub.
-the suggestion board is scenery in the pub.
+The Bannister's Chair One is a chair in The Bannister with printed name "chair".
+The Bannister's Chair Two is a chair in The Bannister with printed name "chair".
+The Bannister's Chair Three is a chair in The Bannister with printed name "chair".
+The Bannister's Chair Four is a chair in The Bannister with printed name "chair".
+Does the player mean entering The Bannister's Chair One: it is very likely.
+Does the player mean entering The Bannister's Chair Two: it is  likely.
+Does the player mean entering The Bannister's Chair Three: it is possible.
+Does the player mean entering The Bannister's Chair Four: it is unlikely.
+
+the suggestion board is scenery in The Bannister.
 The description of the suggestion board is "The board says 'Daily special', followed by some unreadable chalk writing.".
 
-an empty plate is a thing in the secret storeroom.
+an empty plate is a thing. An empty plate is in The Bannister's storeroom.
 The description of the empty plate is "This is just an ordinary plate.".
 empty plate is in the storeroom.
 
-an interesting plate is a thing in the secret storeroom.
+an interesting plate is a thing. An interesting plate is in The Bannister's storeroom.
 The description of the interesting plate is "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
 
-a menu is a thing on the table.
+the menu is a thing on the table.
 The description of a menu is "There seems to be a wide choice of food and drink available. You'll need to read the menu carefully.".
 Instead of examining the menu:
 	say "'The Bannister and Shamrock'[line break]";
@@ -367,53 +441,19 @@ Instead of examining the menu:
 	say "*** drinks menu ***[line break]";
 	repeat with item running through every drink:
 		say "[item] -- [price of item][line break]";
-	say "*** incomplete scenes menu ***[line break]";
-	repeat with item running through every incomplete adventurous scene:
-		say "[item][line break]";
-	say "*** completed scenes menu ***[line break]";
-	repeat with item running through every completed adventurous scene:
-		say "[item][line break]";
 	rule succeeds;
 
 Part 2 -- Food and Drink
 
-Chapter 1 -- General things
+Chapter 1 -- The available wares
 
-a comestible is a kind of thing.
-A comestible has a text called qualifier.
-A comestible can be on_the_menu and special. A comestible is normally on_the_menu.
+Old-fashioned Red Herring is a foodstuff in The Bannister's storeroom. "The red herring looks delicious.".
+some unmentionable meat is a foodstuff in The Bannister's storeroom. "This meat doesn't look very good.".
 
-Foodstuff is a kind of comestible.
-Foodstuff is normally edible.
-The qualifier of a foodstuff is normally "a steaming plate of".
-The price of a foodstuff is normally 1 gold piece.
+beer is a drink in The Bannister's storeroom with qualifier "a nice cool frothy".
+glass of wine is a drink in The Bannister's storeroom with qualifier "a nice". 
 
-a drink is a kind of comestible.
-The qualifier of a drink is normally "a nice".
-The price of a drink is normally 1 gold piece.
-
-instead of buying a comestible in the pub:
-	if the player has the wallet:
-		if the price of the wallet >= the price of the noun:
-			decrease the price of the wallet by the price of the noun;
-			move the noun to the table;
-			say "The landlord places [qualifier of noun] [noun] on the table in front of you.";
-			say "You pay [price of noun] for the [noun].";
-		otherwise:
-			say "You can't afford [noun]. It costs [price of noun].";
-	otherwise:
-		say "You seem to have lost your wallet.";
-	rule succeeds;
-
-Chapter 2 -- The available wares
-
-Old-fashioned Red Herring is a foodstuff in the secret storeroom. "The red herring looks delicious.".
-some unmentionable meat is a foodstuff in the secret storeroom. "This meat doesn't look very good.".
-
-beer is a drink  in the secret storeroom with qualifier "a nice cool frothy".
-glass of wine is a drink in the secret storeroom with qualifier "a nice".
-
-Chapter 3 -- The Daily Special
+Chapter 2 -- The Daily Special
 
 the daily special is a foodstuff which is special.
 The printed name of the daily special is "box".
@@ -425,9 +465,9 @@ instead of listening to the daily special:
 	say "You hear a faint quacking noise.";
 	rule succeeds;
 
-daily special is in the secret storeroom.
+daily special is in The Bannister's storeroom.
 
-Before eating a foodstuff in the pub:
+Before eating a foodstuff:
 	if the noun is the daily special:
 		say "You can't eat that, surely?";
 		stop the action.
@@ -436,40 +476,32 @@ Understand "box" as the daily special.
 
 Chapter 3 -- Eating and Drinking
 
-After eating a foodstuff in the pub:
+After eating a foodstuff in a The Bannister:
 	say "That wasn't bad.";
 	if the noun is the red herring:
 		say "The plate looks interesting."; [special casing avoidable?]
-		move interesting plate to the table;
+		move interesting plate to the Bannister's table;
 	otherwise:
-		move empty plate to the table;
-	move noun to the secret storeroom;
+		move empty plate to the Bannister's table;
+	move noun to the bannister's storeroom;
 
 Understand "complain to [someone] about [any foodstuff]" as asking it about the foodstuff.
 Understand "ask [someone] about [any foodstuff]" as asking it about the foodstuff.
 Asking it about the foodstuff is an action applying to one thing and one visible thing.
 
-Carry out an actor asking about the foodstuff in the pub (this is the ask about the special rule):
+Carry out an actor asking about the foodstuff in The Bannister (this is the ask about the special rule):
 	[rewrite using custom rulebook to allow isolating the daily special?]
 	if the second noun is:
 		-- the daily special:
-			if the daily special is not in the secret storeroom and the daily special is examined and the daily special is listened:
+			if the daily special is not in The Bannister's storeroom and the daily special is examined and the daily special is listened:
 				say "The landlord points at the suggestions board and says 'It[']s clearly written there. The daily special is Peking Duck!'";
 			otherwise:
 				say "The landlord mumbles something unintelligible, and then says 'It[']s really excellent.'";
 		-- otherwise:
 			say "The landlord looks proud and says 'I can really recommend [the second noun]!'".
 
-Instead of drinking a drink in the pub:
-	increase the alcohol level of the player by 1;
-	move the noun to the storeroom;
-	Say "That was good!";
-	if the alcohol level of the player > 2:
-		say "Suddenly the pub starts moving around in strange ways, and you fall over.";
-		say "This [noun] is strong!";
-	rule succeeds;
 
-Part 4 -- Social life
+Part 3 -- Social life
 
 People Walking In is a recurring scene.
 People Walking In begins when the player is in the pub and the romantic interest is unmet and chat up is not happening and a random chance of 1 in 3 succeeds.
@@ -478,9 +510,9 @@ When People Walking In begins:
 	say "Some people have just walked in.";
 	say "You look at them, and notice that one of them is a rather pretty woman.";
 	change the romantic interest to a random unmet potential girlfriend;
-	move romantic interest to the pub;
+	move romantic interest to The Bannister;
 
-People Walking In ends when romantic interest is in the pub.
+People Walking In ends when romantic interest is in The Bannister.
 
 Chat up is a recurring scene.
 Chat up begins when People Walking In ends.
@@ -494,7 +526,7 @@ Instead of talking to a potential girlfriend (called the girl) during chat up:
 		say "She says, 'I could use a drink.'";
 	rule succeeds;
 
-Instead of giving beer to a potential girlfriend (called the girl) in the pub:
+Instead of giving beer to a potential girlfriend (called the girl):
 	if the friendliness of the girl < 0 and a random chance of 0 - the friendliness of the girl in 10 succeeds:
 		say "[girl] pours the beer over your head.";
 		annoy girl by 1;
@@ -775,9 +807,6 @@ Third bit of rough on the right is a rough golf_course in The Celestial Golf Cou
 
 Fourth bit of rough on the right is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the right is northwest of Third bit of rough on the right and north of Green Ten and northeast of Fifth bit of rough on the left of ten.
 
-Hole Nineteen is a room.
-Hole Nineteen is northwest of Green Ten.
-
 Section 2 -- Game things
 
 mountain golf is a recurring scene.
@@ -909,7 +938,37 @@ After asking Jacques about "crampons":
 After asking Joseph about "Mount Golf":
 	say "'Yes, we have spent so much time up here that people think of us as the original Mount Golfers,' is all Joseph has to say.".
 
-Section 3 -- Prepare for ballooning
+Chapter 4 -- Hole Nineteen
+
+Golfing Drinks is a scene.
+Golfing Drinks begins when Mountain Golf ends.
+Golfing Drinks ends when Ballooning begins.
+
+Hole Nineteen is a pub.
+Hole Nineteen's Storeroom is a room that reposits Hole Nineteen.
+Hole Nineteen is northwest of Green Ten.
+Hole Nineteen's table is a table in Hole Nineteen.
+
+Hole Nineteen's Chair One is a chair in Hole Nineteen with printed name "chair".
+Hole Nineteen's Chair Two is a chair in Hole Nineteen with printed name "chair".
+Hole Nineteen's Chair Three is a chair in Hole Nineteen with printed name "chair".
+Hole Nineteen's Chair Four is a chair in Hole Nineteen with printed name "chair".
+Does the player mean entering Hole Nineteen's Chair One: it is very likely.
+Does the player mean entering Hole Nineteen's Chair Two: it is  likely.
+Does the player mean entering Hole Nineteen's Chair Three: it is possible.
+Does the player mean entering Hole Nineteen's Chair Four: it is unlikely.
+
+After an actor going during Golfing Drinks:
+	if the actor is not the player and the room gone to is hole nineteen:
+		Repeat with C running through the chairs in hole nineteen:
+			if C is not enclosing something:
+				try the actor entering C;
+				break;
+
+Another beer is a drink in Hole Nineteen's Storeroom with qualifier "a nice cool frothy" and printed name "beer".
+Another glass of wine is a drink in Hole Nineteen's Storeroom with qualifier "a nice" and printed name "glass of wine". 
+
+Chapter 5 -- Ballooning
 
 BalloonGrounds is a room.
 BalloonGrounds is north of Hole Nineteen.
@@ -935,8 +994,6 @@ Carry out burning the firewood:
 
 understand "wood" as firewood.
 
-
-Chapter 4 -- Ballooning
 
 Ballooning is a scene.
 Ballooning begins when the firewood is lit and the firewood is in the balloon and the player is in the balloon.
