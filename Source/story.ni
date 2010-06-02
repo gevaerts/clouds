@@ -4,6 +4,9 @@ Volume 1 -- definitions and general things
 
 Book 1 -- actions
 
+Owning relates one person (called the owner) to various things.
+The verb to own (he owns, they own, he owned, he is owned) implies the owning relation.
+
 The block giving rule is not listed in the check giving it to rules.
 The block kissing rule is not listed in the check kissing rules.
 The block burning rule is not listed in the check burning rules.
@@ -13,8 +16,6 @@ Check an actor burning:
 	if the noun is fireproof:
 		stop the action with library message burning action number 1.
 
-
-
 Report kissing:
 	say "Are you out of your mind?";
 	rule succeeds. [no other report or after rules!]
@@ -23,6 +24,11 @@ Understand "make love to [someone]" as kissing.
 Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
 Understand "light [something]" as burning.
+
+Hitting is an action applying to one visible thing.
+Understand "hit [something]" as hitting.
+Understand "strike [something]" as hitting.
+Understand "play [something]" as hitting.
 
 Printing the description of something is an activity.
 The fancy examining rule is listed instead of the standard examining rule in the carry out examining rules.
@@ -688,6 +694,8 @@ Chapter 3 -- A game of golf
 Section 1 -- The golf course
 
 a golf_course is a kind of room. A golf_course can be fairway, green, rough, bunker and teeing.
+The description of a golf_course is normally "Hole Ten is a pretty long hole. You are now [if the location is bunker]in[else]on[end if] a [if the location is fairway]fairway[else if the location is green]green[else if the location is rough]rough bit[else if the location is bunker]bunker[else if the location is teeing]teeing area[end if].".
+[The printed name of a golf_course is normally "[if the location is fairway]Fairway[else if the location is green]Green[else if the location is rough]Rough bit[else if the location is bunker]Bunker[else if the location is teeing]Teeing area[end if]".]
 
 To start listing exits for (amount - a number) of (type of exit - a text):
 	if the amount > 0:
@@ -732,8 +740,10 @@ After looking in a golf_course during mountain golf:
 		say "[best route from the location to the nearby bit]";
 		decrease the amount by 1;
 		pick a separator for the amount;
+	if the location is not green:
+		say "The green is roughly to the [best route from the location to green ten].";
 
-Tee ten is a teeing golf_course in The Celestial Golf Course. "You are now ready to play golf. For now (as long as I haven't finished this bit) Hole Eighteen is to the east".
+Tee ten is a teeing golf_course in The Celestial Golf Course. "This is the teeing area of hole ten.".
 Tee ten is northwest of cloud nine.
 
 
@@ -769,10 +779,61 @@ Section 2 -- Game things
 
 After printing the description of cloud nine during mountain golf:
 	say "You can see a path leading to the northwest."
+A golf ball is a kind of thing. A golf ball can be in play. A golf ball is normally not in play.
+the first golf ball is a golf ball with indefinite article "Jacques'" and printed name "ball".
+the second golf ball is a golf ball with indefinite article "Joseph's" and printed name "ball".
+the third golf ball is a golf ball with indefinite article "your" and printed name "ball".
+the fourth golf ball is a golf ball with indefinite article "[romantic interest]'s" and printed name "ball".
+Jacques owns the first golf ball.
+Joseph owns the second golf ball.
+The player owns the third golf ball.
 
-A golf ball is a kind of thing.
-Jacques holds one golf ball.
-Joseph holds one golf ball.
+Check an actor hitting a golf ball (called the ball to play):
+	if the ball to play is not owned by the actor:
+		say "[the owner of the ball to play] shouts at you. Maybe you should play your own ball?";
+		stop the action;
+	if the ball to play is not in play:
+		say "This ball isn't your current playing ball!";
+		stop the action.
+		
+Carry out an actor hitting a golf ball (called the current ball) in a golf_course:
+	let the current space be the location of the actor;
+	let the play direction be the best route from the location to green ten;
+	let the best move be the number of moves from the current space to green ten;
+	repeat with the candidate running through all golf_courses which are adjacent to the current space:
+		let the candidate move be the number of moves from the candidate to green ten;
+		if the candidate move < the best move:
+			let the best move be the candidate move;
+			let the ideal space be the candidate;
+		if the candidate move is the best move and the ideal space is not fairway and the candidate is fairway:
+			let the ideal space be the candidate;
+	if the current space is fairway:
+		let the probability be 7;
+	else if the current space is green:
+		let the probability be 8;
+	else if the current space is rough:
+		let the probability be 5;
+	else if the current space is bunker:
+		let the probability be 2;
+	else if the current space is teeing:
+		let the probability be 7;
+	if a random chance of probability in 10 succeeds:
+		say "Well played!";
+		let the next space be the ideal space;
+	else:
+		say "Tough luck! Now where did that ball go?";
+		let the next space be a random golf_course which is adjacent to the current space;
+	move the current ball to the next space;
+	if the next space is green ten:
+		say "Well done! You've completed the hole.";
+		now the current ball is not in play;
+		
+Check an actor taking a golf ball that is in play:
+	say "Don't cheat!";
+	stop the action.
+ 
+After dropping a golf ball (called the ball to play) in a teeing golf_course:
+	now the ball to play is in play.
 
 mountain golf is a recurring scene.
 mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or the player is in Tee ten.
@@ -780,6 +841,10 @@ mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or
 mountain golf ends when ballooning begins.
 When mountain golf begins:
 	say "The weather clears a bit, and you can now see that the white fluffy things were all actually grass-covered mountain tops.";
+	if the romantic interest is following:
+		Now the romantic interest owns the fourth golf ball;
+	repeat with the distributed ball running through all golf balls:
+		now the owner of the distributed ball holds the distributed ball;
 	Now Jacques is following;
 	Now Joseph is following;
 	Now the description of cloud nine is "The area around you is covered in neatly trimmed grass. You can see a path leading to a hilltop in the east, and a similar one the northwest. The hilltops seem to have flags on them. Maybe you should look at them more closely.";
