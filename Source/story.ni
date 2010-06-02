@@ -634,6 +634,8 @@ printed name of flagpole is "pole".
 a flag is a thing. "There's something on top of the pole.".
 description of flag is "[if the flag is handled]The flag has the number '9' written on it in yellow.[otherwise]There seems to be something written on the flag in yellow, but you can't see it from this angle.[end if]".
 
+understand "pole" as flagpole.
+
 a round hole is a fixed in place thing. The printed name of a round hole is "a hole".
 
 Instead of examining flagpole in cloud nine during The Clouds:
@@ -750,7 +752,8 @@ Tee ten is northwest of cloud nine.
 First Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. First Stretch of Fairway ten is west of Tee ten.
 Middle Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Middle Stretch of Fairway Ten is southwest of First Stretch of Fairway ten.
 Last Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Last Stretch of Fairway Ten is northwest of Middle Stretch of Fairway Ten.
-Green ten is a green golf_course in The Celestial Golf Course. Green Ten is northwest of Last Stretch of Fairway ten.
+Green ten is a green golf_course in The Celestial Golf Course. Green Ten is northwest of Last Stretch of Fairway ten. 
+The description of green ten is "This is the green of hole ten. You can see a building to the northwest.".
 
 First bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. First bit of rough on the left of ten is south of First Stretch of Fairway ten and east of Middle Stretch of Fairway ten and southwest of Tee Ten.
 
@@ -797,7 +800,10 @@ After printing the description of cloud nine during mountain golf:
 
 Check an actor going during mountain golf:
 	if the actor is the player and the room gone to is hole nineteen:
-		say "The people there won't let you in if you're not a real golf player.";
+		if the golf ball owned by the actor is not in play and the golf ball owned by the actor has been in play:
+			say "Wouldn't you wait for the others?";
+		else:
+			say "The people there won't let you in if you're not a real golf player.";
 		stop the action.
 
 A golf ball is a kind of thing. A golf ball can be in play. A golf ball is normally not in play.
@@ -859,7 +865,7 @@ Carry out an actor striking a golf ball (called the current ball) in a golf_cour
 			say "Tough luck[if the actor is not the player], [the actor][end if]! Now where did that ball go?";
 		let the next space be a random golf_course which is adjacent to the current space;
 	move the current ball to the next space;
-	if the current ball is visible:
+	if the current ball is visible and the actor is not the player:
 		say "A golf ball just landed near you.";
 		
 Every turn during mountain golf:
@@ -927,7 +933,8 @@ Check an actor taking the balloon:
 Carry out burning the firewood:
 	now the firewood is lit.
 
-understand "pole" as flagpole.
+understand "wood" as firewood.
+
 
 Chapter 4 -- Ballooning
 
@@ -944,4 +951,3 @@ When Ballooning ends:
 	repeat with chap running through people in the balloon:
 		move chap to park;
 	say "You seem to have landed in the park.";
-	
