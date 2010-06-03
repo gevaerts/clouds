@@ -729,6 +729,7 @@ Section 1 -- The golf course
 
 a golf_course is a kind of room. A golf_course can be fairway, green, rough, bunker and teeing.
 The description of a golf_course is normally "Hole Ten is a pretty long hole. You are now [if the location is bunker]in[else]on[end if] a [if the location is fairway]fairway[else if the location is green]green[else if the location is rough]rough bit[else if the location is bunker]bunker[else if the location is teeing]teeing area[end if].".
+A golf_course has a direction called the way.
 [The printed name of a golf_course is normally "[if the location is fairway]Fairway[else if the location is green]Green[else if the location is rough]Rough bit[else if the location is bunker]Bunker[else if the location is teeing]Teeing area[end if]".]
 
 To start listing exits for (amount - a number) of (type of exit - a text):
@@ -778,34 +779,37 @@ After looking in a golf_course during mountain golf:
 		say "The green is roughly to the [best route from the location to green ten].";
 
 Tee ten is a teeing golf_course in The Celestial Golf Course. "This is the teeing area of hole ten.".
-Tee ten is northwest of cloud nine.
+Tee ten is northwest of cloud nine. The way of Tee ten is west.
 
 
-First Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. First Stretch of Fairway ten is west of Tee ten.
-Middle Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Middle Stretch of Fairway Ten is southwest of First Stretch of Fairway ten.
-Last Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Last Stretch of Fairway Ten is northwest of Middle Stretch of Fairway Ten.
-Green ten is a green golf_course in The Celestial Golf Course. Green Ten is northwest of Last Stretch of Fairway ten. 
+First Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. First Stretch of Fairway ten is west of Tee ten. The way of First Stretch of Fairway ten is southwest.
+
+Middle Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Middle Stretch of Fairway Ten is southwest of First Stretch of Fairway ten. The way of Middle Stretch of Fairway ten is northwest.
+
+Last Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Last Stretch of Fairway Ten is northwest of Middle Stretch of Fairway Ten. The way of Last Stretch of Fairway ten is northwest.
+
+Green ten is a green golf_course in The Celestial Golf Course. Green Ten is northwest of Last Stretch of Fairway ten. The way of Green Ten is north.
 The description of green ten is "This is the green of hole ten. You can see a building to the northwest.".
 
-First bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. First bit of rough on the left of ten is south of First Stretch of Fairway ten and east of Middle Stretch of Fairway ten and southwest of Tee Ten.
+First bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. First bit of rough on the left of ten is south of First Stretch of Fairway ten and east of Middle Stretch of Fairway ten and southwest of Tee Ten. The way of First bit of rough on the left of ten is west.
 
-Second bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Second bit of rough on the left of ten is south of Middle Stretch of Fairway ten and southwest of First bit of rough on the left of ten.
+Second bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Second bit of rough on the left of ten is south of Middle Stretch of Fairway ten and southwest of First bit of rough on the left of ten. The way of Second bit of rough on the left of ten is north.
 
-Third bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Third bit of rough on the left of ten is west of Middle Stretch of Fairway ten and northwest of Second bit of rough on the left of ten and south of Last Stretch of Fairway ten.
+Third bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Third bit of rough on the left of ten is west of Middle Stretch of Fairway ten and northwest of Second bit of rough on the left of ten and south of Last Stretch of Fairway ten. The way of Third bit of rough on the left of ten is north.
 
-Fourth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the left of ten is west of Last Stretch of Fairway ten and northwest of Third bit of rough on the left of ten and south of Green ten.
+Fourth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the left of ten is west of Last Stretch of Fairway ten and northwest of Third bit of rough on the left of ten and south of Green ten. The way of Fourth bit of rough on the left of ten is north.
 
-Fifth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fifth bit of rough on the left of ten is west of Green ten and northwest of Fourth bit of rough on the left of ten.
+Fifth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fifth bit of rough on the left of ten is west of Green ten and northwest of Fourth bit of rough on the left of ten. The way of Fifth bit of rough on the left of ten is east.
 
-First bit of rough on the right is a rough golf_course in The Celestial Golf Course. First bit of rough on the right is northwest of Tee Ten and north of First Stretch of Fairway ten.
+First bit of rough on the right of ten is a rough golf_course in The Celestial Golf Course. First bit of rough on the right of ten is northwest of Tee Ten and north of First Stretch of Fairway ten. The way of First bit of rough on the right of ten is south.
 
-The Bunker Near Ten is a bunker golf_course in The Celestial Golf Course. The Bunker Near Ten is west of First Stretch of Fairway ten and north of Middle Stretch of Fairway ten and east of Last Stretch of Fairway ten and northwest of First bit of rough on the left of ten and northeast of Third bit of rough on the left of ten and southwest of First bit of rough on the right.
+The Bunker Near Ten is a bunker golf_course in The Celestial Golf Course. The Bunker Near Ten is west of First Stretch of Fairway ten and north of Middle Stretch of Fairway ten and east of Last Stretch of Fairway ten and northwest of First bit of rough on the left of ten and northeast of Third bit of rough on the left of ten and southwest of First bit of rough on the right of ten. The way of The Bunker Near Ten is west.
 
-Second bit of rough on the right is a rough golf_course in The Celestial Golf Course. Second bit of rough on the right is west of First bit of rough on the right and northwest of First Stretch of Fairway ten and north of The Bunker Near Ten and northeast of Last Stretch of Fairway ten.
+Second bit of rough on the right of ten is a rough golf_course in The Celestial Golf Course. Second bit of rough on the right of ten is west of First bit of rough on the right of ten and northwest of First Stretch of Fairway ten and north of The Bunker Near Ten and northeast of Last Stretch of Fairway ten. The way of Second bit of rough on the right of ten is southwest.
 
-Third bit of rough on the right is a rough golf_course in The Celestial Golf Course. Third bit of rough on the right is west of Second bit of rough on the right and north of Last Stretch of Fairway ten and northwest of The Bunker Near Ten and northeast of Fourth bit of rough on the left and east of Green Ten.
+Third bit of rough on the right of ten is a rough golf_course in The Celestial Golf Course. Third bit of rough on the right of ten is west of Second bit of rough on the right of ten and north of Last Stretch of Fairway ten and northwest of The Bunker Near Ten and northeast of Fourth bit of rough on the left of ten and east of Green Ten. The way of Third bit of rough on the right of ten is west.
 
-Fourth bit of rough on the right is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the right is northwest of Third bit of rough on the right and north of Green Ten and northeast of Fifth bit of rough on the left of ten.
+Fourth bit of rough on the right of ten is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the right of ten is northwest of Third bit of rough on the right of ten and north of Green Ten and northeast of Fifth bit of rough on the left of ten.The way of Fourth bit of rough on the right of ten is south.
 
 Section 2 -- Game things
 
@@ -855,21 +859,14 @@ Check an actor striking a golf ball (called the ball to play):
 	if the ball to play is not in play:
 		say "[the actor], this ball isn't your current playing ball!";
 		stop the action.
-		
+
 Carry out an actor striking a golf ball (called the current ball) in a golf_course:
 	let the current space be the location of the actor;
-	let the best move be the number of moves from the current space to green ten;
-	let the ideal space be the current space;
-	repeat with the candidate running through all golf_courses which are adjacent to the current space:
-		let the candidate move be the number of moves from the candidate to green ten;
-		if the candidate move < the best move:
-			let the best move be the candidate move;
-			let the ideal space be the candidate;
-		if the candidate move is the best move and the ideal space is not fairway and the candidate is fairway:
-			let the ideal space be the candidate;
+	let the ideal space be the room-or-door the way of the current space from the current space;
 	if the current space is fairway:
 		let the probability be 7;
 	else if the current space is green:
+		let the ideal space be the current space;
 		let the probability be 8;
 	else if the current space is rough:
 		let the probability be 5;
@@ -877,9 +874,6 @@ Carry out an actor striking a golf ball (called the current ball) in a golf_cour
 		let the probability be 2;
 	else if the current space is teeing:
 		let the probability be 7;
-	else if the current space is green:
-		let the probability be 4;
-		let the ideal space be the current space;
 	if a random chance of probability in 10 succeeds:
 		if the actor is visible:
 			say "Well played[if the actor is not the player], [the actor][end if]! [run paragraph on]";
@@ -1008,3 +1002,4 @@ When Ballooning ends:
 	repeat with chap running through people in the balloon:
 		move chap to park;
 	say "You seem to have landed in the park.";
+	
