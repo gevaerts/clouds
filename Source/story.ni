@@ -135,7 +135,7 @@ instead of buying a comestible in a pub (called the joint):
 	if the player has the wallet:
 		if the price of the wallet >= the price of the noun:
 			decrease the price of the wallet by the price of the noun;
-			move the noun to a random table in the pub;
+			move the noun to a random table in the joint;
 			say "The landlord places [qualifier of noun] [noun] on the table in front of you.";
 			say "You pay [price of noun] for the [noun].";
 		otherwise:
@@ -144,9 +144,9 @@ instead of buying a comestible in a pub (called the joint):
 		say "You seem to have lost your wallet.";
 	rule succeeds;
 
-Instead of drinking a drink in a pub:
+Instead of drinking a drink in a pub (called the joint):
 	increase the alcohol level of the player by 1;
-	move the noun to the storeroom;
+	move the noun to a random room which reposits the joint;
 	Say "That was good!";
 	if the alcohol level of the player > 2:
 		say "Suddenly the place starts moving around in strange ways, and you fall over.";
@@ -315,7 +315,7 @@ Every turn:
 
 Every turn:
 	repeat with drunkard running through persons:
-		if the alcohol level of the drunkard > 0 and a random chance of 1 in 10 succeeds:
+		if the alcohol level of the drunkard > 0 and a random chance of 1 in 20 succeeds:
 			decrease the alcohol level of the drunkard by 1;
 
 A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining something: now the noun is examined.
@@ -354,7 +354,7 @@ When play begins:
 Book 2 -- Main area
 
 The Town is a region.
-The park, the rose garden, the flower shop, the narrow street, round square, penny lane, south end of penny lane, the library and the The Bannister and Shamrock are in the town.
+The park, the rose garden, the flower shop, the narrow street, round square, penny lane, south end of penny lane and the library are in the town.
 
 Park is a room. "You are in a park. There are trees here.
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
@@ -402,6 +402,7 @@ Book 4 -- The Bannister and Shamrock
 Part 1 -- The Setting
 
 The Bannister is a pub with printed name "The Bannister and Shamrock".
+The Bannister is in the town.
 The Bannister's Storeroom is a room which reposits The Bannister.
 
 The Bannister is north of the park.
@@ -959,6 +960,12 @@ After an actor going during Golfing Drinks:
 				try the actor entering C;
 				break;
 
+Check an actor going during Golfing Drinks:
+	if the actor is the player and the room gone to is BalloonGrounds:
+		if the alcohol level of the actor < 3:
+			say "It looks dangerous!";
+			stop the action.
+
 Another beer is a drink in Hole Nineteen's Storeroom with qualifier "a nice cool frothy" and printed name "beer".
 Another glass of wine is a drink in Hole Nineteen's Storeroom with qualifier "a nice" and printed name "glass of wine". 
 
@@ -973,6 +980,22 @@ Persuasion rule for asking the romantic interest to try entering in BalloonGroun
 	otherwise:
 		persuasion fails;
 
+After an actor going during Golfing Drinks:
+	if the actor is Jacques and the room gone to is BalloonGrounds:
+		try the actor entering the balloon;
+	if the actor is Joseph and the room gone to is BalloonGrounds:
+		try the actor entering the balloon;
+
+Report an actor entering the balloon during Golfing Drinks:
+	if the actor is Jacques:
+		say "Jacques enthusiatically jumps into the balloon, only to end up with his crampons tangled up in the ropes. He eventually manages to free himself.";
+	if the actor is Joseph:
+		say "Joseph climbs into the balloon with a nonchalance that shows this isn't the first time.";
+	if the actor is the romantic interest:
+		say "[romantic interest] hesitantly climbs into the balloon.";		
+	if the actor is the player:
+		say "You climb into the balloon.";
+								
 Carry out the romantic interest entering the balloon:
 	now the romantic interest is stationary.
 
