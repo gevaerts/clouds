@@ -2,6 +2,7 @@
 
 Volume 1 -- definitions and general things
 
+Use full-length room descriptions.
 When play begins, seed the random-number generator with 33.
 
 Book 1 -- actions
@@ -631,6 +632,16 @@ The Clouds begins when Cloud Selector ends well.
 The Clouds ends well when Ballooning begins.
 [The Clouds ends badly when Ballooning begins.]
 
+To reset the clouds:
+	change the north exit of Hole Nineteen to nowhere;
+	change the south exit of BalloonGrounds to nowhere;
+	change the northwest exit of Cloud Nine to nowhere;
+	change the southeast exit of Tee Ten to nowhere;
+	if the round hole is not handled:
+		remove the round hole from play;
+	if the flag is not handled:
+		remove the flag from play;
+				
 When The Clouds ends:
 	end the adventure;
 	move the player to the park;
@@ -644,10 +655,7 @@ When The Clouds begins:
 	say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
 	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
 	say "You really can't figure out how you got here. The plot is apparently missing some bits.";
-	if the round hole is not handled:
-		remove the round hole from play;
-	if the flag is not handled:
-		remove the flag from play;
+	reset the clouds;
 	move the romantic interest to cloud nine; [ RI will NOT follow "magic" moves automatically!]
 	move the player to cloud nine;
 
@@ -720,10 +728,6 @@ After asking the romantic interest about "[a game of golf]" during The Clouds:
 	move the romantic interest to Tee ten; [ RI will NOT follow "magic" moves automatically!]
 	move the player to Tee ten;
 
-Check  an actor going (this is the don't leave cloud nine yet rule):
-	if the actor is the player and the player is in cloud nine and mountain golf is not happening:
-		stop the action with library message going action number 2 for the room gone from.
-
 Chapter 3 -- A game of golf
 
 Section 1 -- The golf course
@@ -780,7 +784,7 @@ After looking in a golf_course during mountain golf:
 		say "The green is roughly to the [best route from the location to green ten].";
 
 Tee ten is a teeing golf_course in The Celestial Golf Course. "This is the teeing area of hole ten.".
-Tee ten is northwest of cloud nine. The way of Tee ten is west.
+The way of Tee ten is west.
 
 
 First Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. First Stretch of Fairway ten is west of Tee ten. The way of First Stretch of Fairway ten is southwest.
@@ -827,7 +831,11 @@ When mountain golf begins:
 	repeat with the distributed ball running through all golf balls:
 		now the owner of the distributed ball holds the distributed ball;
 	Now the description of cloud nine is "The area around you is covered in neatly trimmed grass. You can see a path leading to a hilltop in the east, and a similar one the northwest. The hilltops seem to have flags on them. Maybe you should look at them more closely.";
-	Now the printed name of cloud nine is "A  neatly trimmed lawn".
+	Now the printed name of cloud nine is "A  neatly trimmed lawn";
+	change the northwest exit of Cloud Nine to Tee Ten;
+	change the southeast exit of Tee Ten to Cloud Nine;
+
+
 
 After printing the description of cloud nine during mountain golf:
 	say "You can see a path leading to the northwest."
@@ -966,13 +974,17 @@ Check an actor going during Golfing Drinks:
 			say "It looks dangerous!";
 			stop the action.
 
+Every turn during Golfing Drinks:
+	if the alcohol level of the player > 4:
+		change the north exit of Hole Nineteen to BalloonGrounds;
+		change the south exit of BalloonGrounds to Hole Nineteen;
+	
 Another beer is a drink in Hole Nineteen's Storeroom with qualifier "a nice cool frothy" and printed name "beer".
 Another glass of wine is a drink in Hole Nineteen's Storeroom with qualifier "a nice" and printed name "glass of wine". 
 
 Chapter 5 -- Ballooning
 
 BalloonGrounds is a room.
-BalloonGrounds is north of Hole Nineteen.
 
 Persuasion rule for asking the romantic interest to try entering in BalloonGrounds:
 	if the noun is the balloon:
