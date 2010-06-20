@@ -1,5 +1,9 @@
 "Cloud" by "Frank Gevaerts and Nick Sant"
 
+[Include Conversation Rules by Eric Eve.]
+Use memory economy.
+Release along with a website and the source text.
+
 Volume 1 -- definitions and general things
 
 Use full-length room descriptions.
@@ -119,9 +123,9 @@ Rule for deciding the scope of the player while buying in a pub (called the join
 Rule for reaching inside a room (called the storeroom) while buying in a pub (called the joint):
 	if the storeroom reposits the joint, allow access.
 
-a comestible is a kind of thing.
+A comestible is a kind of thing.
 A comestible has a text called qualifier.
-A comestible can be on_the_menu and special. A comestible is normally on_the_menu.
+A comestible can be on_the_menu or special. A comestible is normally on_the_menu.
 
 Foodstuff is a kind of comestible.
 Foodstuff is normally edible.
@@ -164,7 +168,7 @@ Book 5 -- The Romantic Interest
 Part 1 -- Definitions
 
 Potential Girlfriend is a kind of woman.
-a Potential Girlfriend can be unmet,current and former.
+a Potential Girlfriend can be unmet,current or former.
 a Potential Girlfriend is normally unmet.
 
 hair colour is a kind of value. A potential girlfriend has hair colour. the hair colour are blond, red, brown, black, interestingly purple-greenish.
@@ -321,7 +325,7 @@ Every turn:
 
 A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining something: now the noun is examined.
 
-A person can be following, wandering and stationary.
+A person can be following, wandering or stationary.
 A person is normally stationary.
 
 Carry out an actor going (this is the follow the player carry out rule):
@@ -611,6 +615,8 @@ Carry out kissing the Romantic Interest in the rose garden during Cloud Selector
 
 Report kissing the Romantic Interest in the rose garden during Cloud Selector:
 	say "You kiss [romantic interest] enthousiastically.";
+	say "This kiss turns out to be a bit more steamy than you had planned.";
+	say "You find yourself surrounded by a fog.";
 	rule succeeds. [no other report or after rules!]
 
 Every turn during Cloud Selector:
@@ -636,7 +642,7 @@ To reset the clouds:
 	change the north exit of Hole Nineteen to nowhere;
 	change the south exit of BalloonGrounds to nowhere;
 	change the northwest exit of Cloud Nine to nowhere;
-	change the southeast exit of Tee Ten to nowhere;
+	change the southeast exit of tee-ten to nowhere;
 	if the round hole is not handled:
 		remove the round hole from play;
 	if the flag is not handled:
@@ -652,9 +658,9 @@ When The Clouds ends well:
 	now Cloud Selector is non-recurring;
 
 When The Clouds begins:
+	say "You can't see what you're doing, you stumble on something, and you fall. [Romantic Interest] seems to fall with you.";
 	say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
 	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
-	say "You really can't figure out how you got here. The plot is apparently missing some bits.";
 	reset the clouds;
 	move the romantic interest to cloud nine; [ RI will NOT follow "magic" moves automatically!]
 	move the player to cloud nine;
@@ -665,8 +671,8 @@ Every turn while in cloud nine during The Clouds:
 	if the clouds has been happening for exactly one turn and the romantic interest is current and the romantic interest is in cloud nine:
 		say "[Romantic Interest] is looking at you expectantly.".
 
-fluffy white thing in the east is scenery in cloud nine. "In the distance to the east you can see a fluffy white object. There's a small flag on it. The flag has the number '8' written on it in yellow.".
-fluffy white thing in the northwest is scenery in cloud nine. "In the distance to the northwest you can see a fluffy white object. There's a small flag on it. The flag has the
+fluffy-white-thing-in-the-east is scenery in cloud nine. "In the distance to the east you can see a fluffy white object. There's a small flag on it. The flag has the number '8' written on it in yellow.".
+fluffy-white-thing-in-the-northwest is scenery in cloud nine. "In the distance to the northwest you can see a fluffy white object. There's a small flag on it. The flag has the
 number '10' written on it in yellow."
 
 The flagpole is a supporter in cloud nine.
@@ -725,14 +731,14 @@ Understand "propose [text] to [someone]" as asking it about (with nouns reversed
 
 After asking the romantic interest about "[a game of golf]" during The Clouds:
 	say "[Romantic Interest] nods enthousiastically and says 'How did you know that I like golf?'";
-	move the romantic interest to Tee ten; [ RI will NOT follow "magic" moves automatically!]
-	move the player to Tee ten;
+	move the romantic interest to tee-ten; [ RI will NOT follow "magic" moves automatically!]
+	move the player to tee-ten;
 
 Chapter 3 -- A game of golf
 
 Section 1 -- The golf course
 
-a golf_course is a kind of room. A golf_course can be fairway, green, rough, bunker and teeing.
+a golf_course is a kind of room. A golf_course can be fairway, green, rough, bunker or teeing.
 The description of a golf_course is normally "Hole Ten is a pretty long hole. You are now [if the location is bunker]in[else]on[end if] a [if the location is fairway]fairway[else if the location is green]green[else if the location is rough]rough bit[else if the location is bunker]bunker[else if the location is teeing]teeing area[end if].".
 A golf_course has a direction called the way.
 [The printed name of a golf_course is normally "[if the location is fairway]Fairway[else if the location is green]Green[else if the location is rough]Rough bit[else if the location is bunker]Bunker[else if the location is teeing]Teeing area[end if]".]
@@ -781,45 +787,45 @@ After looking in a golf_course during mountain golf:
 		decrease the amount by 1;
 		pick a separator for the amount;
 	if the location is not green:
-		say "The green is roughly to the [best route from the location to green ten].";
+		say "The green is roughly to the [best route from the location to green-ten].";
 
-Tee ten is a teeing golf_course in The Celestial Golf Course. "This is the teeing area of hole ten.".
-The way of Tee ten is west.
+tee-ten is a teeing golf_course in The Celestial Golf Course. "This is the teeing area of hole ten.".
+The way of tee-ten is west.
 
 
-First Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. First Stretch of Fairway ten is west of Tee ten. The way of First Stretch of Fairway ten is southwest.
+First-Stretch-of-Fairway-ten is a fairway golf_course in The Celestial Golf Course. First-Stretch-of-Fairway-ten is west of Tee-ten. The way of First-Stretch-of-Fairway-ten is southwest.
 
-Middle Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Middle Stretch of Fairway Ten is southwest of First Stretch of Fairway ten. The way of Middle Stretch of Fairway ten is northwest.
+Middle-Stretch-of-Fairway-ten is a fairway golf_course in The Celestial Golf Course. Middle-Stretch-of-Fairway-Ten is southwest of First-Stretch-of-Fairway-ten. The way of Middle-Stretch-of-Fairway-ten is northwest.
 
-Last Stretch of Fairway ten is a fairway golf_course in The Celestial Golf Course. Last Stretch of Fairway Ten is northwest of Middle Stretch of Fairway Ten. The way of Last Stretch of Fairway ten is northwest.
+Last-Stretch-of-Fairway-ten is a fairway golf_course in The Celestial Golf Course. Last-Stretch-of-Fairway-Ten is northwest of Middle-Stretch-of-Fairway-Ten. The way of Last-Stretch-of-Fairway-ten is northwest.
 
-Green ten is a green golf_course in The Celestial Golf Course. Green Ten is northwest of Last Stretch of Fairway ten. The way of Green Ten is north.
-The description of green ten is "This is the green of hole ten. You can see a building to the northwest.".
+Green-ten is a green golf_course in The Celestial Golf Course. Green-Ten is northwest of Last-Stretch-of-Fairway-ten. The way of Green-Ten is north.
+The description of green-ten is "This is the green of hole ten. You can see a building to the northwest.".
 
-First bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. First bit of rough on the left of ten is south of First Stretch of Fairway ten and east of Middle Stretch of Fairway ten and southwest of Tee Ten. The way of First bit of rough on the left of ten is west.
+First-bit-of-rough-on-the-left-of-ten is a rough golf_course in The Celestial Golf Course. First-bit-of-rough-on-the-left-of-ten is south of First-Stretch-of-Fairway-ten and east of Middle-stretch-of-fairway-ten and southwest of tee-ten. The way of First-bit-of-rough-on-the-left-of-ten is west.
 
-Second bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Second bit of rough on the left of ten is south of Middle Stretch of Fairway ten and southwest of First bit of rough on the left of ten. The way of Second bit of rough on the left of ten is north.
+Second-bit-of-rough-on-the-left-of-ten is a rough golf_course in The Celestial Golf Course. Second-bit-of-rough-on-the-left-of-ten is south of Middle-stretch-of-fairway-ten and southwest of First-bit-of-rough-on-the-left-of-ten. The way of Second-bit-of-rough-on-the-left-of-ten is north.
 
-Third bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Third bit of rough on the left of ten is west of Middle Stretch of Fairway ten and northwest of Second bit of rough on the left of ten and south of Last Stretch of Fairway ten. The way of Third bit of rough on the left of ten is north.
+Third-bit-of-rough-on-the-left-of-ten is a rough golf_course in The Celestial Golf Course. Third-bit-of-rough-on-the-left-of-ten is west of Middle-stretch-of-fairway-ten and northwest of Second-bit-of-rough-on-the-left-of-ten and south of Last-stretch-of-fairway-ten. The way of Third-bit-of-rough-on-the-left-of-ten is north.
 
-Fourth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the left of ten is west of Last Stretch of Fairway ten and northwest of Third bit of rough on the left of ten and south of Green ten. The way of Fourth bit of rough on the left of ten is north.
+Fourth-bit-of-rough-on-the-left-of-ten is a rough golf_course in The Celestial Golf Course. Fourth-bit-of-rough-on-the-left-of-ten is west of Last-stretch-of-fairway-ten and northwest of Third-bit-of-rough-on-the-left-of-ten and south of green-ten. The way of Fourth-bit-of-rough-on-the-left-of-ten is north.
 
-Fifth bit of rough on the left of ten is a rough golf_course in The Celestial Golf Course. Fifth bit of rough on the left of ten is west of Green ten and northwest of Fourth bit of rough on the left of ten. The way of Fifth bit of rough on the left of ten is east.
+Fifth-bit-of-rough-on-the-left-of-ten is a rough golf_course in The Celestial Golf Course. Fifth-bit-of-rough-on-the-left-of-ten is west of green-ten and northwest of Fourth-bit-of-rough-on-the-left-of-ten. The way of Fifth-bit-of-rough-on-the-left-of-ten is east.
 
-First bit of rough on the right of ten is a rough golf_course in The Celestial Golf Course. First bit of rough on the right of ten is northwest of Tee Ten and north of First Stretch of Fairway ten. The way of First bit of rough on the right of ten is south.
+First-bit-of-rough-on-the-right-of-ten is a rough golf_course in The Celestial Golf Course. First-bit-of-rough-on-the-right-of-ten is northwest of tee-ten and north of First-stretch-of-fairway-ten. The way of First-bit-of-rough-on-the-right-of-ten is south.
 
-The Bunker Near Ten is a bunker golf_course in The Celestial Golf Course. The Bunker Near Ten is west of First Stretch of Fairway ten and north of Middle Stretch of Fairway ten and east of Last Stretch of Fairway ten and northwest of First bit of rough on the left of ten and northeast of Third bit of rough on the left of ten and southwest of First bit of rough on the right of ten. The way of The Bunker Near Ten is west.
+The-Bunker-Near-Ten is a bunker golf_course in The Celestial Golf Course. The-Bunker-Near-Ten is west of First-stretch-of-fairway-ten and north of Middle-stretch-of-fairway-ten and east of Last-stretch-of-fairway-ten and northwest of First-bit-of-rough-on-the-left-of-ten and northeast of Third-bit-of-rough-on-the-left-of-ten and southwest of First-bit-of-rough-on-the-right-of-ten. The way of The-Bunker-Near-Ten is west.
 
-Second bit of rough on the right of ten is a rough golf_course in The Celestial Golf Course. Second bit of rough on the right of ten is west of First bit of rough on the right of ten and northwest of First Stretch of Fairway ten and north of The Bunker Near Ten and northeast of Last Stretch of Fairway ten. The way of Second bit of rough on the right of ten is southwest.
+Second-bit-of-rough-on-the-right-of-ten is a rough golf_course in The Celestial Golf Course. Second-bit-of-rough-on-the-right-of-ten is west of First-bit-of-rough-on-the-right-of-ten and northwest of First-stretch-of-fairway-ten and north of The-Bunker-Near-Ten and northeast of Last-stretch-of-fairway-ten. The way of Second-bit-of-rough-on-the-right-of-ten is southwest.
 
-Third bit of rough on the right of ten is a rough golf_course in The Celestial Golf Course. Third bit of rough on the right of ten is west of Second bit of rough on the right of ten and north of Last Stretch of Fairway ten and northwest of The Bunker Near Ten and northeast of Fourth bit of rough on the left of ten and east of Green Ten. The way of Third bit of rough on the right of ten is west.
+Third-bit-of-rough-on-the-right-of-ten is a rough golf_course in The Celestial Golf Course. Third-bit-of-rough-on-the-right-of-ten is west of Second-bit-of-rough-on-the-right-of-ten and north of Last-stretch-of-fairway-ten and northwest of The-Bunker-Near-Ten and northeast of Fourth-bit-of-rough-on-the-left-of-ten and east of green-ten. The way of Third-bit-of-rough-on-the-right-of-ten is west.
 
-Fourth bit of rough on the right of ten is a rough golf_course in The Celestial Golf Course. Fourth bit of rough on the right of ten is northwest of Third bit of rough on the right of ten and north of Green Ten and northeast of Fifth bit of rough on the left of ten.The way of Fourth bit of rough on the right of ten is south.
+Fourth-bit-of-rough-on-the-right-of-ten is a rough golf_course in The Celestial Golf Course. Fourth-bit-of-rough-on-the-right-of-ten is northwest of Third-bit-of-rough-on-the-right-of-ten and north of green-ten and northeast of Fifth-bit-of-rough-on-the-left-of-ten.The way of Fourth-bit-of-rough-on-the-right-of-ten is south.
 
 Section 2 -- Game things
 
 mountain golf is a recurring scene.
-mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or the player is in Tee ten.
+mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or the player is in tee-ten.
 
 mountain golf ends when all golf balls are not in play and the golf ball owned by the player has been in play.
 
@@ -832,8 +838,8 @@ When mountain golf begins:
 		now the owner of the distributed ball holds the distributed ball;
 	Now the description of cloud nine is "The area around you is covered in neatly trimmed grass. You can see a path leading to a hilltop in the east, and a similar one the northwest. The hilltops seem to have flags on them. Maybe you should look at them more closely.";
 	Now the printed name of cloud nine is "A  neatly trimmed lawn";
-	change the northwest exit of Cloud Nine to Tee Ten;
-	change the southeast exit of Tee Ten to Cloud Nine;
+	change the northwest exit of Cloud Nine to tee-ten;
+	change the southeast exit of tee-ten to Cloud Nine;
 
 
 
@@ -903,7 +909,7 @@ Carry out an actor striking a golf ball (called the current ball) in a golf_cour
 Every turn during mountain golf:
 	repeat with the golfer running through all people in a golf_course:
 		if the golfer is not the player:
-			if the golfer is in tee ten and the golfer is holding a golf ball (called the actual ball):
+			if the golfer is in tee-ten and the golfer is holding a golf ball (called the actual ball):
 				try the golfer dropping the actual ball;
 			else if a golf ball (called the actual ball) owned by the golfer is in the location of the golfer:
 				if the actual ball is in play:
@@ -931,7 +937,7 @@ After an actor dropping a golf ball (called the ball to play) in a teeing golf_c
 Jacques is a man with description  "Jacques looks like a real golfing mountaineer. It's a good thing the links are cloudy, or the people in charge would surely have objected to the crampons he insists on wearing while putting.".
 Joseph is a man with description "Joseph is a fanatical mountaineer and golfer. When he was the first man to reach these summits, he immediately laid out this golf course. He named the place 'Mount Golf', and his feet haven't touched the ground since.".
 
-Jacques and Joseph are in Tee ten.
+Jacques and Joseph are in tee-ten.
 After asking Jacques about "[a game of golf]":
 	say "Jacques talks incoherently about spherical things that fly.";
 After asking Joseph about "[a game of golf]":
@@ -949,7 +955,7 @@ Golfing Drinks ends when Ballooning begins.
 
 Hole Nineteen is a pub.
 Hole Nineteen's Storeroom is a room that reposits Hole Nineteen.
-Hole Nineteen is northwest of Green Ten.
+Hole Nineteen is northwest of green-ten.
 Hole Nineteen's table is a table in Hole Nineteen.
 
 Hole Nineteen's Chair One is a chair in Hole Nineteen with printed name "chair".
@@ -1037,4 +1043,5 @@ When Ballooning ends:
 	repeat with chap running through people in the balloon:
 		move chap to park;
 	say "You seem to have landed in the park.";
+	
 	
