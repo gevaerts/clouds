@@ -1,5 +1,6 @@
 "Cloud" by "Frank Gevaerts and Nick Sant"
 
+
 The story headline is "A set of unexpected events". 
 The story genre is "Comedy".
 The story description is "In this wonderful game, your goal is to do things.".
