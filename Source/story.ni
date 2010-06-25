@@ -1,13 +1,12 @@
 "Cloud" by "Frank Gevaerts and Nick Sant"
 
 [Include Conversation Rules by Eric Eve.]
-Use memory economy.
-Release along with a website and the source text.
+[Use memory economy.]
+Release along with a website, the source text, the introductory booklet, the "Parchment" interpreter.
 
 Volume 1 -- definitions and general things
 
 Use full-length room descriptions.
-When play begins, seed the random-number generator with 33.
 
 Book 1 -- actions
 
@@ -42,7 +41,9 @@ Understand "drive [something]" as striking.
 Printing the description of something is an activity.
 The fancy examining rule is listed instead of the standard examining rule in the carry out examining rules.
 This is the fancy examining rule:
-	carry out the printing the description activity with the noun.
+	carry out the printing the description activity with the noun;
+	now examine text printed is true.
+
 Rule for printing the description of something (called item):
 	say "[description of item] [run paragraph on]".
 Last after printing the description of something:
@@ -437,9 +438,10 @@ empty plate is in the storeroom.
 an interesting plate is a thing. An interesting plate is in The Bannister's storeroom.
 The description of the interesting plate is "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
 
-the menu is a thing on the table.
-The description of a menu is "There seems to be a wide choice of food and drink available. You'll need to read the menu carefully.".
-Instead of examining the menu:
+the bannister's menu is a thing on the bannister's table.
+The description of a bannister's menu is "There seems to be a wide choice of food and drink available. You'll need to read the menu carefully.".
+The printed name of the bannister's menu is "a menu".
+Instead of examining the bannister's menu:
 	say "'The Bannister and Shamrock'[line break]";
 	say "*** food menu ***[line break]";
 	repeat with item running through every on_the_menu foodstuff:
@@ -672,8 +674,13 @@ Every turn while in cloud nine during The Clouds:
 		say "[Romantic Interest] is looking at you expectantly.".
 
 fluffy-white-thing-in-the-east is scenery in cloud nine. "In the distance to the east you can see a fluffy white object. There's a small flag on it. The flag has the number '8' written on it in yellow.".
+The printed name of fluffy-white-thing-in-the-east is "a fluffy white thing in the east".
+Understand "fluffy white thing in the east" as fluffy-white-thing-in-the-east.
+
 fluffy-white-thing-in-the-northwest is scenery in cloud nine. "In the distance to the northwest you can see a fluffy white object. There's a small flag on it. The flag has the
 number '10' written on it in yellow."
+The printed name of fluffy-white-thing-in-the-northwest is "a fluffy white thing in the northwest".
+Understand "fluffy white thing in the northwest" as fluffy-white-thing-in-the-northwest.
 
 The flagpole is a supporter in cloud nine.
 description of flagpole is "[if the flagpole is examined]This could well be a flagpole. There seems to be a flag at the top.[otherwise]There seems to be some sort of pole nearby.[end if]".
@@ -781,7 +788,7 @@ After looking in a golf_course during mountain golf:
 		decrease the amount by 1;
 		pick a separator for the amount;
 	Let the amount be the number of adjacent teeing golf_courses;
-	start listing exits for amount of "teeing area";
+	start listing exits for amount of "tee";
 	repeat with nearby bit running through adjacent teeing golf_courses:
 		say "[best route from the location to the nearby bit]";
 		decrease the amount by 1;
@@ -789,7 +796,7 @@ After looking in a golf_course during mountain golf:
 	if the location is not green:
 		say "The green is roughly to the [best route from the location to green-ten].";
 
-tee-ten is a teeing golf_course in The Celestial Golf Course. "This is the teeing area of hole ten.".
+tee-ten is a teeing golf_course in The Celestial Golf Course. "This is the tee of hole ten.".
 The way of tee-ten is west.
 
 
@@ -831,8 +838,8 @@ mountain golf ends when all golf balls are not in play and the golf ball owned b
 
 When mountain golf begins:
 	say "The weather clears a bit, and you can now see that the white fluffy things were all actually grass-covered mountain tops.";
+	Now the romantic interest owns the fourth golf ball;
 	if the romantic interest is following:
-		Now the romantic interest owns the fourth golf ball;
 		Now the romantic interest is stationary;
 	repeat with the distributed ball running through all golf balls:
 		now the owner of the distributed ball holds the distributed ball;
@@ -1043,5 +1050,6 @@ When Ballooning ends:
 	repeat with chap running through people in the balloon:
 		move chap to park;
 	say "You seem to have landed in the park.";
+	
 	
 	
