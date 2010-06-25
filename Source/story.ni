@@ -1,8 +1,13 @@
 "Cloud" by "Frank Gevaerts and Nick Sant"
 
+The story headline is "A set of unexpected events". 
+The story genre is "Comedy".
+The story description is "In this wonderful game, your goal is to do things.".
+The story creation year is 2010.
+
 [Include Conversation Rules by Eric Eve.]
 [Use memory economy.]
-Release along with a website, the source text, the introductory booklet, the "Parchment" interpreter.
+Release along with a "Standard" website, the source text, the introductory booklet, the "Parchment" interpreter and a library card.
 
 Volume 1 -- definitions and general things
 
