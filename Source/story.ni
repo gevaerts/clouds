@@ -1,4 +1,4 @@
-"Cloud" by "Frank Gevaerts and Nick Sant"
+"Cloud" by "Frank Gevaerts with moral support and ideas from Nick Sant"
 
 The story headline is "A set of unexpected events". 
 The story genre is "Comedy".
@@ -13,7 +13,21 @@ Volume 1 -- definitions and general things
 
 Use full-length room descriptions.
 
-Book 1 -- actions
+Book 1 -- People
+
+drunkenness is a kind of value. The drunkennesses are sober, tipsy, squiffy, drunk, sloshed and blotto.
+A person has a drunkenness.
+The drunkenness of a person is normally sober.
+
+To intoxicate (drunkard - a person):
+	if the drunkenness of the drunkard is not the last value of drunkenness:
+		now the drunkenness of the drunkard is the drunkenness after the drunkenness of the drunkard.
+
+To sober up (drunkard - a person):
+	if the drunkenness of the drunkard is not the first value of drunkenness:
+		now the drunkenness of the drunkard is the drunkenness before the drunkenness of the drunkard.
+
+Book 2 -- actions
 
 Owning relates one person (called the owner) to various things.
 The verb to own (he owns, they own, he owned, he is owned) implies the owning relation.
@@ -42,6 +56,7 @@ Understand "strike [something]" as striking.
 Understand "play [something]" as striking.
 Understand "putt [something]" as striking.
 Understand "drive [something]" as striking.
+Understand "eat [a foodstuff]" as eating.
 
 Printing the description of something is an activity.
 The fancy examining rule is listed instead of the standard examining rule in the carry out examining rules.
@@ -54,7 +69,7 @@ Rule for printing the description of something (called item):
 Last after printing the description of something:
 	say paragraph break.
 
-Book 2 -- shops
+Book 3 -- shops
 
 Understand "order [something]" as buying.
 Understand "pay for [something]" as buying;
@@ -98,12 +113,12 @@ The description of the wallet is "Your wallet has [price of the wallet] in it".
 The price of the wallet is 20 gold piece.
 Does the player mean giving the wallet to someone: it is very unlikely.
 
-Book 3 -- Pubs
+Book 4 -- Pubs
 
 a pub is a kind of room.
-a table is a kind of supporter. A table is usually fixed in place. The printed name of a table is usually "table". 
+a table is a kind of supporter. A table is usually fixed in place. The printed name of a table is usually "table". A table is usually scenery.
 
-A chair is a kind of supporter with carrying capacity 1. A chair is enterable. Understand "chair" as a chair. 
+A chair is a kind of supporter with carrying capacity 1. A chair is enterable. Understand "chair" as a chair. A chair is usually scenery.
 
 Instead of an actor entering a chair which is enclosing something (called the original):
 	Let R be the location of the original;
@@ -133,8 +148,11 @@ A comestible is a kind of thing.
 A comestible has a text called qualifier.
 A comestible can be on_the_menu or special. A comestible is normally on_the_menu.
 
-Foodstuff is a kind of comestible.
-Foodstuff is normally edible.
+Serving relates one pub to various  comestibles.
+The verb to serve (he serves, they serve, he served, it is served, he is serving) implies the serving relation.
+
+A foodstuff is a kind of comestible.
+a foodstuff is normally edible.
 The qualifier of a foodstuff is normally "a steaming plate of".
 The price of a foodstuff is normally 1 gold piece.
 
@@ -142,7 +160,7 @@ a drink is a kind of comestible.
 The qualifier of a drink is normally "a nice".
 The price of a drink is normally 1 gold piece.
 
-instead of buying a comestible in a pub (called the joint):
+Instead of buying a comestible in a pub (called the joint):
 	if the player has the wallet:
 		if the price of the wallet >= the price of the noun:
 			decrease the price of the wallet by the price of the noun;
@@ -155,26 +173,38 @@ instead of buying a comestible in a pub (called the joint):
 		say "You seem to have lost your wallet.";
 	rule succeeds;
 
-Instead of drinking a drink in a pub (called the joint):
-	increase the alcohol level of the player by 1;
-	move the noun to a random room which reposits the joint;
-	Say "That was good!";
-	if the alcohol level of the player > 2:
-		say "Suddenly the place starts moving around in strange ways, and you fall over.";
-		say "This [noun] is strong!";
+The block drinking rule is not listed in the check drinking rulebook.
+
+Carry out an actor drinking (this is the get drunk rule):
+	intoxicate the actor;
+	let the origin be a random pub which serves the noun;
+	move the noun to a random room which reposits the origin;
+	rule succeeds;	
+	
+Report an actor drinking:
+	if the actor is the player:
+		if the drunkenness of the player is:
+			-- blotto: 
+				say "Suddenly the place starts moving around in strange ways, and you fall over.";
+			-- sloshed:
+				say "You feel sloshed.";
+			-- drunk:
+				say "[one of]You sing a few songs. If only you could remember the lines![or]More drunk activities.[purely at random]";	
+			-- squiffy:
+				say "You feel a bit squiffy.";
+			-- tipsy:
+				say "[one of]You feel happy. Everyone likes you![or]More tipsy activities.[purely at random]";
 	rule succeeds;	
 
-Book 4 -- The Player
+Does the player mean eating a foodstuff: it is very likely.
+Does the player mean drinking a drink: it is very likely.
 
-A person has a number called alcohol level.
-The alcohol level of a person is normally 0.
-
-Book 5 -- The Romantic Interest
+Book 4 -- The Romantic Interest
 
 Part 1 -- Definitions
 
 Potential Girlfriend is a kind of woman.
-a Potential Girlfriend can be unmet,current or former.
+a Potential Girlfriend can be unmet, met, current or former.
 a Potential Girlfriend is normally unmet.
 
 hair colour is a kind of value. A potential girlfriend has hair colour. the hair colour are blond, red, brown, black, interestingly purple-greenish.
@@ -255,7 +285,6 @@ Every turn:
 			say "You seem to have annoyed [RI] once too often. She's decided to leave you.";
 			lose the girl;
 
-
 To impress (girl - a potential girlfriend) by (amount - a number):
 	increase the friendliness of the girl by the amount;
 	if the friendliness of the girl > 10:
@@ -303,6 +332,46 @@ Susan is a Potential Girlfriend.
 Mary is a Potential Girlfriend.
 Josephine is a Potential Girlfriend.
 
+Part 6 -- Behaviour
+
+Every turn when the romantic interest is in the location of the player:
+	say "[Romantic Interest] is here. She looks absolutely wonderful. [run paragraph on]";
+	if the friendliness of the romantic interest > 3:
+		say "She smiles and steps closer.";
+	otherwise:
+		say "She does look a bit indifferent though.";
+
+Check an actor giving something to:
+	if the second noun is a potential girlfriend and the noun is a flowers:
+		continue the action;
+	otherwise:
+		stop the action with library message giving it to action number 3 for the second noun.
+
+Check kissing the Romantic Interest:
+	if the friendliness of the Romantic Interest > 3:
+		continue the action;
+	else if the friendliness of the Romantic Interest > 1:
+		say "[Romantic Interest] takes a step back.";
+		stop the action;
+	else if the friendliness of the Romantic Interest > -2:
+		say "[Romantic Interest] slaps you.";
+		annoy the romantic interest by 1;
+		stop the action;
+	else:
+		say "[Romantic Interest] reaching the end of her tether with you, slyly kicks you right on the shins. With that sort of pain, you are sure to be wincing the night away.";
+		annoy the romantic interest by 2;
+		stop the action.
+		
+				
+
+Carry out kissing the Romantic Interest:
+	impress the romantic interest by 2;
+	now the romantic interest is current;
+	now the romantic interest is following;
+
+Report kissing the Romantic Interest which is current:
+	say "You kiss [romantic interest] enthousiastically.";
+	rule succeeds. [no other report or after rules!]
 
 Book 6 -- general rules
 
@@ -326,8 +395,8 @@ Every turn:
 
 Every turn:
 	repeat with drunkard running through persons:
-		if the alcohol level of the drunkard > 0 and a random chance of 1 in 20 succeeds:
-			decrease the alcohol level of the drunkard by 1;
+		if a random chance of 1 in 20 succeeds:
+			sober up the drunkard.
 
 A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining something: now the noun is examined.
 
@@ -365,7 +434,7 @@ When play begins:
 Book 2 -- Main area
 
 The Town is a region.
-The park, the rose garden, the flower shop, the narrow street, round square, penny lane, south end of penny lane and the library are in the town.
+The park, the rose garden, the flower shop [, the narrow street, round square, penny lane, south end of penny lane and the library] are in the town.
 
 Park is a room. "You are in a park. There are trees here.
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
@@ -378,6 +447,7 @@ rose garden is east of the park.
 Flower shop is a shop. "They sell flowers here. The exit is to the east.".
 The flower shop is west of the park.
 
+[
 A narrow street is a room. "This isn't a very interesting street. To the southeast is the park, Round Square is to the north.".
 a narrow street is northwest of the park.
 
@@ -392,6 +462,7 @@ Penny Lane is south of the park.
 South end of Penny Lane is a room. "The lane is lined with trees. Some of the trees don't look too well, their leaves seem to be half-eaten and they look a bit silvery. Penny Lane continues to the north.
 Design note: more room for expansion here.".
 South end of Penny Lane is south of Penny Lane.
+]
 
 Book 3 -- The flower shop
 
@@ -417,7 +488,7 @@ The Bannister is in the town.
 The Bannister's Storeroom is a room which reposits The Bannister.
 
 The Bannister is north of the park.
-The description of The Bannister is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall.".
+The description of The Bannister is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall. There is a table with some chairs.".
 
 The landlord is a person who is in The Bannister.
 
@@ -460,11 +531,11 @@ Part 2 -- Food and Drink
 
 Chapter 1 -- The available wares
 
-Old-fashioned Red Herring is a foodstuff in The Bannister's storeroom. "The red herring looks delicious.".
-some unmentionable meat is a foodstuff in The Bannister's storeroom. "This meat doesn't look very good.".
+Old-fashioned Red Herring is a foodstuff in The Bannister's storeroom. "The red herring looks delicious.". It is served by the bannister.
+some unmentionable meat is a foodstuff in The Bannister's storeroom. "This meat doesn't look very good.". It is served by the bannister.
 
-beer is a drink in The Bannister's storeroom with qualifier "a nice cool frothy".
-glass of wine is a drink in The Bannister's storeroom with qualifier "a nice". 
+Bannister's beer is a drink in The Bannister's storeroom with qualifier "a nice cool frothy" and printed name "beer". It is served by the bannister.
+Bannister's glass of wine is a drink in The Bannister's storeroom with qualifier "a nice" and printed name "glass of wine".  It is served by the bannister.
 
 Chapter 2 -- The Daily Special
 
@@ -478,7 +549,7 @@ instead of listening to the daily special:
 	say "You hear a faint quacking noise.";
 	rule succeeds;
 
-daily special is in The Bannister's storeroom.
+daily special is in The Bannister's storeroom. It is served by The Bannister.
 
 Before eating a foodstuff:
 	if the noun is the daily special:
@@ -489,7 +560,7 @@ Understand "box" as the daily special.
 
 Chapter 3 -- Eating and Drinking
 
-After eating a foodstuff in a The Bannister:
+After eating a foodstuff in The Bannister:
 	say "That wasn't bad.";
 	if the noun is the red herring:
 		say "The plate looks interesting."; [special casing avoidable?]
@@ -533,43 +604,29 @@ Does the player mean talking to the romantic interest during chat up: it is very
 
 Instead of talking to a potential girlfriend (called the girl) during chat up:
 	if the girl is unmet:
-		now the girl is current;
+		now the girl is met;
 		say "She says, 'Hello, my name is [the printed name of the romantic interest].'";
 	otherwise:
 		say "She says, 'I could use a drink.'";
 	rule succeeds;
 
-Instead of giving beer to a potential girlfriend (called the girl):
+Instead of giving a drink (called the glass) to a potential girlfriend (called the girl):
 	if the friendliness of the girl < 0 and a random chance of 0 - the friendliness of the girl in 10 succeeds:
-		say "[girl] pours the beer over your head.";
+		say "[girl] pours [the glass] over your head.";
 		annoy girl by 1;
 	otherwise:
-		Say "[girl] drinks the beer and smiles at you.";
-		increase the alcohol level of the girl by 1;
+		Say "[girl] drinks [the glass] and smiles at you.";
+		intoxicate the girl;
 		impress girl by 1;
 	move the noun to the storeroom;
 	rule succeeds;
 
-Chat up ends drunkenly when the alcohol level of the player > 2 and the romantic interest is not unmet.
-Chat up ends soberly when the romantic interest is not unmet and the player is not in the pub.
+Chat up ends when the romantic interest is not unmet.
 
-Drunken end of chat up is a recurring scene.
-Drunken end of chat up begins when Chat Up ends drunkenly.
-Drunken end of chat up ends when the player is in a room.
-When Drunken end of chat up begins:
-	remove Romantic Interest from play;
-	move the player to the park;
-	say "You wake up, not remembering much except for meeting [romantic interest]. You really want to see her again.";
-
-Sober end of chat up is a recurring scene.
-Sober end of chat up begins when Chat Up ends soberly.
-Sober end of chat up ends when the player is in a room.
-When Sober end of chat up begins:
-	remove Romantic Interest from play;
-	say "You wouldn't mind seeing [romantic interest] again.";
 
 Book 5 -- The Library
 
+[
 The library is a room. "This is the library. The walls are lined with books. There is a nice plaque on the wall.
 The exit is to the east".
 The library is west of Penny lane.
@@ -586,6 +643,7 @@ Instead of examining the achievements plaque:
 		repeat with item running through every incomplete adventurous scene:
 			say "* [item][line break]";
 	rule succeeds;
+]
 
 Volume 3 -- The Adventures
 
@@ -598,37 +656,19 @@ The Celestial Golf Course is a region.
 Part 2 -- Selection
 
 Cloud Selector is a selective recurring scene.
-Cloud Selector begins when no adventurous scene is happening and the romantic interest is current  and the player is in the rose garden and the player is wandering about. [the romantic interest is current? That might need some rework]
+Cloud Selector begins when no adventurous scene is happening and the player is in The Bannister and the player is wandering about.
 
 When Cloud Selector begins:
 	now the player is selecting;
-	move Romantic Interest to the rose garden;
-	say "[Romantic Interest] is here. She looks absolutely wonderful. [run paragraph on]";
-	if the friendliness of the romantic interest > 2:
-		say "She smiles and steps closer.";
-	otherwise:
-		say "She does look a bit indifferent though.";
 
-Check an actor giving something to:
-	if the second noun is a potential girlfriend and the noun is a flowers:
-		continue the action;
-	otherwise:
-		stop the action with library message giving it to action number 3 for the second noun.
-
-
-Carry out kissing the Romantic Interest in the rose garden during Cloud Selector:
-	complete selection;
-	now the romantic interest is following;
-
-Report kissing the Romantic Interest in the rose garden during Cloud Selector:
-	say "You kiss [romantic interest] enthousiastically.";
-	say "This kiss turns out to be a bit more steamy than you had planned.";
-	say "You find yourself surrounded by a fog.";
-	rule succeeds. [no other report or after rules!]
 
 Every turn during Cloud Selector:
-	if the player has been in the rose garden for exactly 2 turns, say "You suddenly hear a booming voice coming from above. It says 'Get on with it!'.";
+	if the player is blotto:
+		complete selection;
+		
+[	if the player has been in the rose garden for exactly 2 turns, say "You suddenly hear a booming voice coming from above. It says 'Get on with it!'.";
 	if the player has been in the rose garden for exactly 3 turns, say "Don't you know what to do when you meet [Romantic Interest] in a rose garden?".
+]
 
 Cloud Selector ends well when the player is adventuring.
 Cloud Selector ends normally when the player is wandering about.
@@ -665,11 +705,11 @@ When The Clouds ends well:
 	now Cloud Selector is non-recurring;
 
 When The Clouds begins:
-	say "You can't see what you're doing, you stumble on something, and you fall. [Romantic Interest] seems to fall with you.";
-	say "The world seems to be swirling, and for a moment you lose all sense of orientation.";
-	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. You are not alone.";
+	say "You wake up with a headache. The world seems to be swirling a bit, and your sense of orientation is missing.";
+	say "When you regain your senses, you seem to be comfortably lying on something fluffy and white. [if the romantic interest is following]You are not alone.[end if]";
 	reset the clouds;
-	move the romantic interest to cloud nine; [ RI will NOT follow "magic" moves automatically!]
+	if the romantic interest is following:
+		move the romantic interest to cloud nine; [ RI will NOT follow "magic" moves automatically!]
 	move the player to cloud nine;
 
 Chapter 2 -- Cloud Nine
@@ -699,8 +739,9 @@ a round hole is a fixed in place thing. The printed name of a round hole is "a h
 
 Instead of examining flagpole in cloud nine during The Clouds:
 	say "This could well be a flagpole. There seems to be a flag at the top.";
-	say "[Romantic Interest] seems to be getting a bit impatient.";
-	annoy romantic interest by 1;
+	if the romantic interest is current and the romantic interest is following:
+		say "[Romantic Interest] seems to be getting a bit impatient.";
+		annoy romantic interest by 1;
 	move flag to flagpole;
 	rule succeeds.
 
@@ -709,14 +750,16 @@ Instead of examining flag in cloud nine during The Clouds:
 		move round hole to cloud nine;
 	if the flag is not handled:
 		say "The flag seems to have yellow writing on it, but you can't read it from this angle. You can see a hole at the lower end of the flagpole though.";
-		say "[Romantic Interest] tugs at your sleeve.";
-		annoy romantic interest by 1;
+		if the romantic interest is current and the romantic interest is following:		
+			say "[Romantic Interest] tugs at your sleeve.";
+			annoy romantic interest by 1;
 	rule succeeds;
 
 Instead of examining the round hole in cloud nine during The Clouds:
-	say "[Romantic Interest] just got up and left.";
-	annoy romantic interest by 2;
-	lose the girl;
+	if the romantic interest is current and the romantic interest is following:
+		say "[Romantic Interest] just got up and left.";
+		annoy romantic interest by 2;
+		lose the girl;
 	say "You hear someone shouting 'Fore!'.";
 	say "Something hits you on the head.";
 	say "The world turns black.";
@@ -730,7 +773,8 @@ Check an actor kissing the romantic interest in cloud nine during The Clouds:
 Instead of kissing the romantic interest in cloud nine during The Clouds:
 	say "Someone taps you in the shoulder. You look round and see a man wearing mountaineering gear and crampons, carrying a golf club.";
 	say "'Excuse me, sir, but could you get out of the way? I'd like to get on with my putting.'";
-	say "[Romantic Interest] screams and runs away.";
+	if the romantic interest is current and the romantic interest is following:
+		say "[Romantic Interest] screams and runs away.";
 	Move Jacques to Cloud Nine;
 	now the romantic interest is wandering;
 	move the romantic interest to a random room that is not cloud nine in the celestial golf course;
@@ -751,9 +795,9 @@ Chapter 3 -- A game of golf
 Section 1 -- The golf course
 
 a golf_course is a kind of room. A golf_course can be fairway, green, rough, bunker or teeing.
-The description of a golf_course is normally "Hole Ten is a pretty long hole. You are now [if the location is bunker]in[else]on[end if] a [if the location is fairway]fairway[else if the location is green]green[else if the location is rough]rough bit[else if the location is bunker]bunker[else if the location is teeing]teeing area[end if].".
+The description of a golf_course is normally "Hole Ten is a fairly long hole. You are now [if the location is bunker]in[else]on[end if] a [if the location is fairway]fairway[else if the location is green]green[else if the location is rough]rough bit[else if the location is bunker]bunker[else if the location is teeing]tee[end if].".
 A golf_course has a direction called the way.
-[The printed name of a golf_course is normally "[if the location is fairway]Fairway[else if the location is green]Green[else if the location is rough]Rough bit[else if the location is bunker]Bunker[else if the location is teeing]Teeing area[end if]".]
+[The printed name of a golf_course is normally "[if the location is fairway]Fairway[else if the location is green]Green[else if the location is rough]Rough bit[else if the location is bunker]Bunker[else if the location is teeing]Tee[end if]".]
 
 To start listing exits for (amount - a number) of (type of exit - a text):
 	if the amount > 0:
@@ -836,7 +880,7 @@ Fourth-bit-of-rough-on-the-right-of-ten is a rough golf_course in The Celestial 
 
 Section 2 -- Game things
 
-mountain golf is a recurring scene.
+mountain golf is a scene. [This should be recurring, but there's a bug...]
 mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or the player is in tee-ten.
 
 mountain golf ends when all golf balls are not in play and the golf ball owned by the player has been in play.
@@ -988,17 +1032,17 @@ After an actor going during Golfing Drinks:
 
 Check an actor going during Golfing Drinks:
 	if the actor is the player and the room gone to is BalloonGrounds:
-		if the alcohol level of the actor < 3:
+		if the drunkenness of the actor <= drunk:
 			say "It looks dangerous!";
 			stop the action.
 
 Every turn during Golfing Drinks:
-	if the alcohol level of the player > 4:
+	if the drunkenness of the player >= drunk:
 		change the north exit of Hole Nineteen to BalloonGrounds;
 		change the south exit of BalloonGrounds to Hole Nineteen;
 	
-Another beer is a drink in Hole Nineteen's Storeroom with qualifier "a nice cool frothy" and printed name "beer".
-Another glass of wine is a drink in Hole Nineteen's Storeroom with qualifier "a nice" and printed name "glass of wine". 
+Another beer is a drink in Hole Nineteen's Storeroom with qualifier "a nice cool frothy" and printed name "beer". It is served by hole nineteen.
+Another glass of wine is a drink in Hole Nineteen's Storeroom with qualifier "a nice" and printed name "glass of wine".  It is served by hole nineteen.
 
 Chapter 5 -- Ballooning
 
@@ -1055,6 +1099,4 @@ When Ballooning ends:
 	repeat with chap running through people in the balloon:
 		move chap to park;
 	say "You seem to have landed in the park.";
-	
-	
 	
