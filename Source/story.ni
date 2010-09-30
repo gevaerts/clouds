@@ -13,21 +13,7 @@ Volume 1 -- definitions and general things
 
 Use full-length room descriptions.
 
-Book 1 -- People
-
-drunkenness is a kind of value. The drunkennesses are sober, tipsy, squiffy, drunk, sloshed and blotto.
-A person has a drunkenness.
-The drunkenness of a person is normally sober.
-
-To intoxicate (drunkard - a person):
-	if the drunkenness of the drunkard is not the last value of drunkenness:
-		now the drunkenness of the drunkard is the drunkenness after the drunkenness of the drunkard.
-
-To sober up (drunkard - a person):
-	if the drunkenness of the drunkard is not the first value of drunkenness:
-		now the drunkenness of the drunkard is the drunkenness before the drunkenness of the drunkard.
-
-Book 2 -- actions
+Book 1 -- actions
 
 Owning relates one person (called the owner) to various things.
 The verb to own (he owns, they own, he owned, he is owned) implies the owning relation.
@@ -41,10 +27,6 @@ Check an actor burning:
 	if the noun is fireproof:
 		stop the action with library message burning action number 1.
 
-Report kissing:
-	say "Are you out of your mind?";
-	rule succeeds. [no other report or after rules!]
-
 Understand "make love to [someone]" as kissing.
 Talking to is an action applying to one visible thing.
 Understand "talk to [someone]" or "converse with [someone]" as talking to.
@@ -56,7 +38,7 @@ Understand "strike [something]" as striking.
 Understand "play [something]" as striking.
 Understand "putt [something]" as striking.
 Understand "drive [something]" as striking.
-Understand "eat [a foodstuff]" as eating.
+
 
 Printing the description of something is an activity.
 The fancy examining rule is listed instead of the standard examining rule in the carry out examining rules.
@@ -69,7 +51,7 @@ Rule for printing the description of something (called item):
 Last after printing the description of something:
 	say paragraph break.
 
-Book 3 -- shops
+Book 2 -- shops
 
 Understand "order [something]" as buying.
 Understand "pay for [something]" as buying;
@@ -113,9 +95,8 @@ The description of the wallet is "Your wallet has [price of the wallet] in it".
 The price of the wallet is 20 gold piece.
 Does the player mean giving the wallet to someone: it is very unlikely.
 
-Book 4 -- Pubs
+Book 2 -- Furniture
 
-a pub is a kind of room.
 a table is a kind of supporter. A table is usually fixed in place. The printed name of a table is usually "table". A table is usually scenery.
 
 A chair is a kind of supporter with carrying capacity 1. A chair is enterable. Understand "chair" as a chair. A chair is usually scenery.
@@ -133,23 +114,50 @@ Report an actor entering a chair:
 	else:
 		say "[the actor] sits down.";
 	stop the action;
+	
 
-Repositing relates one pub to one room.
-The verb to reposit (he reposits, they reposit, he reposited, he is reposited) implies the repositing relation.
+Book 3 -- Pubs and Alcohol
 
-Rule for deciding the scope of the player while buying in a pub (called the joint):
-	Let the storeroom be a random room which reposits the joint;
-        place the storeroom in scope.
+Part 1 -- Intoxication
 
-Rule for reaching inside a room (called the storeroom) while buying in a pub (called the joint):
-	if the storeroom reposits the joint, allow access.
+drunkenness is a kind of value. The drunkennesses are sober, tipsy, squiffy, drunk, sloshed and blotto.
+A person has a drunkenness.
+The drunkenness of a person is normally sober.
+
+To intoxicate (drunkard - a person):
+	if the drunkenness of the drunkard is not the last value of drunkenness:
+		now the drunkenness of the drunkard is the drunkenness after the drunkenness of the drunkard.
+
+To sober up (drunkard - a person):
+	if the drunkenness of the drunkard is not the first value of drunkenness:
+		now the drunkenness of the drunkard is the drunkenness before the drunkenness of the drunkard.
+
+Part 2 -- Pubs, comestibles, and their relations
+
+a pub is a kind of room.
+The secret storeroom is a room.
 
 A comestible is a kind of thing.
 A comestible has a text called qualifier.
 A comestible can be on_the_menu or special. A comestible is normally on_the_menu.
 
-Serving relates one pub to various  comestibles.
+Serving relates one pub to various comestibles.
 The verb to serve (he serves, they serve, he served, it is served, he is serving) implies the serving relation.
+
+Replacing relates one comestible to one thing.
+The verb to replace (he replaces, they replace, he replaced, it is replaced, he is replacing) implies the replacing relation.
+
+When play begins:
+	repeat with stuff running through comestibles that are served by a pub:
+		move stuff to the secret storeroom;
+
+Rule for deciding the scope of the player while buying in a pub (called the joint):
+	repeat with stuff running through comestibles that are served by the joint:
+		if the stuff is in the secret storeroom:
+			place the stuff in scope;
+
+Rule for reaching inside a room (called the storeroom) while buying in a pub (called the joint):
+	allow access.
 
 A foodstuff is a kind of comestible.
 a foodstuff is normally edible.
@@ -175,12 +183,38 @@ Instead of buying a comestible in a pub (called the joint):
 
 The block drinking rule is not listed in the check drinking rulebook.
 
+Part 2 -- Eating and Drinking
+
+Understand "eat [a foodstuff]" as eating.
+
 Carry out an actor drinking (this is the get drunk rule):
 	intoxicate the actor;
+
+Carry out an actor drinking (this is the move drinks back rule):
 	let the origin be a random pub which serves the noun;
-	move the noun to a random room which reposits the origin;
-	rule succeeds;	
-	
+	if the origin is not nothing:
+		move the noun to the secret storeroom;
+	let the replacement be a random thing which replaces the noun;
+	if the replacement is not nothing:
+		let the place be a random table in the location of the actor;
+		if the place is not nothing:
+			move replacement to the place;
+		otherwise:
+			move empty plate to the location of the actor;
+
+Carry out an actor eating (this is the move food back rule):
+	let the origin be a random pub which serves the noun;
+	if the origin is not nothing:
+		move the noun to the secret storeroom;
+	let the replacement be a random thing which replaces the noun;
+	if the replacement is not nothing:
+		let the place be a random table in the location of the actor;
+		if the place is not nothing:
+			move replacement to the place;
+		otherwise:
+			move empty plate to the location of the actor;
+
+
 Report an actor drinking:
 	if the actor is the player:
 		if the drunkenness of the player is:
@@ -196,8 +230,13 @@ Report an actor drinking:
 				say "[one of]You feel happy. Everyone likes you![or]More tipsy activities.[purely at random]";
 	rule succeeds;	
 
-Does the player mean eating a foodstuff: it is very likely.
+Report an actor eating:
+	if the actor is the player:
+		say "That wasn't bad.";
+	
 Does the player mean drinking a drink: it is very likely.
+
+Does the player mean eating a foodstuff: it is very likely.
 
 Book 4 -- The Romantic Interest
 
@@ -210,8 +249,18 @@ a Potential Girlfriend is normally unmet.
 hair colour is a kind of value. A potential girlfriend has hair colour. the hair colour are blond, red, brown, black, interestingly purple-greenish.
 Height is a kind of value. A potential girlfriend has height. The heights are tall, of medium lenght, rather short.
 
-A potential girlfriend has a number called friendliness.
-The friendliness of a potential girlfriend is normally 0.
+friendliness is a kind of value. The friendlinesses are fuming, angry, annoyed, indifferent, friendly, attracted, adoring and madly in love.
+A potential girlfriend has a friendliness.
+The friendliness of a potential girlfriend is normally indifferent.
+		
+To impress (girl - a potential girlfriend):
+	if the friendliness of the girl is not the last value of friendliness:
+		now the friendliness of the girl is the friendliness after the friendliness of the girl;
+
+To annoy (girl - a potential girlfriend):
+	if the friendliness of the girl is not the first value of friendliness:
+		now the friendliness of the girl is the friendliness before the friendliness of the girl;
+		
 
 When play begins:
 	repeat with girl running through potential girlfriends:
@@ -225,20 +274,23 @@ Rule for printing the name of an unmet potential girlfriend:
 
 Rule for printing the description of a potential girlfriend (called the girl):
 	say "This is [girl]. She has [hair colour of girl] hair and is [height of girl]. [run paragraph on]";
-	if the friendliness of the girl < -8:
-		say "[girl] looks as if she could kill you.";
-	otherwise if the friendliness of the girl < -5:
-		say "[girl] looks as if she is really annoyed with you.";
-	otherwise if the friendliness of the girl < -2:
-		say "[girl] seems to be a bit annoyed.";
-	otherwise if the friendliness of the girl < 2:
-		say "[girl] seems to be indifferent about you.";
-	otherwise if the friendliness of the girl < 5:
-		say "[girl] seems to be happy to see you.";
-	otherwise if the friendliness of the girl < 8:
-		say "[girl] smiles when she sees you looking at her.";
-	otherwise:
-		say "[girl] looks at you adoringly. You can do nothing wrong.";
+	if the friendliness of the girl is:
+		-- fuming:
+			say "[girl] looks as if she could kill you.";
+		-- angry:
+			say "[girl] looks as if she is really annoyed with you.";
+		-- annoyed:
+			say "[girl] seems to be a bit annoyed.";
+		-- indifferent:
+			say "[girl] seems to be indifferent about you.";
+		-- friendly:
+			say "[girl] seems to be happy to see you.";
+		-- attracted:
+			say "[girl] smiles when she sees you looking at her.";
+		-- adoring:
+			say "[girl] looks at you adoringly.";
+		-- madly in love:
+			say "[girl] swoons when she looks. You can do nothing wrong.";
 	say " [run paragraph on]".
 
 After printing the description of a current potential girlfriend:
@@ -272,59 +324,61 @@ Every turn:
 
 Every turn:
 	repeat with ex running through former potential girlfriends:
-		if the friendliness of the ex > 0 and a random chance of 1 in 20 succeeds:
-			decrease the friendliness of the ex by 1;
-		if the friendliness of the ex < 0 and a random chance of 1 in 20 succeeds:
-			increase the friendliness of the ex by 1;
+		if the friendliness of the ex > indifferent and a random chance of 1 in 20 succeeds:
+			annoy the ex;
+		if the friendliness of the ex < indifferent and a random chance of 1 in 20 succeeds:
+			impress the ex;
 	repeat with RI running through current potential girlfriends:
-		if the friendliness of the RI > 5 and a random chance of 1 in 20 succeeds:
-			decrease the friendliness of the RI by 1;
-		if the friendliness of the RI < 5 and a random chance of 1 in 20 succeeds:
-			increase the friendliness of the RI by 1;
-		if the friendliness of the RI < 0:
+		if the friendliness of the RI > adoring and a random chance of 1 in 20 succeeds:
+			annoy the RI;
+		if the friendliness of the RI < adoring and a random chance of 1 in 20 succeeds:
+			impress the RI;
+		if the friendliness of the RI < friendly:
 			say "You seem to have annoyed [RI] once too often. She's decided to leave you.";
 			lose the girl;
 
-To impress (girl - a potential girlfriend) by (amount - a number):
-	increase the friendliness of the girl by the amount;
-	if the friendliness of the girl > 10:
-		now the friendliness of the girl is 10;
-
-To annoy (girl - a potential girlfriend) by (amount - a number):
-	decrease the friendliness of the girl by the amount;
-	if the friendliness of the girl < -10:
-		now the friendliness of the girl is -10;
-
 Part 4 -- Actions
 
-Report kissing a potential girlfriend:
-	say "That was nice!";
-	rule succeeds. [no other report or after rules!]
-
-
 Carry out giving flowers (called the bouquet) to a potential girlfriend (called the girl):
-	impress the girl by the niceness of the bouquet;
+	impress the girl;
 
 Report giving flowers (called the bouquet) to a potential girlfriend (called the girl):
 	Say "[girl] gladly accepts the [bouquet].";
 	rule succeeds. [no other report or after rules!]
 
-Check an actor kissing a potential girlfriend (called the girl):
-	if the friendliness of the girl > 2:
-		continue the action;
-	otherwise if the friendliness of the girl >= -2:
-		say "[Romantic Interest] turns away.";
-		stop the action;
-	otherwise:
-		say "[romantic interest] slapped you.";
-		annoy the girl by 1;
+	
+Report kissing a potential girlfriend:
+	say "You kiss [romantic interest] enthousiastically.";
+	rule succeeds. [no other report or after rules!]
+Report kissing:
+	say "Are you out of your mind?";
+	rule succeeds. [no other report or after rules!]
 
+Check an actor kissing a potential girlfriend (called the girl):
+	if the friendliness of the girl is at least attracted:
+		continue the action;
+	else if the friendliness of the girl is at least indifferent:
+		say "[Romantic Interest] takes a step back.";
+		stop the action;
+	else if the friendliness of the girl is at least angry:
+		say "[Romantic Interest] slaps you.";
+		annoy the girl;
+		stop the action;
+	else:
+		say "[Romantic Interest], reaching the end of her tether with you, slyly kicks you right on the shins. With that sort of pain, you are sure to be wincing the night away.";
+		annoy the romantic interest;
+		stop the action.
+		
 Carry out kissing a potential girlfriend (called the kissed girl):
 	repeat with other girl running through potential girlfriends in the location of the player:
 		if the other girl is not the kissed girl:
-			annoy the other girl by 1;
+			annoy the other girl;
 			if the other girl is current:
-				annoy the other girl by 2; [so 3 in total]
+				lose the girl;
+
+Carry out kissing the Romantic Interest:
+	now the romantic interest is current;
+	now the romantic interest is following;
 
 Part 5 -- The Cast
 
@@ -336,7 +390,7 @@ Part 6 -- Behaviour
 
 Every turn when the romantic interest is in the location of the player:
 	say "[Romantic Interest] is here. She looks absolutely wonderful. [run paragraph on]";
-	if the friendliness of the romantic interest > 3:
+	if the friendliness of the romantic interest is at least attracted:
 		say "She smiles and steps closer.";
 	otherwise:
 		say "She does look a bit indifferent though.";
@@ -347,33 +401,8 @@ Check an actor giving something to:
 	otherwise:
 		stop the action with library message giving it to action number 3 for the second noun.
 
-Check kissing the Romantic Interest:
-	if the friendliness of the Romantic Interest > 3:
-		continue the action;
-	else if the friendliness of the Romantic Interest > 1:
-		say "[Romantic Interest] takes a step back.";
-		stop the action;
-	else if the friendliness of the Romantic Interest > -2:
-		say "[Romantic Interest] slaps you.";
-		annoy the romantic interest by 1;
-		stop the action;
-	else:
-		say "[Romantic Interest] reaching the end of her tether with you, slyly kicks you right on the shins. With that sort of pain, you are sure to be wincing the night away.";
-		annoy the romantic interest by 2;
-		stop the action.
-		
-				
 
-Carry out kissing the Romantic Interest:
-	impress the romantic interest by 2;
-	now the romantic interest is current;
-	now the romantic interest is following;
-
-Report kissing the Romantic Interest which is current:
-	say "You kiss [romantic interest] enthousiastically.";
-	rule succeeds. [no other report or after rules!]
-
-Book 6 -- general rules
+Book 5 -- general rules
 
 [
 Every turn:
@@ -439,6 +468,8 @@ The park, the rose garden, the flower shop [, the narrow street, round square, p
 Park is a room. "You are in a park. There are trees here.
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
 
+The player is in the park.
+
 The wallet is in the park.
 
 Rose Garden is a room. "This rose garden is full of roses. The park is to the west.".
@@ -485,7 +516,6 @@ Part 1 -- The Setting
 
 The Bannister is a pub with printed name "The Bannister and Shamrock".
 The Bannister is in the town.
-The Bannister's Storeroom is a room which reposits The Bannister.
 
 The Bannister is north of the park.
 The description of The Bannister is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall. There is a table with some chairs.".
@@ -507,35 +537,33 @@ Does the player mean entering The Bannister's Chair Four: it is unlikely.
 the suggestion board is scenery in The Bannister.
 The description of the suggestion board is "The board says 'Daily special', followed by some unreadable chalk writing.".
 
-an empty plate is a thing. An empty plate is in The Bannister's storeroom.
-The description of the empty plate is "This is just an ordinary plate.".
-empty plate is in the storeroom.
-
-an interesting plate is a thing. An interesting plate is in The Bannister's storeroom.
-The description of the interesting plate is "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
-
 the bannister's menu is a thing on the bannister's table.
 The description of a bannister's menu is "There seems to be a wide choice of food and drink available. You'll need to read the menu carefully.".
 The printed name of the bannister's menu is "a menu".
 Instead of examining the bannister's menu:
 	say "'The Bannister and Shamrock'[line break]";
 	say "*** food menu ***[line break]";
-	repeat with item running through every on_the_menu foodstuff:
+	repeat with item running through every on_the_menu foodstuff that is served by The Bannister:
 		say "[item] -- [price of item][line break]";
 	say "*** drinks menu ***[line break]";
-	repeat with item running through every drink:
+	repeat with item running through every on_the_menu drink that is served by The Bannister:
 		say "[item] -- [price of item][line break]";
+	say "[line break]Check out our daily specials!";
 	rule succeeds;
 
 Part 2 -- Food and Drink
 
 Chapter 1 -- The available wares
 
-Old-fashioned Red Herring is a foodstuff in The Bannister's storeroom. "The red herring looks delicious.". It is served by the bannister.
-some unmentionable meat is a foodstuff in The Bannister's storeroom. "This meat doesn't look very good.". It is served by the bannister.
 
-Bannister's beer is a drink in The Bannister's storeroom with qualifier "a nice cool frothy" and printed name "beer". It is served by the bannister.
-Bannister's glass of wine is a drink in The Bannister's storeroom with qualifier "a nice" and printed name "glass of wine".  It is served by the bannister.
+an interesting plate is a thing. "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
+Old-fashioned Red Herring is a foodstuff. "The red herring looks delicious.". It is served by the bannister and replaced by the interesting plate.
+
+an empty plate is a thing. "This is just an ordinary plate.".
+some unmentionable meat is a foodstuff. "This meat doesn't look very good.". It is served by the bannister and replaced by the empty plate.
+
+Bannister's beer is a drink with qualifier "a nice cool frothy" and printed name "a beer". It is served by the bannister.
+Bannister's glass of wine is a drink with qualifier "a nice" and printed name "a glass of wine".  It is served by the bannister.
 
 Chapter 2 -- The Daily Special
 
@@ -551,7 +579,7 @@ instead of listening to the daily special:
 
 daily special is in The Bannister's storeroom. It is served by The Bannister.
 
-Before eating a foodstuff:
+Check eating a foodstuff:
 	if the noun is the daily special:
 		say "You can't eat that, surely?";
 		stop the action.
@@ -560,14 +588,9 @@ Understand "box" as the daily special.
 
 Chapter 3 -- Eating and Drinking
 
-After eating a foodstuff in The Bannister:
-	say "That wasn't bad.";
+Report eating (this is the report on red herring rule):
 	if the noun is the red herring:
-		say "The plate looks interesting."; [special casing avoidable?]
-		move interesting plate to the Bannister's table;
-	otherwise:
-		move empty plate to the Bannister's table;
-	move noun to the bannister's storeroom;
+		say "The plate looks interesting.";
 
 Understand "complain to [someone] about [any foodstuff]" as asking it about the foodstuff.
 Understand "ask [someone] about [any foodstuff]" as asking it about the foodstuff.
@@ -610,15 +633,18 @@ Instead of talking to a potential girlfriend (called the girl) during chat up:
 		say "She says, 'I could use a drink.'";
 	rule succeeds;
 
-Instead of giving a drink (called the glass) to a potential girlfriend (called the girl):
-	if the friendliness of the girl < 0 and a random chance of 0 - the friendliness of the girl in 10 succeeds:
-		say "[girl] pours [the glass] over your head.";
-		annoy girl by 1;
+Instead of giving a drink (called the stuff) to a potential girlfriend (called the girl):
+	if the friendliness of the girl is at most angry and a random chance of 1 in 3 succeeds:
+		say "[girl] pours [the stuff] over your head.";
+		annoy girl;
+	otherwise if the friendliness of the girl is at most annoyed and a random chance of 1 in 6 succeeds:
+		say "[girl] pours [the stuff] over your head.";
+		annoy girl;
 	otherwise:
 		Say "[girl] drinks [the glass] and smiles at you.";
-		intoxicate the girl;
-		impress girl by 1;
-	move the noun to the storeroom;
+		Now the girl has the stuff;
+		try the girl drinking the stuff;
+		impress girl;
 	rule succeeds;
 
 Chat up ends when the romantic interest is not unmet.
@@ -741,7 +767,7 @@ Instead of examining flagpole in cloud nine during The Clouds:
 	say "This could well be a flagpole. There seems to be a flag at the top.";
 	if the romantic interest is current and the romantic interest is following:
 		say "[Romantic Interest] seems to be getting a bit impatient.";
-		annoy romantic interest by 1;
+		annoy romantic interest;
 	move flag to flagpole;
 	rule succeeds.
 
@@ -752,13 +778,13 @@ Instead of examining flag in cloud nine during The Clouds:
 		say "The flag seems to have yellow writing on it, but you can't read it from this angle. You can see a hole at the lower end of the flagpole though.";
 		if the romantic interest is current and the romantic interest is following:		
 			say "[Romantic Interest] tugs at your sleeve.";
-			annoy romantic interest by 1;
+			annoy romantic interest;
 	rule succeeds;
 
 Instead of examining the round hole in cloud nine during The Clouds:
 	if the romantic interest is current and the romantic interest is following:
 		say "[Romantic Interest] just got up and left.";
-		annoy romantic interest by 2;
+		Now The friendliness of the romantic interest is annoyed;
 		lose the girl;
 	say "You hear someone shouting 'Fore!'.";
 	say "Something hits you on the head.";
@@ -1010,7 +1036,6 @@ Golfing Drinks begins when Mountain Golf ends.
 Golfing Drinks ends when Ballooning begins.
 
 Hole Nineteen is a pub.
-Hole Nineteen's Storeroom is a room that reposits Hole Nineteen.
 Hole Nineteen is northwest of green-ten.
 Hole Nineteen's table is a table in Hole Nineteen.
 
@@ -1037,12 +1062,12 @@ Check an actor going during Golfing Drinks:
 			stop the action.
 
 Every turn during Golfing Drinks:
-	if the drunkenness of the player >= drunk:
+	if the drunkenness of the player is at least drunk:
 		change the north exit of Hole Nineteen to BalloonGrounds;
 		change the south exit of BalloonGrounds to Hole Nineteen;
 	
-Another beer is a drink in Hole Nineteen's Storeroom with qualifier "a nice cool frothy" and printed name "beer". It is served by hole nineteen.
-Another glass of wine is a drink in Hole Nineteen's Storeroom with qualifier "a nice" and printed name "glass of wine".  It is served by hole nineteen.
+Another beer is a drink with qualifier "a nice cool frothy" and printed name "a beer". It is served by hole nineteen.
+Another glass of wine is a drink with qualifier "a nice" and printed name "a glass of wine".  It is served by hole nineteen.
 
 Chapter 5 -- Ballooning
 
