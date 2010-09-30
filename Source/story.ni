@@ -194,25 +194,27 @@ Carry out an actor drinking (this is the move drinks back rule):
 	let the origin be a random pub which serves the noun;
 	if the origin is not nothing:
 		move the noun to the secret storeroom;
-	let the replacement be a random thing which replaces the noun;
+	let the replacement be a random thing that replaces the noun;
 	if the replacement is not nothing:
 		let the place be a random table in the location of the actor;
 		if the place is not nothing:
 			move replacement to the place;
 		otherwise:
-			move empty plate to the location of the actor;
+			move replacement to the location of the actor;
 
 Carry out an actor eating (this is the move food back rule):
 	let the origin be a random pub which serves the noun;
+	say "the origin is [the origin].";
 	if the origin is not nothing:
 		move the noun to the secret storeroom;
-	let the replacement be a random thing which replaces the noun;
+	let the replacement be a random thing that replaces the noun;
+	say "the replacement is [the replacement].";	
 	if the replacement is not nothing:
 		let the place be a random table in the location of the actor;
 		if the place is not nothing:
 			move replacement to the place;
 		otherwise:
-			move empty plate to the location of the actor;
+			move replacement to the location of the actor;
 
 
 Report an actor drinking:
