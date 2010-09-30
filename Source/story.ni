@@ -538,7 +538,7 @@ Does the player mean entering The Bannister's Chair Four: it is unlikely.
 
 the suggestion board is scenery in The Bannister.
 The description of the suggestion board is "The board says 'Daily special', followed by some [unreadable chalk writing].".
-Unreadable chalk writing is scenery in The Bannister. "It's writing, yes, but you can't make out what it says.".
+unreadable chalk writing is scenery in The Bannister. "It's writing, yes, but you can't make out what it says.".
 
 the bannister's menu is a thing on the bannister's table.
 The description of a bannister's menu is "There seems to be a wide choice of food and drink available. You'll need to read the menu carefully.".
@@ -559,11 +559,11 @@ Part 2 -- Food and Drink
 Chapter 1 -- The available wares
 
 
-an interesting plate is a thing. "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
-Old-fashioned Red Herring is a foodstuff. "The red herring looks delicious.". It is served by the bannister and replaced by the interesting plate.
+an interesting plate is a thing with description "The plate shows an olden photograph of this pub, but confusingly the name on the photograph is 'The Rose and Crown'.".
+Old-fashioned Red Herring is a foodstuff with description "The red herring looks delicious.". It is served by the bannister and replaced by the interesting plate.
 
-an empty plate is a thing. "This is just an ordinary plate.".
-some unmentionable meat is a foodstuff. "This meat doesn't look very good.". It is served by the bannister and replaced by the empty plate.
+an empty plate is a thing with description "This is just an ordinary plate.".
+some unmentionable meat is a foodstuff with description "This meat doesn't look very good.". It is served by the bannister and replaced by the empty plate.
 
 Bannister's beer is a drink with qualifier "a nice cool frothy" and printed name "a beer". It is served by the bannister.
 Bannister's glass of wine is a drink with qualifier "a nice" and printed name "a glass of wine".  It is served by the bannister.
@@ -804,9 +804,9 @@ Instead of examining the round hole in cloud nine during The Clouds:
 Check an actor kissing the romantic interest in cloud nine during The Clouds:
 	continue the action;
 
-crampons are part of Jacques. "They're just ordinary crampons".
-mountaineering gear is part of Jacques. "You know, ropes and stuff. Not interesting.".
-a golf club is part of Jacques. "Jacques likes his golfing gear. This club is especially fine.".
+crampons are part of Jacques. The description of the crampons is "They're just ordinary crampons".
+mountaineering gear is part of Jacques. The description of mountaineering gear is "You know, ropes and stuff. Not interesting.".
+a golf club is part of Jacques. The description of golf club is "Jacques likes his golfing gear. This club is especially fine.".
 Instead of kissing the romantic interest in cloud nine during The Clouds:
 	say "Someone taps you in the shoulder. You look round and see a man wearing [mountaineering gear] and [crampons], carrying [a golf club].";
 	say "'Excuse me, sir, but could you get out of the way? I'd like to get on with my putting.'";
