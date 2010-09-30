@@ -79,7 +79,7 @@ instead of buying something in a shop:
 			otherwise:
 				say "You can't afford [noun]. It costs [price of noun].";
 		otherwise:
-			say "You seem to have lost your wallet.";
+			say "You seem to have lost your [wallet].";
 	else if the noun is a sold thing:
 		say "You already bought [the noun]";
 	rule succeeds;
@@ -110,7 +110,7 @@ Instead of an actor entering a chair which is enclosing something (called the or
 
 Report an actor entering a chair:
 	if the actor is the player:
-		say "This is a nice chair!";
+		say "This is a nice [noun]!";
 	else:
 		say "[the actor] sits down.";
 	stop the action;
@@ -178,7 +178,7 @@ Instead of buying a comestible in a pub (called the joint):
 		otherwise:
 			say "You can't afford [noun]. It costs [price of noun].";
 	otherwise:
-		say "You seem to have lost your wallet.";
+		say "You seem to have lost your [wallet].";
 	rule succeeds;
 
 The block drinking rule is not listed in the check drinking rulebook.
@@ -318,9 +318,10 @@ Every turn:
 		if a random chance of 1 in 4 succeeds:
 			if chap is in a room (called the current space):
 				let next space be a random room which is adjacent to the current space;
-				if chap is visible, say "[chap] heads to [the next space].";
-				move chap to next space;
-				if chap is visible, say "[chap] arrives from [the current space].".
+				if next space is not nothing:
+					if chap is visible, say "[chap] heads to [the next space].";
+					move chap to next space;
+					if chap is visible, say "[chap] arrives from [the current space].".
 
 Every turn:
 	repeat with ex running through former potential girlfriends:
@@ -465,18 +466,21 @@ Book 2 -- Main area
 The Town is a region.
 The park, the rose garden, the flower shop [, the narrow street, round square, penny lane, south end of penny lane and the library] are in the town.
 
-Park is a room. "You are in a park. There are trees here.
-There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest "
+Park is a room. "You are in a park. There are [trees] here.
+There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest.".
+trees are scenery in the park.
 
 The player is in the park.
 
 The wallet is in the park.
 
-Rose Garden is a room. "This rose garden is full of roses. The park is to the west.".
+Rose Garden is a room. "This rose garden is full of [roses]. The park is to the west.".
 rose garden is east of the park.
+roses are scenery in the rose garden.
 
-Flower shop is a shop. "They sell flowers here. The exit is to the east.".
+Flower shop is a shop. "They sell [shopflowers] here. The exit is to the east.".
 The flower shop is west of the park.
+shopflowers are scenery in the flower shop. The printed name of shopflowers is "flowers". Understand "flowers" as shopflowers.
 
 [
 A narrow street is a room. "This isn't a very interesting street. To the southeast is the park, Round Square is to the north.".
@@ -498,10 +502,8 @@ South end of Penny Lane is south of Penny Lane.
 Book 3 -- The flower shop
 
 flowers is a kind of thing.
-A flowers has a number called niceness.
-The niceness of a flowers is normally 1.
 
-a bunch of roses is a flowers with niceness 3.
+a bunch of roses is a flowers.
 a bunch of lilies is a flowers.
 
 The price of a bunch of roses and a bunch of lilies is 1 gold piece.
@@ -518,7 +520,7 @@ The Bannister is a pub with printed name "The Bannister and Shamrock".
 The Bannister is in the town.
 
 The Bannister is north of the park.
-The description of The Bannister is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a suggestion board on the wall. There is a table with some chairs.".
+The description of The Bannister is "'The Bannister and Shamrock' is well known all over the uncivilised world for its wide selection of food and for the cheapness of its beer. There's a [suggestion board] on the wall. There is a table with some chairs.".
 
 The landlord is a person who is in The Bannister.
 
@@ -535,7 +537,8 @@ Does the player mean entering The Bannister's Chair Three: it is possible.
 Does the player mean entering The Bannister's Chair Four: it is unlikely.
 
 the suggestion board is scenery in The Bannister.
-The description of the suggestion board is "The board says 'Daily special', followed by some unreadable chalk writing.".
+The description of the suggestion board is "The board says 'Daily special', followed by some [unreadable chalk writing].".
+Unreadable chalk writing is scenery in The Bannister. "It's writing, yes, but you can't make out what it says.".
 
 the bannister's menu is a thing on the bannister's table.
 The description of a bannister's menu is "There seems to be a wide choice of food and drink available. You'll need to read the menu carefully.".
@@ -571,7 +574,8 @@ the daily special is a foodstuff which is special.
 The printed name of the daily special is "box".
 The qualifier of the daily special is "some sort of".
 The daily special can be listened or unlistened. The daily special is  unlistened.
-The description of the daily special is "This box seems to have something moving inside it. Wait, did the lid just move up a bit, and did a pair of beady eyes really look out? What's this noise?".
+The description of the daily special is "This box seems to have something moving inside it. Wait, did [the lid] just move up a bit, and did a pair of beady eyes really look out? What's this noise?".
+The lid is part of the daily special. "The lid seems to be closed very securely.".
 instead of listening to the daily special:
 	now the daily special is listened;
 	say "You hear a faint quacking noise.";
@@ -601,11 +605,11 @@ Carry out an actor asking about the foodstuff in The Bannister (this is the ask 
 	if the second noun is:
 		-- the daily special:
 			if the daily special is not in The Bannister's storeroom and the daily special is examined and the daily special is listened:
-				say "The landlord points at the suggestions board and says 'It[']s clearly written there. The daily special is Peking Duck!'";
+				say "[The landlord] points at the [suggestion board] and says 'It[']s clearly written there. The daily special is Peking Duck!'";
 			otherwise:
-				say "The landlord mumbles something unintelligible, and then says 'It[']s really excellent.'";
+				say "[The landlord] mumbles something unintelligible, and then says 'It[']s really excellent.'";
 		-- otherwise:
-			say "The landlord looks proud and says 'I can really recommend [the second noun]!'".
+			say "[The landlord] looks proud and says 'I can really recommend [the second noun]!'".
 
 
 Part 3 -- Social life
@@ -613,11 +617,16 @@ Part 3 -- Social life
 People Walking In is a recurring scene.
 People Walking In begins when the player is in the pub and the romantic interest is unmet and chat up is not happening and a random chance of 1 in 3 succeeds.
 
+Some-people are an animal with printed name "Some people".It is scenery."This is just a bunch of people". Understand "people" as some-people.
+Instead of doing anything except examining some-people:
+	say "They're not interested".
+	
 When People Walking In begins:
-	say "Some people have just walked in.";
+	say "[Some-people] have just walked in.";
 	say "You look at them, and notice that one of them is a rather pretty woman.";
 	change the romantic interest to a random unmet potential girlfriend;
 	move romantic interest to The Bannister;
+	move some-people to the bannister;
 
 People Walking In ends when romantic interest is in The Bannister.
 
@@ -649,10 +658,9 @@ Instead of giving a drink (called the stuff) to a potential girlfriend (called t
 
 Chat up ends when the romantic interest is not unmet.
 
-
+[
 Book 5 -- The Library
 
-[
 The library is a room. "This is the library. The walls are lined with books. There is a nice plaque on the wall.
 The exit is to the east".
 The library is west of Penny lane.
@@ -703,7 +711,7 @@ Part 3 -- The actual adventure
 
 Chapter 1 -- Intro
 
-Cloud nine is a room in The Celestial Golf Course. "The area around you is white and fluffy. You can see a fluffy white thing in the east, and one in the northwest. They seem to have some flags on them. Maybe you should look at them more closely.".
+Cloud nine is a room in The Celestial Golf Course. "The area around you is white and fluffy. You can see a [fluffy-white-thing-in-the-east], and one in the northwest. They seem to have some flags on them. Maybe you should look at them more closely.".
 The printed name of cloud nine is "A fluffy white place.".
 
 The Clouds is an adventurous recurring scene.
@@ -755,8 +763,8 @@ Understand "fluffy white thing in the northwest" as fluffy-white-thing-in-the-no
 
 The flagpole is a supporter in cloud nine.
 description of flagpole is "[if the flagpole is examined]This could well be a flagpole. There seems to be a flag at the top.[otherwise]There seems to be some sort of pole nearby.[end if]".
-printed name of flagpole is "pole".
-a flag is a thing. "There's something on top of the pole.".
+printed name of flagpole is "the pole".
+a flag is a thing. "There's something on top of [the flagpole].".
 description of flag is "[if the flag is handled]The flag has the number '9' written on it in yellow.[otherwise]There seems to be something written on the flag in yellow, but you can't see it from this angle.[end if]".
 
 understand "pole" as flagpole.
@@ -796,8 +804,11 @@ Instead of examining the round hole in cloud nine during The Clouds:
 Check an actor kissing the romantic interest in cloud nine during The Clouds:
 	continue the action;
 
+crampons are part of Jacques. "They're just ordinary crampons".
+mountaineering gear is part of Jacques. "You know, ropes and stuff. Not interesting.".
+a golf club is part of Jacques. "Jacques likes his golfing gear. This club is especially fine.".
 Instead of kissing the romantic interest in cloud nine during The Clouds:
-	say "Someone taps you in the shoulder. You look round and see a man wearing mountaineering gear and crampons, carrying a golf club.";
+	say "Someone taps you in the shoulder. You look round and see a man wearing [mountaineering gear] and [crampons], carrying [a golf club].";
 	say "'Excuse me, sir, but could you get out of the way? I'd like to get on with my putting.'";
 	if the romantic interest is current and the romantic interest is following:
 		say "[Romantic Interest] screams and runs away.";
@@ -911,14 +922,20 @@ mountain golf begins when Jacques is in cloud nine or Joseph is in cloud nine or
 
 mountain golf ends when all golf balls are not in play and the golf ball owned by the player has been in play.
 
+mountain tops are scenery in cloud nine. "Those are mountain tops. Some of them are nice and green.".
+neatly trimmed grass is scenery in cloud nine. "This grass is very well maintained. You wonder if there's a reason for that.".
+hilltops are scenery in cloud nine. "You can see flags on them".
+a hilltop is  scenery in cloud nine. "You can see a flag on it".
+[todo: this scenery isn't ready yet. It needs lots of Understand clauses]
+
 When mountain golf begins:
-	say "The weather clears a bit, and you can now see that the white fluffy things were all actually grass-covered mountain tops.";
+	say "The weather clears a bit, and you can now see that the white fluffy things were all actually grass-covered [mountain tops].";
 	Now the romantic interest owns the fourth golf ball;
 	if the romantic interest is following:
 		Now the romantic interest is stationary;
 	repeat with the distributed ball running through all golf balls:
 		now the owner of the distributed ball holds the distributed ball;
-	Now the description of cloud nine is "The area around you is covered in neatly trimmed grass. You can see a path leading to a hilltop in the east, and a similar one the northwest. The hilltops seem to have flags on them. Maybe you should look at them more closely.";
+	Now the description of cloud nine is "The area around you is covered in [neatly trimmed grass]. You can see a path leading to a hilltop in the east, and a similar one the northwest. The hilltops seem to have flags on them. Maybe you should look at them more closely.";
 	Now the printed name of cloud nine is "A  neatly trimmed lawn";
 	change the northwest exit of Cloud Nine to tee-ten;
 	change the southeast exit of tee-ten to Cloud Nine;
@@ -1087,13 +1104,13 @@ After an actor going during Golfing Drinks:
 
 Report an actor entering the balloon during Golfing Drinks:
 	if the actor is Jacques:
-		say "Jacques enthusiatically jumps into the balloon, only to end up with his crampons tangled up in the ropes. He eventually manages to free himself.";
+		say "Jacques enthusiatically jumps into [the balloon], only to end up with his [crampons] tangled up in the ropes. He eventually manages to free himself.";
 	if the actor is Joseph:
-		say "Joseph climbs into the balloon with a nonchalance that shows this isn't the first time.";
+		say "Joseph climbs into [the balloon] with a nonchalance that shows this isn't the first time.";
 	if the actor is the romantic interest:
-		say "[romantic interest] hesitantly climbs into the balloon.";		
+		say "[romantic interest] hesitantly climbs into [the balloon].";		
 	if the actor is the player:
-		say "You climb into the balloon.";
+		say "You climb into [the balloon].";
 								
 Carry out the romantic interest entering the balloon:
 	now the romantic interest is stationary.
