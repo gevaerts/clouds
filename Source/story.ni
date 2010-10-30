@@ -95,7 +95,7 @@ The description of the wallet is "Your wallet has [price of the wallet] in it".
 The price of the wallet is 20 gold piece.
 Does the player mean giving the wallet to someone: it is very unlikely.
 
-Book 2 -- Furniture
+Book 3 -- Furniture
 
 a table is a kind of supporter. A table is usually fixed in place. The printed name of a table is usually "table". A table is usually scenery.
 
@@ -116,7 +116,7 @@ Report an actor entering a chair:
 	stop the action;
 	
 
-Book 3 -- Pubs and Alcohol
+Book 4 -- Pubs and Alcohol
 
 Part 1 -- Intoxication
 
@@ -183,7 +183,7 @@ Instead of buying a comestible in a pub (called the joint):
 
 The block drinking rule is not listed in the check drinking rulebook.
 
-Part 2 -- Eating and Drinking
+Part 3 -- Eating and Drinking
 
 Understand "eat [a foodstuff]" as eating.
 
@@ -240,7 +240,7 @@ Does the player mean drinking a drink: it is very likely.
 
 Does the player mean eating a foodstuff: it is very likely.
 
-Book 4 -- The Romantic Interest
+Book 5 -- The Romantic Interest
 
 Part 1 -- Definitions
 
@@ -405,7 +405,7 @@ Check an actor giving something to:
 		stop the action with library message giving it to action number 3 for the second noun.
 
 
-Book 5 -- general rules
+Book 6 -- general rules
 
 [
 Every turn:
