@@ -176,7 +176,7 @@ Instead of buying a comestible in a pub (called the joint):
 			say "The landlord places [qualifier of noun] [noun] on the table in front of you.";
 			say "You pay [price of noun] for the [noun].";
 		otherwise:
-			say "You can't afford [noun]. It costs [price of noun].";
+			say "The [noun] is much too expensive for you. It costs [price of noun].";
 	otherwise:
 		say "You seem to have lost your [wallet].";
 	rule succeeds;
