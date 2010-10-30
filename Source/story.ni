@@ -249,7 +249,7 @@ a Potential Girlfriend can be unmet, met, current or former.
 a Potential Girlfriend is normally unmet.
 
 hair colour is a kind of value. A potential girlfriend has hair colour. the hair colour are blond, red, brown, black, interestingly purple-greenish.
-Height is a kind of value. A potential girlfriend has height. The heights are tall, of medium lenght, rather short.
+Height is a kind of value. A potential girlfriend has height. The heights are tall, of medium length, rather short.
 
 friendliness is a kind of value. The friendlinesses are fuming, angry, annoyed, indifferent, friendly, attracted, adoring and madly in love.
 A potential girlfriend has a friendliness.
@@ -1080,17 +1080,12 @@ Check an actor going during Golfing Drinks:
 			say "It looks dangerous!";
 			stop the action.
 
-Every turn during Golfing Drinks:
-	if the drunkenness of the player is at least drunk:
-		change the north exit of Hole Nineteen to BalloonGrounds;
-		change the south exit of BalloonGrounds to Hole Nineteen;
-	
 Another beer is a drink with qualifier "a nice cool frothy" and printed name "a beer". It is served by hole nineteen.
 Another glass of wine is a drink with qualifier "a nice" and printed name "a glass of wine".  It is served by hole nineteen.
 
 Chapter 5 -- Ballooning
 
-BalloonGrounds is a room.
+BalloonGrounds is a room. It is north of Hole Nineteen.
 
 Persuasion rule for asking the romantic interest to try entering in BalloonGrounds:
 	if the noun is the balloon:
