@@ -39,6 +39,16 @@ Understand "play [something]" as striking.
 Understand "putt [something]" as striking.
 Understand "drive [something]" as striking.
 
+Hiding is an action applying to one carried thing.
+Understand "hide [something]" as hiding.
+Understand "conceal [something]" as hiding.
+a thing can be concealed or exposed. A thing normally is exposed.
+Carry out an actor hiding:
+	now the noun is concealed;
+	if the actor is the player:
+		say "[the noun] is now well hidden, nobody should even suspect you have it.";
+	rule succeeds;
+		
 
 Printing the description of something is an activity.
 The fancy examining rule is listed instead of the standard examining rule in the carry out examining rules.
@@ -466,7 +476,7 @@ When play begins:
 Book 2 -- Main area
 
 The Town is a region.
-The park, the rose garden, the flower shop [, the narrow street, round square, penny lane, south end of penny lane and the library] are in the town.
+The park, the rose garden, the flower shop [, the narrow street, round square], penny lane[, south end of penny lane], the academy and the poetic garden are in the town.
 
 Park is a room. "You are in a park. There are [trees] here.
 There's some sort of flowery garden to the east, and a shop to the west. To the north you can see 'The Bannister and Shamrock', the pub. A narrow street goes northwest.".
@@ -491,11 +501,18 @@ a narrow street is northwest of the park.
 Round Square is a room. "This square isn't. A narrow street leads to the south.
 Design note: Round Square has room for buildings.".
 Round Square is north of a narrow street.
-
+]
 Penny Lane is a room. "The lane is lined with trees. Some of the trees don't look too well, their leaves seem to be half-eaten and they look a bit silvery. Penny Lane continues to the south.
-To the west is the library, the park is to the north.".
+To the west is a garden, the park is to the north.".
 Penny Lane is south of the park.
 
+Poetic garden is a room. "This is a garden. There is a building to the north. Above the doorway into the building you can make out the words 'The Academy'. A [doorman] is guarding the doorway.".  The printed name of poetic garden is "Academy Gardens".
+
+The Academy is a room. "The Academy of Written and Unwritten Words is unfinished. Please come back later. The exit is to the south.". 
+Poetic garden is west of Penny Lane.
+The Academy is north of poetic garden.
+
+[
 South end of Penny Lane is a room. "The lane is lined with trees. Some of the trees don't look too well, their leaves seem to be half-eaten and they look a bit silvery. Penny Lane continues to the north.
 Design note: more room for expansion here.".
 South end of Penny Lane is south of Penny Lane.
@@ -513,6 +530,7 @@ The bunch of roses and the bunch of lilies are forsale.
 The description of the bunch of roses is "A nice bunch of roses.".
 The description of the bunch of lilies is "These lilies look a bit faded.".
 bunch of roses and bunch of lilies are in the flower shop.
+
 
 Book 4 -- The Bannister and Shamrock
 
@@ -565,7 +583,7 @@ an interesting plate is a thing with description "The plate shows an olden photo
 Old-fashioned Red Herring is a foodstuff with description "The red herring looks delicious.". It is served by the bannister and replaced by the interesting plate.
 
 an empty plate is a thing with description "This is just an ordinary plate.".
-some unmentionable meat is a foodstuff with description "This meat doesn't look very good.". It is served by the bannister and replaced by the empty plate.
+
 
 Bannister's beer is a drink with qualifier "a nice cool frothy" and printed name "a beer". It is served by the bannister.
 Bannister's glass of wine is a drink with qualifier "a nice" and printed name "a glass of wine".  It is served by the bannister.
@@ -949,7 +967,7 @@ After printing the description of cloud nine during mountain golf:
 
 Check an actor going during mountain golf:
 	if the actor is the player and the room gone to is hole nineteen:
-		if the golf ball owned by the actor is not in play and the golf ball owned by the actor has been in play:
+		if the third golf ball is not in play and the third golf ball has been in play:
 			say "Wouldn't you wait for the others?";
 		else:
 			say "The people there won't let you in if you're not a real golf player.";
@@ -979,6 +997,8 @@ Check an actor striking a golf ball (called the ball to play):
 Carry out an actor striking a golf ball (called the current ball) in a golf_course:
 	let the current space be the location of the actor;
 	let the ideal space be the room-or-door the way of the current space from the current space;
+	let the probability be 10;
+	let the next space be the location of the actor;
 	if the current space is fairway:
 		let the probability be 7;
 	else if the current space is green:
@@ -1138,4 +1158,125 @@ When Ballooning ends:
 	repeat with chap running through people in the balloon:
 		move chap to park;
 	say "You seem to have landed in the park.";
+
+Book 2 -- The Poetic Garden
+
+Part 1 -- Things
+
+meat is a kind of foodstuff.
+a steak is a meat.
+
+The description of a steak is "This is exactly the sort of steak a lady might like."
+
+[Food seems like it belongs in a pub, so it will start its life there]
+a pork chop is a meat with printed name "pork chop". It is served by the bannister and replaced by the empty plate.
+The description of a pork chop is "This is exactly the sort of pork chop a lady might like.".
+a fork is a thing in the Bannister.
+The description of a fork is "It's a fork.".
+
+
+Check going from The Bannister:
+	if the player is carrying an exposed fork:
+		say "The landlord grabs your arm and refuses to let you leave with pub property.";
+		stop the action.
+
+
+Part 2 -- The doorman
+
+The academy doorman is a man in poetic garden with printed name "doorman". The description of the academy doorman is "A uniformed doorman guards the entrance to the Academy. He looks a bit hungry."
+
+Instead of giving a pork chop to the academy doorman:
+	Now the pork chop is off-stage;
+	now the player carries the steak;
+	say "The doorman looks happy. 'Thanks, mate! I really didn't look forward to this steak my wife put in my lunchbox! I much prefer pork.' He gives you his steak.";
+
+Check giving to the academy doorman:
+	if the noun is not a meat:
+		say "[The doorman] wants meat.";
+		stop the action;
+
+Instead of talking to the academy doorman:
+	say "[The doorman] isn't very talkative.";
+	if the new york lady is in the academy:
+		try the new york lady going south;
+	rule succeeds;
+
+Part 3 -- The New York Lady Limerick
+
+To say the new york limerick:
+	say "[italic type]A lady who didn't like pork[line break]Was given a steak and a fork[line break]She quickly ate all[line break]And as I recall[line break]She swiftly went back to New York[roman type]".
+
+The new york limerick bit of paper is a thing. The description of the new york limerick bit of paper is "A bit of paper with some lines scribbled on it. It says: [paragraph break][the new york limerick]".
+
+The printed name of the new york limerick bit of paper is "bit of paper".
+
+Table of the new york limerick
+Line
+"A nice young lady from New York"
+"said, 'I told you I'd never eat pork!'"
+"'I do enjoy beef"
+"So it'd be a relief"
+"If you could go and find me a fork'."
+
+
+The player has a number called new york limerick level. The new york limerick level of the player is usually 1.
+
+To recite the new york limerick:
+	repeat with N running from 1 to the new york limerick level of the player:
+		say "[italic type][Line in row N of the Table of the new york limerick][roman type][line break]";
+	say "[paragraph break]".
+
+Part 4 -- The New York Lady
+
+A new york lady is a woman in the academy with printed name "lady".
+The description of the new york lady is "A nice young lady from New York".
+
+Carry out examining the new york lady (this is the examine the new york lady rule):
+	recite the new york limerick;
+	now examine text printed is true;
+	stop the action.
+
+Instead of giving a pork chop to the new york lady:
+	if the new york limerick level of the player < 2:
+		increment the new york limerick level of the player;
+	recite the new york limerick;
+	say "[The lady] doesn't seem interested.";
 	
+Instead of talking to the new york lady:
+	if the new york limerick level of the player < 2:
+		say "She says, 'I'm hungry. I like pigs!'";
+	otherwise:
+		say "[The lady] doesn't seem interested, but she does look hungry.";
+	rule succeeds;
+
+Check giving to the new york lady:
+	if the noun is a fork:
+		rule succeeds;
+	otherwise if the noun is not a foodstuff:
+		say "[The new york lady] looks at [the noun] as if it's something from Mars.";
+		stop the action;
+	if the noun is not a meat:
+		say "[The new york lady] looks at the food and mumbles something about it not being meat.";
+		stop the action;
+
+Instead of giving a steak to the new york lady:
+	if the new york limerick level of the player < 5:
+		now the new york limerick level of the player is 5;
+	recite the new york limerick;
+	now the lady carries the steak;
+
+Instead of giving a fork to the new york lady when the new york lady carries the steak:
+	now the lady carries the fork;
+	now the lady is off-stage;
+	now the new york limerick bit of paper is in the poetic garden;
+	say "The lady eats the steak and leaves. She seems to have dropped something.";
+			
+				
+Check going from the poetic garden:
+	if the room gone to is the academy:
+		if the player carries the new york limerick bit of paper:
+			say "You briefly panic when the doorman asks you who you are, but a quick look at the [bit of paper] provides the solution. You recite: [paragraph break][the new york limerick][paragraph break]The doorman instantly recognises your genius and lets you enter.";
+		otherwise:
+			say "The doorman stops you, saying that only people with literary merits may enter here.";
+			stop the action;
+			
